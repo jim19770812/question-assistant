@@ -2,7 +2,7 @@ package com.training.beans;
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -15,16 +15,22 @@ import com.baomidou.mybatisplus.annotation.IdType;
 
 /**
  * @author hanxiaofeng
- * @date 2020-01-28 11:42:46
+ * @date 2020-02-16 20:58:46
  * @description 
  */
 
-@Builder
 @Data
 @ToString
 @EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
 @ApiModel("m_用户表")
 public class MUser  extends Model<MUser>{
+	public static final String COL_USR_ID="usr_id";
+	public static final String COL_USR_NAME="usr_name";
+	public static final String COL_USR_EMAIL="usr_email";
+	public static final String COL_USR_PWD="usr_pwd";
+	public static final String COL_USR_SLAT="usr_slat";
+	public static final String COL_USR_JOIN_TIME="usr_join_time";
 
 	/**
 	 * 用户ID
@@ -62,18 +68,6 @@ public class MUser  extends Model<MUser>{
 	 */
 	@ApiModelProperty("用户加入时间")
 	private Date usr_join_time;
-
-	/**
-	 * 用户app-key
-	 */
-	@ApiModelProperty("用户app-key")
-	private String usr_app_key;
-
-	/**
-	 * 用户app-secret
-	 */
-	@ApiModelProperty("用户app-secret")
-	private String usr_app_secret;
 
 
 }

@@ -1,9 +1,7 @@
 package com.training.vos;
 
-import lombok.Data;
-import lombok.Builder;
-import lombok.ToString;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+
 import java.util.Date;
 import java.math.BigDecimal;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,11 +13,11 @@ import io.swagger.annotations.ApiModel;
  * @description 
  */
 
-@Builder
 @Data
 @ToString
 @EqualsAndHashCode(callSuper = false)
 @ApiModel("m_用户表VO")
+@NoArgsConstructor
 public class MUserVO {
 
 	/**

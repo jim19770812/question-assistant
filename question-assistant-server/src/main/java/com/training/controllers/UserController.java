@@ -25,17 +25,26 @@ public class UserController {
     @Resource
     private UserDomain userDomain;
 
+    @ApiOperation(value = "注册", notes = "注册")
+    @GetMapping("/register")
+    @ResponseBody
+    public Result<MUserVO> register(@ApiParam("用户参数对象") @ModelAttribute @Valid final MUserDTO userDTO) throws Exception {
+        var usr=this.userDomain.register(userDTO.getUsr_email(), userDTO.getUsr_email(), userDTO.getUsr_pwd());
+        var ret=new MUserVO();
+        BeanUtils.copyProperties(usr, ret);
+        return Result.succes(ret);
+    }
+
     @ApiOperation(value = "登录/注册", notes = "登录或者注册")
     @GetMapping("/login")
     @ResponseBody
-    public Result<MUserVO> registerOrLogin(@ApiParam("用户参数对象") @ModelAttribute @Valid final MUserDTO userDTO) throws Exception {
+    public Result<MUserVO> login(@ApiParam("登录") @ModelAttribute @Valid final MUserDTO userDTO) throws Exception {
         var auth=this.userDomain.login(userDTO.getUsr_email(), userDTO.getUsr_pwd());
-        var vo=MUserVO.builder()
-                .usr_id(Integer.valueOf(auth.get("usr_id", "")))
-                .usr_email(auth.get("usr_email", ""))
-                .usr_name(auth.get("usr_name", ""))
-                .token(auth.getToken())
-                .build();
+        var vo=new MUserVO();
+        vo.setUsr_email(auth.get("usr_email",""));
+        vo.setToken(auth.getToken());
+        vo.setUsr_id(Integer.valueOf(auth.get("usr_id", "")));
+        vo.setUsr_name(auth.get("usr_email",""));
         vo.setToken(auth.getToken());
         return Result.succes(vo);
     }
