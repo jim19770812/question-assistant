@@ -50,68 +50,58 @@
             </div>
           </div>
           <div class="qa-list-body-container">
-            <div class="qa-list-body-container-row">
-              <div class="qa-list-body-content-cell" style="width:148px">
-                <div class="qa-list-body-qa-id qa-list-body-qa-id-st1">
-                  问卷ID
-                </div>
-              </div>
-              <div class="qa-list-body-content-cell" style="width:334px">
-                <span class="qa-list-body-qa-name">问卷名称问卷名称问卷名称问卷名称问卷名称问卷名称</span>
-                <span class="qa-list-body-qa-name-ellipsis"></span>
-              </div>
-              <div class="qa-list-body-content-cell" style="width:148px">
-                <span class="qa-list-body-qa-st1-icon"></span>
-                <span>问卷状态</span>
-              </div>
-              <div class="qa-list-body-content-cell" style="width:120px">
-                <span class="qa-list-body-qa-count">34</span>
-              </div>
-              <div class="qa-list-body-content-cell" style="width:194px">
-                <span class="qa-list-body-create-time">2020/5/15/ 16:34:15</span>
-              </div>
-              <div class="qa-list-body-content-cell" style="width:168px">
-                <a href="#" class="qa-list-body-op-copy"></a>
-                <a href="#" class="qa-list-body-op-edit"></a>
-                <a href="#" class="qa-list-body-op-del"></a>
+            <div class="qa-list-body-content-cell" style="width:148px">
+              <div class="qa-list-body-qa-id qa-list-body-qa-id-st1">
+                问卷ID
               </div>
             </div>
-            <div class="qa-list-body-container-row">
-              <div class="qa-list-body-content-cell" style="width:148px">
-                <div class="qa-list-body-qa-id qa-list-body-qa-id-st2">
-                  问卷ID
-                </div>
-              </div>
-              <div class="qa-list-body-content-cell" style="width:334px">
-                <span class="qa-list-body-qa-name">问卷名称问卷名称问卷名称问卷名称问卷名称问卷名称</span>
-                <span class="qa-list-body-qa-name-ellipsis"></span>
-              </div>
-              <div class="qa-list-body-content-cell" style="width:148px">
-                <span class="qa-list-body-qa-st2-icon"></span>
-                <span>问卷状态</span>
-              </div>
-              <div class="qa-list-body-content-cell" style="width:120px">
-                <span class="qa-list-body-qa-count">34</span>
-              </div>
-              <div class="qa-list-body-content-cell" style="width:194px">
-                <span class="qa-list-body-create-time">2020/5/15/ 16:34:15</span>
-              </div>
-              <div class="qa-list-body-content-cell" style="width:168px">
-                <a href="#" class="qa-list-body-op-copy"></a>
-                <a href="#" class="qa-list-body-op-edit"></a>
-                <a href="#" class="qa-list-body-op-del"></a>
-              </div>
+            <div class="qa-list-body-content-cell" style="width:334px">
+              <span class="qa-list-body-qa-name">问卷名称问卷名称问卷名称问卷名称问卷名称问卷名称</span>
+              <span class="qa-list-body-qa-name-ellipsis"></span>
+            </div>
+            <div class="qa-list-body-content-cell" style="width:148px">
+              <span class="qa-list-body-qa-st1-icon"></span>
+              <span>问卷状态</span>
+            </div>
+            <div class="qa-list-body-content-cell" style="width:120px">
+              <span class="qa-list-body-qa-count">34</span>
+            </div>
+            <div class="qa-list-body-content-cell" style="width:194px">
+              <span class="qa-list-body-create-time">2020/5/15/ 16:34:15</span>
+            </div>
+            <div class="qa-list-body-content-cell" style="width:168px">
+              <a href="#" class="qa-list-body-op-copy"></a>
+              <a href="#" class="qa-list-body-op-edit"></a>
+              <a href="#" class="qa-list-body-op-del"></a>
             </div>
           </div>
-          <div class="qa-list-footer">
-            <span class="qa-list-footer-pageup"></span>
-            <input class="qa-list-footer-pagenum" type="text" value="3"/>
-            <span>/</span>
-            <span class="qa-list-footer-pagecount">10</span>
-            <span class="qa-list-footer-pagedown"></span>
+          <div class="qa-list-body-container">
+            <div class="qa-list-body-content-cell" style="width:148px">
+              <div class="qa-list-body-qa-id qa-list-body-qa-id-st2">
+                问卷ID
+              </div>
+            </div>
+            <div class="qa-list-body-content-cell" style="width:334px">
+              <span class="qa-list-body-qa-name">问卷名称</span>
+            </div>
+            <div class="qa-list-body-content-cell" style="width:148px">
+              问卷状态
+            </div>
+            <div class="qa-list-body-content-cell" style="width:120px">
+              问卷数量
+            </div>
+            <div class="qa-list-body-content-cell" style="width:194px">
+              创建时间
+            </div>
+            <div class="qa-list-body-content-cell" style="width:168px">
+              <a href="#" class="qa-list-body-op-copy"></a>
+              <a href="#" class="qa-list-body-op-edit"></a>
+              <a href="#" class="qa-list-body-op-del"></a>
+            </div>
           </div>
         <div>
-      </div>
+
+        </div>
     </div>
       </div>
     </div>
@@ -321,27 +311,22 @@ export default {
     font-weight:400;
     line-height:10px;
   }
-  .qa-list-body .qa-list-body-container{
-    margin:0px;
-    padding:0px;
-  }
-  .qa-list-body>.qa-list-body-container>.qa-list-body-container-row{
+  .qa-list-body .qa-list-body-container>{
     display: flex;
-    width: 100%;
     flex-direction: column;
     justify-content: space-between;
     flex-flow: nowrap;
     margin: 18px auto 18px auto;
-    border-bottom: 1px solid rgba(237,238,242,1);
   }
-  .qa-list-body .qa-list-body-container-row .qa-list-body-content-cell{
-    padding-top: 12px;
+  .qa-list-body .qa-list-body-container .qa-list-body-content-cell{
+    padding-top: 20px;
     box-sizing: border-box;
     text-align: center;
     height: 68px;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    border: 1px solid rgba(237,238,242,1);
     margin:0;
     padding-left:0;
     padding-right: 0;
@@ -366,17 +351,15 @@ export default {
     color:white;
   }
   .qa-list-body .qa-list-body-content-cell .qa-list-body-qa-name{
-    width:320px;
+    width:300px;
     word-break: normal;
     overflow: hidden;
-    white-space: nowrap;
   }
   .qa-list-body .qa-list-body-content-cell .qa-list-body-qa-name-ellipsis{/*提供一个小的遮罩层实现超出文字渐淡*/
     display: block;
-    width:60px;
-    margin-left: -60px;
-    background-image: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 100%);
-    /*background-color: blue;*/
+    width:32px;
+    margin-left: -32px;
+    background-image: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
   }
   .qa-list-body .qa-list-body-content-cell .qa-list-body-qa-st0-icon{/*待发布图标*/
     display: block;
@@ -422,59 +405,21 @@ export default {
   }
   .qa-list-body .qa-list-body-content-cell .qa-list-body-op-copy{
     display: block;
-    width: 14px;
-    height: 14px;
+    width: 14.51px;
+    height: 14.51px;
     background-image: url("../../assets/icon_list_copy.png");
 
   }
   .qa-list-body .qa-list-body-content-cell .qa-list-body-op-edit{
     display: block;
-    width: 15px;
-    height: 15px;
+    width: 14.51px;
+    height: 14.51px;
     background-image: url("../../assets/icon_list_edit.png");
   }
   .qa-list-body .qa-list-body-content-cell .qa-list-body-op-del{
     display: block;
-    width: 12px;
-    height: 15px;
+    width: 14.51px;
+    height: 14.51px;
     background-image: url("../../assets/icon_list_del.png");
-  }
-  .qa-list-body .qa-list-footer{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    font-size:12px;
-    font-family:Arial;
-    font-weight:400;
-    line-height:14px;
-    opacity:1;
-  }
-  .qa-list-footer .qa-list-footer-pageup{
-    display: block;
-    height: 8px;
-    width:8px;
-    background-image: url("../../assets/icon_list_arrow_left.png");
-    margin: auto 3px;
-  }
-  .qa-list-footer .qa-list-footer-pagedown{
-    display: block;
-    height: 8px;
-    width:8px;
-    background-image: url("../../assets/icon_list_arrow_right.png");
-    margin: auto 3px;
-  }
-  .qa-list-footer .qa-list-footer-pagenum{
-    margin: auto 3px;
-    width:20px;
-    background:rgba(240,243,246,1);
-    border:1px solid rgba(227,227,227,1);
-    text-align: center;
-  }
-  .qa-list-footer .qa-list-footer-pagecount{
-    margin: auto 3px;
-    text-align: center;
-    color:rgba(26,33,71,0.40);
   }
 </style>
