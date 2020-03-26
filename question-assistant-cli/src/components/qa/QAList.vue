@@ -212,20 +212,12 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    width:350px;
     justify-content: start;
     align-items: center;
-  }
-  .qa-list-header .bar-operate{
-    width:304px;
-    height:30px;
-    background:rgba(255,255,255,1);
-    box-shadow:0px 2px 16px rgba(26,33,71,0.04);
-    opacity:1;
-    border-radius:15px;
+    width:360px;
   }
   .qa-list-operator-bar .bar-search-input{
-    width:304px;
+    width:300px;
     height:30px;
     background:rgba(255,255,255,1);
     box-shadow:0px 2px 16px rgba(26,33,71,0.04);
@@ -233,7 +225,11 @@ export default {
     border:0px;
     border-radius:15px;
     z-index: 1;
-    padding-left: 32px;
+    padding-left: 22px;
+    margin-right: 36px;
+    text-decoration: none;
+    outline: none;
+
   }
   .qa-list-operator-bar .bar-search-input>input::-webkit-input-placeholder{
     position: relative;
@@ -245,7 +241,7 @@ export default {
     background-image: url("../../assets/icon_del.png");
     background-repeat: no-repeat;
     z-index: 2;
-    margin-left: -320px;
+    margin-left: -355px;
   }
   .qa-list-operator-bar .bar-search-find-btn{
     display: block;
@@ -254,7 +250,7 @@ export default {
     background-image: url("../../assets/icon_search.png");
     background-repeat: no-repeat;
     z-index: 2;
-    margin-left: 270px;
+    margin-left: 285px;
   }
   .qa-list-operator-bar .bar-operate-add{
     font-weight: bolder;
@@ -268,7 +264,7 @@ export default {
     opacity:1;
     outline: none;
     text-decoration: none;
-    z-index: 2;
+    /*z-index: 1;*/
     margin-left: 16px;
   }
   .qa-list-body table{
@@ -471,6 +467,7 @@ export default {
     background:rgba(240,243,246,1);
     border:1px solid rgba(227,227,227,1);
     text-align: center;
+    outline: none;
   }
   .qa-list-footer .qa-list-footer-pagecount{
     margin: auto 3px;
