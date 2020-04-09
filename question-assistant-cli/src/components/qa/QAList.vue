@@ -3,29 +3,68 @@
     <div class="qa-list-main">
       <div class="qa-list-container">
         <div class="qa-list-header">
-          <div class="qa-list-header-tabs">
-            <div class="qa-list-header-tab qa-list-header-tab-active">
-              <div class="qa-list-header-number">325</div>
-              <div class="qa-list-header-status">全部问卷</div>
+          <div>
+            报名助手
+          </div>
+          <div class="qa-list-header-user-container">
+            <div class="qa-list-header-user-flex">
+              <a href="#" class="qa-return-home">返回首页</a>
+              <span class="qa-default-user-icon"></span>
+              <span class="qa-default-user-name">张三丰</span>
+              <span class="arrow-down"></span>
             </div>
-            <div class="qa-list-header-tab qa-list-header-tab-deactive">
-              <div class="qa-list-header-number">94</div>
-              <div class="qa-list-header-status">待发布</div>
+            <div class="qa-list-header-user-opt-list-container">
+              <div class="qa-list-header-user-opt-list">
+                <a href="#" class="logout-txt">退出登录</a>
+                <a href="#" class="logout-button"></a>
+              </div>
             </div>
-            <div class="qa-list-header-tab qa-list-header-tab-deactive">
-              <div class="qa-list-header-number">129</div>
-              <div class="qa-list-header-status">已发布</div>
+          </div>
+        </div>
+        <div class="qa-list-header-container">
+          <div class="qa-list-header-container-tabs">
+            <div class="qa-list-header-container-tab qa-list-header-container-tab-active">
+              <div class="qa-list-header-container-number">325</div>
+              <div class="qa-list-header-container-status">全部问卷</div>
             </div>
-            <div class="qa-list-header-tab qa-list-header-tab-deactive">
-              <div class="qa-list-header-number">211</div>
-              <div class="qa-list-header-status">已停止</div>
+            <div class="qa-list-header-container-tab qa-list-header-container-tab-deactive">
+              <div class="qa-list-header-container-number">94</div>
+              <div class="qa-list-header-container-status">待发布</div>
+            </div>
+            <div class="qa-list-header-container-tab qa-list-header-container-tab-deactive">
+              <div class="qa-list-header-container-number">129</div>
+              <div class="qa-list-header-container-status">已发布</div>
+            </div>
+            <div class="qa-list-header-container-tab qa-list-header-container-tab-deactive">
+              <div class="qa-list-header-container-number">211</div>
+              <div class="qa-list-header-container-status">已停止</div>
             </div>
           </div>
           <div class="qa-list-operator-bar">
-            <input class="bar-search-input" type="text" placeholder="请输入问卷名称/ID"/>
-            <a href="#" class="bar-search-del-btn"></a>
-            <a href="#" class="bar-search-find-btn"></a>
-            <a class="bar-operate-add" href="#">+</a>
+            <div class="qa-list-operator-bar-box">
+              <input class="bar-search-input" type="text" placeholder="请输入问卷名称/ID"/>
+              <a href="#" class="bar-search-del-btn"></a>
+              <a href="#" class="bar-search-find-btn"></a>
+              <a class="bar-operate-add-or-close" href="#" @click="barOperateAddOrCloseClicked">{{barOperateAddOrCloseTitle}}</a>
+            </div>
+            <div class="popup-dialog" v-if="barOperatAdd">
+              <div class="popup-dialog-row">
+                <div class="popup-dialog-cell">
+                  <div class="dlg-container right-border">
+                    <div class="dlg-template-icon"></div>
+                    <div class="dialog-item-title">问卷模板</div>
+                    <div class="dialog-item-content">项目会议、品牌活动等 报名表模板</div>
+                  </div>
+                </div>
+                <div class="popup-dialog-cell">
+                  <div class="dlg-container">
+                    <div class="dlg-template-empty-qa"></div>
+                    <div class="dialog-item-title">空白问卷</div>
+                    <div class="dialog-item-content">空白问卷，需要您自主 设计题目</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="qa-list-body">
@@ -104,15 +143,13 @@
             </div>
           </div>
           <div class="qa-list-footer">
-            <span class="qa-list-footer-pageup"></span>
+            <a href="#" class="qa-list-footer-pageup"></a>
             <input class="qa-list-footer-pagenum" type="text" value="3"/>
             <span>/</span>
-            <span class="qa-list-footer-pagecount">10</span>
-            <span class="qa-list-footer-pagedown"></span>
+            <a href="#" class="qa-list-footer-pagecount">10</a>
+            <a href="#" class="qa-list-footer-pagedown"></a>
           </div>
-        <div>
-      </div>
-    </div>
+        </div>
       </div>
     </div>
   </div>
@@ -121,16 +158,39 @@
 
 <script>
 export default {
-  name: 'QAList'
+  name: 'QAList',
+  data:function(){
+    return {
+      barOperatAdd:true /*是否是添加操作*/
+    }
+  },
+  computed:{
+    barOperateAddOrCloseTitle:function(){ /*添加/关闭按钮,点击切换图标*/
+      if (this.barOperatAdd){
+        return "+"
+      }else{
+        return "x"
+      }
+    }
+  },
+  methods:{
+    barOperateAddOrCloseClicked:function(){
+      this.barOperatAdd=!this.barOperatAdd
+    }
+  }
 }
 </script>
 
 <style scoped lang="less">
-  html,body {vue
+  html,body {
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
+  }
+  a{
+    outline: none;
+    text-decoration: none;
   }
   .qa-list-main{
     display: flex;
@@ -147,32 +207,132 @@ export default {
     flex-direction: column;
     flex-wrap: nowrap;
   }
-  .qa-list-container>.qa-list-header{
+  .qa-list-header{
+    display: flex;
+    flex-direction: row;
+    height: 68px;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    justify-items: center;
+    box-sizing: border-box;
+    border:1px solid red;
+  }
+  .qa-list-header>*{
+    padding: 20px;
+  }
+  .qa-list-header-user-container{
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+  }
+  .qa-list-header-user-container>.qa-list-header-user-flex{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-end; /*右侧对齐*/
+  }
+  .qa-list-header-user-container .qa-default-user-name{
+    margin: 4px;
+  }
+  .qa-list-header-user-flex .qa-return-home{
+    font-size:14px;
+    font-family:PingFang SC;
+    font-weight:400;
+    line-height:20px;
+    color:rgba(27,31,38,1);
+    opacity:1;
+    margin-right: 48px;
+  }
+  .qa-list-header-user-container .qa-default-user-icon{
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    background: url("../../assets/default-user-logo.png") no-repeat center center;
+    background-size: 28px 28px;
+    margin: 0 12px 0 0;
+  }
+  .qa-list-header-user-container .arrow-down {
+    width: 0;
+    height: 0;
+    border-top: 8px solid rgba(26,33,71,1);
+    opacity: 1;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    margin: 10px 0 0 4px;
+  }
+  .qa-list-header-user-container>.qa-list-header-user-opt-list-container{
+    z-index: 2;
+    display: block;
+    width:240px;
+    height:56px;
+  }
+  .qa-list-header-user-container>.qa-list-header-user-opt-list-container>.qa-list-header-user-opt-list{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    //justify-items: center;
+    align-items: center;
+    background:rgba(255,255,255,0.93);
+    border:1px solid rgba(233,233,233,1);
+    box-shadow:0 2px 6px rgba(188,188,188,0.5);
+    opacity:1;
+    border-radius:10px;
+    margin-top: 4px;
+    height: 36px;
+    /*z-index: 3;*/
+  }
+  .qa-list-header-user-opt-list>*{
+    margin: 20px 20px;
+  }
+  .qa-list-header-user-opt-list>.logout-txt{
+    /*width:48px;*/
+    /*height:17px;*/
+    font-size:12px;
+    font-family:PingFang SC;
+    font-weight:400;
+    line-height:17px;
+    /*-webkit-text-stroke:1 rgba(0,0,0,0.00);*/
+    text-stroke:1 rgba(0,0,0,0.00);
+    color:#F45738;
+    opacity:1;
+    /*margin:20px 18px;*/
+  }
+  .qa-list-header-user-opt-list>.logout-button{
+    background-image:url("../../assets/icon_quit.png");
+    background-size: 10px 10px;
+    background-repeat: no-repeat;
+    width: 10px;
+    height: 10px;
+    outline: none;
+    text-decoration: none;
+  }
+  .qa-list-container>.qa-list-header-container{
     width:100%;
     height: 73px;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
   }
-  .qa-list-header>.qa-list-header-tabs{
+  .qa-list-header-container>.qa-list-header-container-tabs{
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
   }
-  .qa-list-header .qa-list-header-tab-deactive{
+  .qa-list-header-container .qa-list-header-container-tab-deactive{
     background:rgba(0,166,122,1);
   }
-  .qa-list-header .qa-list-header-tab{
+  .qa-list-header-container .qa-list-header-container-tab{
     width:157px;
     height:73px;
     opacity:1;
     border-radius: 5px 5px 0 0;
     margin-right: 12px;
   }
-  .qa-list-header .qa-list-header-tab-active{
+  .qa-list-header-container .qa-list-header-container-tab-active{
     background:rgba(255,255,255,1);
   }
-  .qa-list-header .qa-list-header-tab-active>.qa-list-header-number{
+  .qa-list-header-container .qa-list-header-container-tab-active>.qa-list-header-container-number{
     font-size:24px;
     font-family:DIN Alternate;
     font-weight:bold;
@@ -181,7 +341,7 @@ export default {
     margin: 12px 0 2px 12px;
     opacity:1;
   }
-  .qa-list-header .qa-list-header-tab-active>.qa-list-header-status{
+  .qa-list-header-container .qa-list-header-container-tab-active>.qa-list-header-container-status{
     font-size:14px;
     font-family:PingFang SC;
     font-weight:400;
@@ -190,7 +350,7 @@ export default {
     opacity:0.6;
     margin: 2px 0 0 12px;
   }
-  .qa-list-header .qa-list-header-tab-deactive>.qa-list-header-number{
+  .qa-list-header-container .qa-list-header-container-tab-deactive>.qa-list-header-container-number{
     font-size:24px;
     font-family:DIN Alternate;
     font-weight:bold;
@@ -199,7 +359,7 @@ export default {
     padding: 12px 0 0 12px;
     opacity:1;
   }
-  .qa-list-header .qa-list-header-tab-deactive>.qa-list-header-status{
+  .qa-list-header-container .qa-list-header-container-tab-deactive>.qa-list-header-container-status{
     font-size:14px;
     font-family:PingFang SC;
     font-weight:400;
@@ -208,7 +368,17 @@ export default {
     opacity:0.6;
     margin: 2px 0 0 12px;
   }
-  .qa-list-header .qa-list-operator-bar{
+  .qa-list-header-container .qa-list-operator-bar{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: start;
+    align-items: center;
+    /*width:360px;*/
+    width: auto;
+    margin-top: 30px;
+  }
+  .qa-list-header-container .qa-list-operator-bar .qa-list-operator-bar-box{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -229,9 +399,8 @@ export default {
     margin-right: 36px;
     text-decoration: none;
     outline: none;
-
   }
-  .qa-list-operator-bar .bar-search-input>input::-webkit-input-placeholder{
+  .qa-list-operator-bar .bar-search-input input::-webkit-input-placeholder{
     position: relative;
     left: 20px;
   }
@@ -252,7 +421,7 @@ export default {
     z-index: 2;
     margin-left: 285px;
   }
-  .qa-list-operator-bar .bar-operate-add{
+  .qa-list-operator-bar .bar-operate-add-or-close{
     font-weight: bolder;
     color: white;
     font-size: larger;
@@ -264,8 +433,82 @@ export default {
     opacity:1;
     outline: none;
     text-decoration: none;
-    /*z-index: 1;*/
     margin-left: 16px;
+  }
+  .qa-list-main .popup-dialog{
+    width:320px;
+    height:132px;
+    background:rgba(0,166,122,1);
+    border:1px solid rgba(233,233,233,1);
+    box-shadow:0px 2px 6px rgba(188,188,188,0.5);
+    opacity:1;
+    border-radius:10px;
+    display: table;
+    /*order:0;*/
+    z-index: 0;/*设置了z-index才能浮动*/
+    margin-top: 12px;
+  }
+  .popup-dialog>.popup-dialog-row{
+    display: table-row;
+  }
+  .popup-dialog>.popup-dialog-row>.popup-dialog-cell{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
+  .popup-dialog>.popup-dialog-row .right-border{
+    box-sizing: content-box;
+    /*padding: 19px 0;*/
+    margin: 0 19px 0 0;
+    border-right: 1px solid rgba(255,155,122,1);
+  }
+  .popup-dialog>.popup-dialog-row>.popup-dialog-cell .dlg-container{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: self-start;
+  }
+  .popup-dialog>.popup-dialog-row>.popup-dialog-cell .dlg-container>*{
+    margin:5px auto;
+    text-align: center;
+  }
+  .popup-dialog>.popup-dialog-row>.popup-dialog-cell .dlg-template-icon{
+    display: block;
+    width:24px;
+    height: 28px;
+    background-image: url("../../assets/icon_Question1.png");
+    background-repeat: no-repeat;
+  }
+  .popup-dialog>.popup-dialog-row>.popup-dialog-cell .dialog-item-title{
+    width:auto;
+    height:17px;
+    font-size:12px;
+    font-family:PingFang SC;
+    font-weight:500;
+    line-height:17px;
+    color:rgba(255,255,255,1);
+    text-stroke:1 rgba(0,0,0,0.00);
+    opacity:1;
+  }
+  .popup-dialog>.popup-dialog-row>.popup-dialog-cell .dialog-item-content{
+    width:auto;
+    height:34px;
+    font-size:12px;
+    font-family:PingFang SC;
+    font-weight:300;
+    line-height:17px;
+    color:rgba(255,255,255,1);
+    /*-webkit-text-stroke:1 rgba(0,0,0,0.00);*/
+    text-stroke:1 rgba(0,0,0,0.00);
+    opacity:0.7;
+  }
+  .popup-dialog>.popup-dialog-row>.popup-dialog-cell .dlg-template-empty-qa{
+    display: block;
+    width:24px;
+    height: 28px;
+    background-image: url("../../assets/icon_Question2.png");
+    background-repeat: no-repeat;
   }
   .qa-list-body table{
     border-collapse: collapse;
