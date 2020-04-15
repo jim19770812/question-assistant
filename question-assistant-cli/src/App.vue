@@ -6,6 +6,7 @@
       <router-link to="/reset/1" @click.native="goLosePassword">重置密码</router-link>
       <router-link to="/reset/2" @click.native="goNewPassword">新设密码</router-link>
       <router-link to="/qalist">问题列表</router-link>
+      <router-link to="/qadesigner">问题表单设计器</router-link>
       <router-link to="/qaform">问题表单</router-link>
     </div>
     <router-view/>

@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Auth from '@/components/sys/Auth.vue'
 
 import QAList from '@/components/qa/QAList'
+import QAFormDesigner from '@/components/qa/QAFormDesigner'
 import QAForm from '@/components/qa/QAForm'
 import LoginComponent from '../components/sys/LoginComponent'
 import RegisterComponent from '../components/sys/RegisterComponent'
@@ -46,9 +47,14 @@ const routes = [{path: '/',
 //     name:'newpassword',
 //     component:NewPasswordComponent
 //   }]
-},{ path:'/qalist',
-  name:'qalist',
+}, {
+  path: '/qalist',
+  name: 'qalist',
   component: QAList
+},{
+  path: '/qadesigner',
+  name: 'qadesigner',
+  component: QAFormDesigner
 },{ path:'/qaform',
   name:'qaform',
   component: QAForm
