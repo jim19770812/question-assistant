@@ -5,7 +5,7 @@ import Auth from '@/components/sys/Auth.vue'
 
 import QAList from '@/components/qa/QAList'
 import QAFormDesigner from '@/components/qa/QAFormDesigner'
-import QAForm from '@/components/qa/QAForm'
+import QACompContainer from '@/components/qa/QACompContainer'
 import LoginComponent from '../components/sys/LoginComponent'
 import RegisterComponent from '../components/sys/RegisterComponent'
 import Reset from '../components/sys/Reset'
@@ -55,9 +55,9 @@ const routes = [{path: '/',
   path: '/qadesigner',
   name: 'qadesigner',
   component: QAFormDesigner
-},{ path:'/qaform',
-  name:'qaform',
-  component: QAForm
+},{ path:'/qacompcontainer',
+  name:'qacompcontainer',
+  component: QACompContainer
 }]
 
 const router = new VueRouter({

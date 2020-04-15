@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'QAAreaFormItem'
+  name: 'QAAreaFormItemEditor'
 }
 </script>
 

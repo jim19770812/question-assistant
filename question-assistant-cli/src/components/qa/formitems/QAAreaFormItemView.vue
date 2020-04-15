@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'QAPhoneFormItem'
+  name: 'QAAreaFormItemView'
 }
 </script>
 

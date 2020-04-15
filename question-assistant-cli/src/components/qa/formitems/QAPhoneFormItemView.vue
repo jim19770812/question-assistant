@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'QANameFormItem'
+  name: 'QAPhoneFormItemView'
 }
 </script>
 

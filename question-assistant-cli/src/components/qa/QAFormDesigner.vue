@@ -52,9 +52,9 @@
           </div>
         </div>
         <div class="qad-comp-render-container">
-          <div class="qad-content-pane">
-              请从左侧选择一个题目
-          </div>
+<!--          <div class="qad-content-pane">-->
+<!--              请从左侧选择一个题目-->
+<!--          </div>-->
         </div>
         <div class="qad-comp-inspect-container">right</div>
       </div>
@@ -124,6 +124,7 @@ export default {
     box-shadow:0px 2px 12px rgba(0,166,122,0.2);
     opacity:1;
     border-radius:16px;
+    line-height: 32px;
   }
   .qad-container>.qad-header>.qad-header-buttons-container>.enabled{
     background:rgba(0,165,123,1);
@@ -224,6 +225,7 @@ export default {
     text-align: center;
     padding-left: 5px;
     line-height: 32px;
+    color:rgba(51,51,51,1);
   }
   .qad-lp-box .icon-name{
     background:url("../../assets/icon_edit_name.png") no-repeat transparent;

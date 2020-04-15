@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'QAForm'
+  name: 'QACompContainer'
 }
 </script>
 
