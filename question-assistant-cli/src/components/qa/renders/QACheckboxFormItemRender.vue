@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'QARadioButtonFormItemView'
+  name: 'QACheckboxFormItemRender'
 }
 </script>
 

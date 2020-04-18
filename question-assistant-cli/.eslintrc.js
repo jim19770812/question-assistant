@@ -38,7 +38,7 @@ module.exports = {
     "valid-jsdoc": ["error", {
       "requireReturn": false,
       "requireParamDescription": false,
-      "requireReturnDescription": true
+      "requireReturnDescription": false
     }], //强制JSDoc注释
     "valid-typeof": ["error", {
       "requireStringLiterals": true

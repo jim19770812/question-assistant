@@ -1,12 +1,11 @@
 <template>
-  <div>
 
-  </div>
 </template>
 
 <script>
+/*表单项渲染器容器*/
 export default {
-  name: 'QACompContainer'
+  name: 'QARenderContainer'
 }
 </script>
 

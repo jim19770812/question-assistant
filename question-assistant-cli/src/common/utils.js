@@ -1,19 +1,33 @@
-
-class Utils{
-  /*
-   * 从Vue实例的Childrens里查找某个属性=给定值的Children对象
+class ObjectUtlls{
+  /**
+   * 判断是否是undefined
+   * @param {str|int|float|undefined|NaN} o 对象
+   * @return {boolean}
    */
-  static findChildren(childrens, dataPropName, dataPropValue){
-    for(const x in childrens){
-      if (!Object.prototype.hasOwnProperty.call(x, dataPropName)){
-        return null
-      }
-      if(x[dataPropName]===dataPropValue){
-        return x
-      }
-    }
-    return 1
+  static isUndef(o){
+    return typeof(o)=="undefined"
+  }
+
+  /**
+   * 判断是否是null
+   * @param {string | int | float | undefined | NaN}o
+   * @return {boolean} none
+   */
+  static isNull(o){
+    return o ===null
   }
 }
 
-export default [Utils]
+class StringUtils{
+
+  /**
+   * 判断字符串是否是空白,同时判断undefined,null,NaN
+   * @param {str|int|float|undefined|null|NaN}o
+   * @return {boolean}
+   */
+  static isBlank(o){
+    return !ObjectUtlls.isNull(o) && !ObjectUtlls.isUndef(o) && !isNaN(o) && o!==""
+  }
+}
+
+export default [ObjectUtlls, StringUtils]

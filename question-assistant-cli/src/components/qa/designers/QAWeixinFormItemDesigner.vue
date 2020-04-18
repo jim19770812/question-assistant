@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'QAPhoneFormItemView'
+  name: 'QAWeixinFormItemDesigner'
 }
 </script>
 

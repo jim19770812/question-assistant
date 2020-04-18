@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'QATextLineFormItemView'
+  name: 'QAWeixinFormItemRender'
 }
 </script>
 
