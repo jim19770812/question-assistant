@@ -6,8 +6,6 @@
 </template>
 
 <script>
-import {ObjectUtlls} from '@/common/utils'
-
 export default {
   name: 'QANameFormItemDesigner',
   data:function(){
@@ -38,7 +36,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
   .qad-item-name{
     display: flex;
     flex-direction: column;
@@ -70,5 +68,4 @@ export default {
     opacity:1;
     border-radius:4px;
   }
-
 </style>

@@ -21,7 +21,7 @@
 import { ObjectUtlls } from '@/common/utils'
 
 export default {
-  name: 'item-name-editor',
+  name: 'QANameFormItemEditor',
   data:function(){
     return{
     }
@@ -39,21 +39,6 @@ export default {
         if (!ObjectUtlls.isNull(this.$store.state.qa.container.getItem(this.key))){
           const index=this.$store.state.qa.container.indexByKey(this.key)
           this.$store.commit("qa/updateValue", {path: `$.items[${index}].title`,
-            newVal: val,
-            key:this.key
-          })
-        }
-      }
-    },
-    val:{
-      get(){
-        const item=this.$store.state.qa.container.getItem(this.key)
-        return ObjectUtlls.isNull(item)?"":item.val
-      },
-      set(val){
-        if (!ObjectUtlls.isNull(this.$store.state.qa.container.getItem(this.key))){
-          const index=this.$store.state.qa.container.indexByKey(this.key)
-          this.$store.commit("qa/updateValue", {path: `$.items[${index}].val`,
             newVal: val,
             key:this.key
           })
