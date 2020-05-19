@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import LosePasswordComponent from './LosePasswordComponent'
-import NewPasswordComponent from './NewPasswordComponent'
-import {mapGetters} from 'vuex'
+import LosePasswordComponent from '@/components/sys/LosePasswordComponent'
+import NewPasswordComponent from '@/components/sys/NewPasswordComponent'
+// import {mapGetters} from 'vuex'
 export default {
   name: 'Reset',
   data: function () {
@@ -36,7 +36,7 @@ export default {
     }
   },
   methods: {
-    ...mapGetters('reset')
+    // ...mapGetters('reset')
   },
   components: {
     'lose-password-component':LosePasswordComponent,

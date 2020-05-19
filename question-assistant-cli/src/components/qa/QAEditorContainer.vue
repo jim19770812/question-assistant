@@ -1,16 +1,52 @@
 <template>
-  <div>
-
+  <div class="qad-comp-editor-container">
+    <component :is="type"></component>
   </div>
 </template>
 
 <script>
 /*表单项编辑器容器*/
+import QANameFormItemEditor from '@/components/qa/editors/QANameFormItemEditor'
+import QAPhoneFormItemEditor from '@/components/qa/editors/QAPhoneFormItemEditor'
+import { ObjectUtlls } from '@/common/utils'
 export default {
-  name: 'QAEditorContainer'
+  name: 'QAEditorContainer',
+  data:function(){
+    return {
+
+    }
+  },
+  computed:{
+    item:function(){
+      if (this.$store.state.qa.container.index<0){
+        return null
+      }
+      const ret=this.$store.state.qa.container.getItem(this.$store.state.qa.container.index)
+      console.log("item:", ret)
+      return ret
+    },
+    type:function(){
+      const comp=this.item
+      if (ObjectUtlls.isNull(comp)){
+        return ""
+      }
+      const ret=this.$store.state.qa.container.getEditorClass(comp.type)
+      return ret
+    }
+  },
+  components:{
+    "item-name-editor":QANameFormItemEditor,
+    "item-phone-editor":QAPhoneFormItemEditor
+  }
 }
 </script>
 
 <style scoped lang="less">
-
+  .qad-comp-editor-container{
+    width:360px;
+    height:1012px;
+    background:rgba(255,255,255,1);
+    box-shadow:-5px 0px 5px rgba(23,29,62,0.05);
+    opacity:1;
+  }
 </style>

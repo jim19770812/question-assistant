@@ -7,7 +7,12 @@
 
 <script>
 export default {
-  name: 'QAAreaFormItemEditor'
+  name: 'QAAreaFormItemEditor',
+  data:function(){
+    return{
+      data:{}
+    }
+  }
 }
 </script>
 

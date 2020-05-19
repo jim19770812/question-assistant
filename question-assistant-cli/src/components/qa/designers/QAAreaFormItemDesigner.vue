@@ -7,7 +7,13 @@
 
 <script>
 export default {
-  name: 'QAAreaFormItemDesigner'
+  name: 'QAAreaFormItemDesigner',
+  data:function(){
+    return {
+      type:"fitem-area"
+
+    }
+  }
 }
 </script>
 

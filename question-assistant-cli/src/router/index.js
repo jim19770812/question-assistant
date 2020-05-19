@@ -3,13 +3,11 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Auth from '@/components/sys/Auth.vue'
 
-import QAList from '@/components/qa/QAList'
 import QAFormDesigner from '@/components/qa/QAFormDesigner'
-import LoginComponent from '../components/sys/LoginComponent'
-import RegisterComponent from '../components/sys/RegisterComponent'
-import Reset from '../components/sys/Reset'
-import LosePasswordComponent from '../components/sys/LosePasswordComponent'
-import NewPasswordComponent from '../components/sys/NewPasswordComponent'
+import QAList from '@/components/qa/QAList'
+import LoginComponent from '@/components/sys/LoginComponent'
+import RegisterComponent from '@/components/sys/RegisterComponent'
+import Reset from '@/components/sys/Reset'
 
 Vue.use(VueRouter)
 

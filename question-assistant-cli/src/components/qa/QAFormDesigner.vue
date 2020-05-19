@@ -18,16 +18,16 @@
             <span class="qad-lp-qa-items">个人信息</span>
             <div class="qad-lp-box">
               <a href="#">
-                <div class="icon-name" draggable="true" @dragstart="formItemDragStart" @dragend="formItemDragEnd">姓名</div>
+                <div class="fitem_name" draggable="true" @dragstart="formItemDragStart" @dragend="formItemDragEnd">姓名</div>
               </a>
               <a href="#">
-                <div class="icon-phone" draggable="true" @dragstart="formItemDragStart" @dragend="formItemDragEnd">电话</div>
+                <div class="fitem_phone" draggable="true" @dragstart="formItemDragStart" @dragend="formItemDragEnd">电话</div>
               </a>
               <a href="#">
-                <div class="icon-wechat" draggable="true" @dragstart="formItemDragStart" @dragend="formItemDragEnd">微信</div>
+                <div class="fitem_wechat" draggable="true" @dragstart="formItemDragStart" @dragend="formItemDragEnd">微信</div>
               </a>
               <a href="#">
-                <div class="icon-position" draggable="true" @dragstart="formItemDragStart" @dragend="formItemDragEnd">省市区</div>
+                <div class="fitem_area" draggable="true" @dragstart="formItemDragStart" @dragend="formItemDragEnd">省市区</div>
               </a>
             </div>
           </div>
@@ -35,7 +35,7 @@
             <span class="qad-lp-qa-items" draggable="true" @dragstart="formItemDragStart" @dragend="formItemDragEnd">文本</span>
             <div class="qad-lp-box">
               <a href="#">
-                <div class="icon-text" draggable="true" @dragstart="formItemDragStart" @dragend="formItemDragEnd">单行文本</div>
+                <div class="fitem_text" draggable="true" @dragstart="formItemDragStart" @dragend="formItemDragEnd">多行文本</div>
             </a>
             </div>
           </div>
@@ -43,21 +43,16 @@
             <span class="qad-lp-qa-items">选择题</span>
             <div class="qad-lp-box">
               <a href="#">
-                <div class="icon-select" draggable="true" @dragstart="formItemDragStart" @dragend="formItemDragEnd">单项选择</div>
+                <div class="fitem_radio" draggable="true" @dragstart="formItemDragStart" @dragend="formItemDragEnd">单项选择</div>
               </a>
               <a href="#">
-                <div class="icon-mulselet" draggable="true" @dragstart="formItemDragStart" @dragend="formItemDragEnd">多项选择</div>
+                <div class="fitem_mulselet" draggable="true" @dragstart="formItemDragStart" @dragend="formItemDragEnd">多项选择</div>
               </a>
             </div>
           </div>
         </div>
-        <qa-designer-container></qa-designer-container>
-<!--        <div class="qad-comp-render-container">-->
-<!--          <div class="qad-content-pane">-->
-<!--              请从左侧选择一个题目-->
-<!--          </div>-->
-<!--        </div>-->
-        <div class="qad-comp-inspect-container">right</div>
+        <qa-designer-container ref="designer"></qa-designer-container>
+        <qa-editor-container ref="editor"></qa-editor-container>
       </div>
     </div>
 
@@ -65,11 +60,13 @@
 </template>
 
 <script>
-import QaDesignerContainer from "./QADesignerContainer"
+import QaDesignerContainer from "@/components/qa/QADesignerContainer"
+import QAEditorContainer from "@/components/qa/QAEditorContainer"
 export default {
   name: 'QAFormDesigner',
   components: {
-    'qa-designer-container':QaDesignerContainer
+    'qa-designer-container':QaDesignerContainer,
+    'qa-editor-container': QAEditorContainer
   },
   methods:{
     /**
@@ -111,7 +108,7 @@ export default {
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;/*水平居中*/
-    justify-items: start;
+    justify-items: flex-start;
     /*align-items: center;*/
     line-height: 20px;
   }
@@ -177,8 +174,8 @@ export default {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: start;
-    align-items: start;
+    justify-content: flex-start;
+    align-items: flex-start;
     text-align: left;
   }
   .qad-container>.qad-main-container>.qad-leftpane>*{
@@ -186,30 +183,6 @@ export default {
     margin: 16px auto;
     text-align: left;
   }
-  /*.qad-container>.qad-main-container>.qad-comp-render-container{*/
-  /*  width:100%;*/
-  /*  height:100%;*/
-  /*  display: flex;*/
-  /*  flex-wrap: nowrap;*/
-  /*  flex-direction: column;*/
-  /*  justify-content: center;*/
-  /*  align-items: center;*/
-  /*}*/
-  /*.qad-container>.qad-main-container>.qad-comp-render-container>.qad-content-pane{*/
-  /*  width:320px;*/
-  /*  height:665px;*/
-  /*  background:rgba(255,255,255,1);*/
-  /*  box-shadow:0 3px 24px rgba(0,0,0,0.08);*/
-  /*  font-size:12px;*/
-  /*  font-family:PingFang SC;*/
-  /*  font-weight:400;*/
-  /*  line-height:16px;*/
-  /*  color:rgba(51,51,51,1);*/
-  /*  opacity:0.4;*/
-  /*  display: flex;*/
-  /*  justify-content: center;*/
-  /*  align-items: center;*/
-  /*}*/
   .qad-leftpane .qad-lp-qa-type{
     height: 66px;
     line-height: 66px;
@@ -238,7 +211,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
   }
   .qad-leftpane .qad-lp-box>a{
@@ -254,46 +227,46 @@ export default {
     line-height: 32px;
     color:rgba(51,51,51,1);
   }
-  .qad-lp-box .icon-name{
+  .qad-lp-box .fitem_name{
     background:url("../../assets/icon_edit_name.png") no-repeat transparent;
     background-size: 16px 16px;
     background-position: 16px 6px;
   }
-  .qad-lp-box .icon-phone{
+  .qad-lp-box .fitem_phone{
     background:url("../../assets/icon_edit_phone.png") no-repeat transparent;
     background-size: 16px 16px;
     background-position: 16px 6px;
   }
-  .qad-lp-box .icon-wechat{
+  .qad-lp-box .fitem_wechat{
     background:url("../../assets/icon_edit_wechat.png") no-repeat transparent;
     background-size: 16px 16px;
     background-position: 16px 6px;
   }
-  .qad-lp-box .icon-position{
+  .qad-lp-box .fitem_area{
     background:url("../../assets/icon_edit_position.png") no-repeat transparent;
     background-size: 16px 16px;
     background-position: 12px 6px;
   }
-  .qad-lp-box .icon-text{
+  .qad-lp-box .fitem_text{
     background:url("../../assets/icon_edit_text.png") no-repeat transparent;
     background-size: 16px 16px;
     background-position: 4px 6px;
   }
-  .qad-leftpane .icon-select{
+  .qad-leftpane .fitem_radio{
     background:url("../../assets/icon_edit_danxuan.png") no-repeat transparent;
     background-size: 16px 16px;
     background-position: 4px 6px;
   }
-  .qad-leftpane .icon-mulselet{
+  .qad-leftpane .fitem_mulselet{
     background:url("../../assets/icon_edit_duoxuan.png") no-repeat transparent;
     background-size: 16px 16px;
     background-position: 4px 6px;
   }
-  .qad-container>.qad-main-container>.qad-comp-inspect-container{
-    width:360px;
-    height:1012px;
-    background:rgba(255,255,255,1);
-    box-shadow:-5px 0px 5px rgba(23,29,62,0.05);
-    opacity:1;
-  }
+  /*.qad-container>.qad-main-container>.qad-comp-editor-container{*/
+  /*  width:360px;*/
+  /*  height:1012px;*/
+  /*  background:rgba(255,255,255,1);*/
+  /*  box-shadow:-5px 0px 5px rgba(23,29,62,0.05);*/
+  /*  opacity:1;*/
+  /*}*/
 </style>

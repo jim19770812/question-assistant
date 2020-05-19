@@ -7,7 +7,12 @@
 
 <script>
 export default {
-  name: 'QANameFormItemRender'
+  name: 'QANameFormItemRender',
+  data:function(){
+    return{
+      data:{}
+    }
+  }
 }
 </script>
 

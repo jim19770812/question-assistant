@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import LoginComponent from './LoginComponent'
-import RegisterComponent from './RegisterComponent'
-import { mapState, mapMutations, mapActions, mapGetters } from 'vuex'
+// import LoginComponent from '@/components/sys/LoginComponent'
+// import RegisterComponent from '@/components/sys/RegisterComponent'
+// import { mapState, mapMutations, mapActions, mapGetters } from 'vuex'
 export default {
   data:function(){
     return {

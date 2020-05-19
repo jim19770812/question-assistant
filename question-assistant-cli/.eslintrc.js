@@ -48,7 +48,7 @@ module.exports = {
     "consistent-return": "error", //无论有没有返回值都强制要求return语句返回一个值
     "curly": ["error", "all"], //强制使用花括号的风格
     "default-case": "off", //在switch语句中需要有default语句
-    "dot-notation": ["error", {"allowKeywords": false, "allowPattern": ""}], //获取对象属性的时候使用点号
+    "dot-notation": ["warn", {"allowKeywords": true, "allowPattern": ""}], //获取对象属性的时候使用点号
     "eqeqeq": ["error", "smart"], //比较的时候使用严格等于
     "no-alert": "warn", //不允许使用alert，confirm，prompt语句
     "no-caller": "error", //不允许使用arguments.callee和arguments.caller属性
@@ -156,6 +156,6 @@ module.exports = {
     "comma-spacing":"off", //逗号前后加空格
     "spaced-comment":"off", //注释前后的空格
     "arrow-spacing":"off", //箭头前后空格
-    "no-unused-components":"off", //未使用的组件
+    "no-unused-components":"off" //未使用的组件
   }
 }

@@ -372,7 +372,7 @@ export default {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     /*width:360px;*/
     width: auto;
@@ -382,7 +382,7 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     width:360px;
   }
