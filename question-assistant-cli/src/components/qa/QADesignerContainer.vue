@@ -23,6 +23,8 @@
 import {QAUtils} from '../../modules/qa.js'
 import QANameFormItemDesigner from '@/components/qa/designers/QANameFormItemDesigner'
 import QAPhoneFormItemDesigner from '@/components/qa/designers/QAPhoneFormItemDesigner'
+import QAWeixinFormItemDesigner from '@/components/qa/designers/QAWeixinFormItemDesigner'
+import QATextLineFormItemDesigner from '@/components/qa/designers/QATextLineFormItemDesigner'
 
 /*表单项设计器容器*/
 export default {
@@ -37,23 +39,6 @@ export default {
   },
   methods: {
     showThis () {
-      const data={
-        a:{
-          b:{
-            c:{
-              name:'吕布',
-              age:20
-            },
-            e:{
-              name:"张飞",
-              age:19
-            }
-          }
-        }
-      }
-
-      jq.value(data, "$.a.b.c.age", 22)
-      console.log(data)
     },
     /**
      *
@@ -83,7 +68,10 @@ export default {
   },
   components: {
     "item-name-designer":QANameFormItemDesigner,
-    "item-phone-designer":QAPhoneFormItemDesigner
+    "item-phone-designer":QAPhoneFormItemDesigner,
+    "item-wechat-designer":QAWeixinFormItemDesigner,
+    "item-text-designer":QATextLineFormItemDesigner
+
   }
 }
 
@@ -115,7 +103,7 @@ export default {
     align-items: center;
   }
   .selected{
-    border: solid 1px blue;
+    border: solid 1px #00a57b;
   }
 
 </style>

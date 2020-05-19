@@ -1,55 +1,47 @@
 <template>
-  <div>
-    <div class="qae-item-phone">
-      <div>手机号</div>
-      <input type="text" v-model="val"/>
-      <div>校验</div>
-      <div>
-        <input type="checkbox" v-model="notEmpty"/><span>是否必填</span>
-      </div>
+  <div class="qae-item-phone">
+    <div>手机号</div>
+    <input type="text" v-model="val"/>
+    <div>校验</div>
+    <div>
+      <input type="checkbox" v-model="notEmpty"/><span>是否必填</span>
     </div>
   </div>
-
 </template>
 
 <script>
-import { ObjectUtlls } from '@/common/utils'
-
 export default {
   name: 'QAPhoneFormItemEditor',
   data:function(){
     return {
-
     }
   },
   computed:{
-    index:function(){
-      return this.$store.state.qa.container.index
+    key(){
+      return this.$store.state.qa.container.key
     },
     val:{
       get(){
-        return this.$store.state.qa.container.getItem(this.index).val
+        return this.$store.state.qa.container.getItem(this.key).val
       },
       set(newVal){
-        if (!ObjectUtlls.isNull(this.$store.state.qa.container.getSelectedItem())){
-          const path=`$.items[${this.index}].val`
-          this.$store.commit("qa/updateValue", {path: path,
-            newVal: newVal
-          })
-        }
+        const index=this.$store.state.qa.container.indexByKey(this.key)
+        this.$store.commit("qa/updateValue", {path: `$.items[${index}].val`,
+          newVal: newVal,
+          key:this.key
+        })
       }
     },
     notEmpty:{
       get(){
-        return this.$store.state.qa.container.getItem(this.index).notEmpty
+        return this.$store.state.qa.container.getItem(this.key).notEmpty
       },
       set(newVal){
-        if (!ObjectUtlls.isNull(this.$store.state.qa.container.getSelectedItem())){
-          const path=`$.items[${this.index}].notEmpty`
-          this.$store.commit("qa/updateValue", {path: path,
-            newVal: newVal
-          })
-        }
+        const index=this.$store.state.qa.container.indexByKey(this.key)
+        this.$store.commit("qa/updateValue", {path: `$.items[${index}].notEmpty`,
+          newVal: newVal,
+          key:this.key
+        })
       }
     }
   }

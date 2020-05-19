@@ -1,36 +1,39 @@
 <template>
   <div v-bind:class="{'qad-item-name':true, selected:selected}"  @click="click">
-    <div class="title">{{item.title}} <span class="red" v-show="item.notEmpty">*</span></div>
-    <div class="input">{{item.val}}</div>
+<!--    <div class="title">{{item.title}} <span class="red" v-show="item.notEmpty">*</span></div>-->
+    <div class="title">{{item?item.title:""}} <span class="red" v-show="item">*</span></div>
+    <div class="input"></div>
   </div>
 </template>
 
 <script>
+import {ObjectUtlls} from '@/common/utils'
+
 export default {
   name: 'QANameFormItemDesigner',
   data:function(){
     return {
-      index:-1
+      key:""
     }
   },
   created:function(){
-    this.index=Math.max(this.$store.state.qa.container.items.length-1,0)
+    this.key=this.$store.state.qa.container.getLastestItem().key
   },
   methods:{
     click:function(){
-      this.$store.commit('qa/select', this.index)
+      this.$store.commit('qa/select', this.key)
     }
   },
   computed:{
+    container:function(){
+      return this.$store.state.qa.container
+    },
     item:function(){
-      if (this.$store.state.qa.container.index<0){
-        return null
-      }
-      const ret=this.$store.state.qa.container.getSelectedItem()
+      const ret=this.$store.state.qa.container.getItem(this.key)
       return ret
     },
     selected:function(){
-      return this.$store.state.qa.container.index===this.index
+      return this.$store.state.qa.container.key===this.key
     }
   }
 }

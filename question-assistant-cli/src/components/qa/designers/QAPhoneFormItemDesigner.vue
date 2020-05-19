@@ -3,8 +3,6 @@
     <div class="title">电话 <span class="red" v-show="item.notEmpty">*</span></div>
     <div class="input"></div>
   </div>
-
-
 </template>
 
 <script>
@@ -12,27 +10,24 @@ export default {
   name: 'QAPhoneFormItemDesigner',
   data:function(){
     return {
-      index:-1
+      key:""
     }
   },
   created:function(){
-    this.index=Math.max(this.$store.state.qa.container.items.length-1,0)
+    this.key=this.$store.state.qa.container.getLastestItem().key
   },
   methods:{
     click:function(){
-      this.$store.commit('qa/select', this.index)
+      this.$store.commit('qa/select', this.key)
     }
   },
   computed:{
     item:function(){
-      if (this.$store.state.qa.container.index<0){
-        return null
-      }
-      const ret=this.$store.state.qa.container.getSelectedItem()
+      const ret=this.$store.state.qa.container.getItem(this.key)
       return ret
     },
     selected:function(){
-      return this.$store.state.qa.container.index===this.index
+      return this.$store.state.qa.container.key===this.key
     }
   }
 }

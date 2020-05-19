@@ -9,6 +9,8 @@
 import QANameFormItemEditor from '@/components/qa/editors/QANameFormItemEditor'
 import QAPhoneFormItemEditor from '@/components/qa/editors/QAPhoneFormItemEditor'
 import { ObjectUtlls } from '@/common/utils'
+import QAWeixinFormItemEditor from '@/components/qa/editors/QAWeixinFormItemEditor'
+import QATextLineFormItemEditor from '@/components/qa/editors/QATextLineFormItemEditor'
 export default {
   name: 'QAEditorContainer',
   data:function(){
@@ -18,16 +20,13 @@ export default {
   },
   computed:{
     item:function(){
-      if (this.$store.state.qa.container.index<0){
-        return null
-      }
-      const ret=this.$store.state.qa.container.getItem(this.$store.state.qa.container.index)
+      const ret=this.$store.state.qa.container.getItem(this.$store.state.qa.container.key)
       console.log("item:", ret)
       return ret
     },
     type:function(){
       const comp=this.item
-      if (ObjectUtlls.isNull(comp)){
+      if (ObjectUtlls.isNull(comp) || ObjectUtlls.isUndef(comp)){
         return ""
       }
       const ret=this.$store.state.qa.container.getEditorClass(comp.type)
@@ -36,7 +35,9 @@ export default {
   },
   components:{
     "item-name-editor":QANameFormItemEditor,
-    "item-phone-editor":QAPhoneFormItemEditor
+    "item-phone-editor":QAPhoneFormItemEditor,
+    "item-wechat-editor":QAWeixinFormItemEditor,
+    "item-text-editor":QATextLineFormItemEditor
   }
 }
 </script>

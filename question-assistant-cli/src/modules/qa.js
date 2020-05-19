@@ -1,6 +1,7 @@
 import {ObjectUtlls} from '@/common/utils'
 import Vue from 'vue'
 import jq from 'jsonpath'
+import {v1 as uuid1} from 'uuid'
 /**
  * 定义类型和对应组件设计器/编辑器/渲染器的映射关系
  * @type {object}
@@ -47,7 +48,7 @@ class Container{
   constructor () {
     console.log("constructor")
     this.items=[]
-    this.index=-1
+    this.key="" //当前选中项的key
   }
 
   /**
@@ -59,17 +60,22 @@ class Container{
   add(item, autoSelect=true){
     this.items.push(item)
     if (autoSelect){
-      this.index=this.items.length-1
+      this.key=this.items[this.items.length-1].key
     }
   }
 
   /**
-   * 移除指定索引的项
-   * @param {number} index
-   * @returns {void}
+   * 移除指定key的项
+   * @param {string} key
+   * @returns {int}
    */
-  remove(index){
-    this.items.splice(index)
+  remove(key){
+    const idx=this.indexByKey(key)
+    let ret=null
+    if (idx>=0){
+      ret=this.items.splice(idx)
+    }
+    return ret?1:0
   }
 
   /**
@@ -81,32 +87,38 @@ class Container{
   }
 
   /**
-   * 选中某项
-   * @param {number}index
-   * @returns {void}
+   * 根据key找到对应的索引
+   * @param {string} key
+   * @return {number}
    */
-  select(index){
-    this.index=index
+  indexByKey(key){
+    for(let result=0; result<=this.items.length-1; result++){
+      if (this.items[result].key===key){
+        return result
+      }
+    }
+    return -1
   }
 
   /**
-   * 根据索引获取某项
-   * @param {number}index
+   * 根据key获取某项
+   * @param {string}key
    * @returns {object}
    */
-  getItem(index){
+  getItem(key){
+    const index=this.indexByKey(key)
     return this.items[index]
   }
 
   /**
-   * 当前选中项
-   * @returns {object}
+   * 获取最后一个项
+   * @returns {null|*}
    */
-  getSelectedItem(){
-    if (this.index<0){
+  getLastestItem(){
+    if (this.items.length<0){
       return null
     }
-    return this.items[this.index]
+    return this.items[this.items.length-1]
   }
 
   /**
@@ -131,7 +143,8 @@ class Container{
    * @returns {string}
    */
   getDesignerClass(itemName){
-    return ObjectUtlls.hasProperty(typeClassMapper, itemName)?typeClassMapper[itemName].designer:""
+    const ret=ObjectUtlls.hasProperty(typeClassMapper, itemName)?typeClassMapper[itemName].designer:""
+    return ret
   }
 
   /**
@@ -161,21 +174,38 @@ const mutations={
   showThis:(states)=>{
     console.log("showThis, states.container", states.container)
   },
+  /**
+   * 添加
+   * @param {object} states
+   * @param {object} payload 载荷：需要添加的json对象
+   */
   add: (states, payload)=> {
     states.container.add(payload)
     console.log("add，states.container", states.container)
   },
-  remove:(states, index)=>{
-    states.container.remove(index)
+  /**
+   * 移除
+   * @param {object} states
+   * @param {string}key
+   */
+  remove:(states, key)=>{
+    const idx=states.container.indexByKey(key)
+    if (idx>=0){
+      states.container.remove(key)
+    }
     console.log("remove，states.container", states.container)
   },
   /**
-   * 选中组件
-   * @param {this} states
-   * @param {int} index
+   * 根据key选中组件
+   * @param {this}states
+   * @param {string} key uuid
+   * @returns {void}
    */
-  select:(states, index)=>{
-    states.container.index=index
+  select:(states, key)=>{
+    const idx=states.container.indexByKey(key)
+    if (idx>=0){
+      states.container.key=key
+    }
   },
   /**
    * 更新组件对象
@@ -194,7 +224,12 @@ const mutations={
     if (ret !== payload.newVal){
       throw new Error(`未能根据jsonpath：${payload.path}修改对象值`)
     }
-    console.log("after updateValue, ret=",  ret, JSON.stringify(states.container.items[states.container.index]))
+    if (ObjectUtlls.hasProperty(payload, "key")){
+      const index=states.container.indexByKey(payload.key)
+      console.log("after updateValue, ret=",  ret, JSON.stringify(states.container.items[index]))
+    }else{
+      console.log("after updateValue, ret=",  ret)
+    }
   },
   /**
    * 批量更新组件对象值
@@ -224,6 +259,7 @@ export class QAUtils{
   static createfNameItemData(title, defVal, notEmpty, minLen, maxLen){
     return {
       type:"fitem_name",
+      key:uuid1(),
       title:title,
       val:defVal,
       notEmpty:!ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true,
@@ -247,6 +283,7 @@ export class QAUtils{
   static createfPhoneItemData(phone, notEmpty){
     return {
       type:"fitem_phone",
+      key:uuid1(),
       val:phone,
       notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true
     }
@@ -263,11 +300,9 @@ export class QAUtils{
   static createfTextItemData(text, notEmpty, minLen, maxLen){
     return {
       type:"fitem_text",
+      key:uuid1(),
       val:text,
-      notEmpty:{
-        enabled:ObjectUtlls.isUndef(notEmpty),
-        val:!ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true
-      },
+      notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true,
       minLen:{
         enabled:ObjectUtlls.isUndef(minLen),
         val:!ObjectUtlls.isUndef(minLen) && !ObjectUtlls.isNull(minLen)?minLen:0
@@ -287,12 +322,10 @@ export class QAUtils{
    */
   static createfWeixinItemData(weixin, notEmpty){
     return {
-      type:"fitem_weixin",
+      type:"fitem_wechat",
+      key:uuid1(),
       val:weixin,
-      notEmpty:{
-        enabled:ObjectUtlls.isUndef(notEmpty),
-        val:!ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true
-      }
+      notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true
     }
   }
 
@@ -306,11 +339,9 @@ export class QAUtils{
   static createfRadioItemData(title, notEmpty, options){
     return {
       type:"fitem_radio",
+      key:uuid1(),
       val:options,
-      notEmpty:{
-        enabled:ObjectUtlls.isUndef(notEmpty),
-        val:!ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true
-      }
+      notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true
     }
   }
 
@@ -326,11 +357,9 @@ export class QAUtils{
   static createfMulseletItemData(title, notEmpty, options, minOptionCnt, maxOptionCnt){
     return {
       type:"fitem_mulselet",
+      key:uuid1(),
       val:options,
-      notEmpty:{
-        enabled:ObjectUtlls.isUndef(notEmpty),
-        val:!ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true
-      },
+      notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true,
       minOptionCnt:{
         enabled:ObjectUtlls.isUndef(minOptionCnt),
         val:!ObjectUtlls.isUndef(minOptionCnt) && !ObjectUtlls.isNull(minOptionCnt)?minOptionCnt:true
@@ -355,10 +384,8 @@ export class QAUtils{
   static createfAreaItemData(title, notEmpty,provinceKey, cityKey, coutyKey){
     return {
       type:"fitem_area",
-      notEmpty:{
-        enabled:ObjectUtlls.isUndef(notEmpty),
-        val:!ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true
-      },
+      key:uuid1(),
+      notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true,
       provinceKey:!ObjectUtlls.isUndef(provinceKey) && !ObjectUtlls.isNull(provinceKey)?provinceKey:0,
       cityKey:!ObjectUtlls.isUndef(cityKey) && !ObjectUtlls.isNull(cityKey)?cityKey:0,
       coutyKey:!ObjectUtlls.isUndef(coutyKey) && !ObjectUtlls.isNull(coutyKey)?coutyKey:0
