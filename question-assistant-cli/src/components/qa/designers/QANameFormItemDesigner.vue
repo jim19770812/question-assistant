@@ -1,6 +1,5 @@
 <template>
   <div v-bind:class="{'qad-item-name':true, selected:selected}"  @click="click">
-<!--    <div class="title">{{item.title}} <span class="red" v-show="item.notEmpty">*</span></div>-->
     <div class="title">{{item?item.title:""}} <span class="red" v-show="item">*</span></div>
     <div class="input"></div>
   </div>
