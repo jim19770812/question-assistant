@@ -65,5 +65,7 @@ export default {
     opacity:1;
     border-radius:4px;
   }
-
+  .selected{
+    border: solid 1px #00a57b;
+  }
 </style>

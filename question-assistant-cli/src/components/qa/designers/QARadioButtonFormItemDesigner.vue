@@ -30,8 +30,7 @@ export default {
       return this.$store.state.qa.container
     },
     item:function(){
-      const ret=this.$store.state.qa.container.getItem(this.key)
-      return ret
+      return this.$store.state.qa.container.getItem(this.key)
     },
     selected:function(){
       return this.$store.state.qa.container.key===this.key
@@ -71,5 +70,8 @@ export default {
     border:1px solid rgba(222,226,230,1);
     opacity:1;
     border-radius:4px;
+  }
+  .selected{
+    border: solid 1px #00a57b;
   }
 </style>

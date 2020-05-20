@@ -13,12 +13,12 @@ import QAWeixinFormItemEditor from '@/components/qa/editors/QAWeixinFormItemEdit
 import QATextLineFormItemEditor from '@/components/qa/editors/QATextLineFormItemEditor'
 import QARadioButtonFormItemEditor from '@/components/qa/editors/QARadioButtonFormItemEditor'
 import QACheckboxFormItemEditor from '@/components/qa/editors/QACheckboxFormItemEditor'
+import QAAreaFormItemEditor from '@/components/qa/editors/QAAreaFormItemEditor'
 
 export default {
   name: 'QAEditorContainer',
   data:function(){
     return {
-
     }
   },
   computed:{
@@ -42,14 +42,15 @@ export default {
     "item-wechat-editor":QAWeixinFormItemEditor,
     "item-text-editor":QATextLineFormItemEditor,
     "item-radio-editor":QARadioButtonFormItemEditor,
-    "item-mulselet-editor":QACheckboxFormItemEditor
+    "item-mulselet-editor":QACheckboxFormItemEditor,
+    "item-area-editor":QAAreaFormItemEditor
   }
 }
 </script>
 
 <style scoped lang="less">
   .qad-comp-editor-container{
-    width:360px;
+    width:320px;
     height:1012px;
     background:rgba(255,255,255,1);
     box-shadow:-5px 0px 5px rgba(23,29,62,0.05);

@@ -1,21 +1,19 @@
 <template>
-  <div>
-    <div class="qad-comp-render-container">
+  <div class="qad-comp-render-container">
 <!--      <div>-->
 <!--        {{this.container}}-->
 <!--      </div>-->
-        <div class="qad-content-pane" @dragover.prevent @drop="formItemDrop($event)">
-          <div v-if="this.container.isEmpty()">
-            请从左侧选择一个题目并拖拽到这里
-            <button @click="showThis">showThis</button>
-          </div>
-            <div v-if="!this.container.isEmpty()">
-              <div v-for="(comp, idx) in this.container.getItems()" :key="idx">
-                <component :is="container.getDesignerClass(comp.type)" key="idx"></component>
-              </div>
-            </div>
+      <div class="qad-content-pane" @dragover.prevent @drop="formItemDrop($event)">
+        <div v-if="this.container.isEmpty()">
+          请从左侧选择一个题目并拖拽到这里
+          <button @click="showThis">showThis</button>
         </div>
-    </div>
+          <div v-if="!this.container.isEmpty()">
+            <div v-for="(comp, idx) in this.container.getItems()" :key="idx">
+              <component :is="container.getDesignerClass(comp.type)" key="idx"></component>
+            </div>
+          </div>
+      </div>
   </div>
 </template>
 
@@ -27,6 +25,7 @@ import QAWeixinFormItemDesigner from '@/components/qa/designers/QAWeixinFormItem
 import QATextLineFormItemDesigner from '@/components/qa/designers/QATextLineFormItemDesigner'
 import QARadioButtonFormItemDesigner from '@/components/qa/designers/QARadioButtonFormItemDesigner'
 import QACheckboxFormItemDesigner from '@/components/qa/designers/QACheckboxFormItemDesigner'
+import QAAreaFormItemDesigner from '@/components/qa/designers/QAAreaFormItemDesigner'
 
 /*表单项设计器容器*/
 export default {
@@ -60,7 +59,7 @@ export default {
       } else if (clazz === "fitem_radio") {
         data = QAUtils.createfRadioItemData("单项选择", true, ["选项1","选项2","选项3"], "", "")
       } else if (clazz === "fitem_mulselet") {
-        data = QAUtils.createfMulseletItemData("多项选择", true, [])
+        data = QAUtils.createfMulseletItemData("多项选择", true, ["选项1","选项2","选项3"])
       } else {
         data = QAUtils.createfTextItemData("多行文本", true)
       }
@@ -75,6 +74,7 @@ export default {
     "item-text-designer":QATextLineFormItemDesigner,
     "item-radio-designer":QARadioButtonFormItemDesigner,
     "item-mulselet-designer":QACheckboxFormItemDesigner,
+    "item-area-designer":QAAreaFormItemDesigner
   }
 }
 
@@ -82,17 +82,18 @@ export default {
 
 <style scoped lang="less">
   .qad-comp-render-container{
-    width:100%;
     height:100%;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex:1;
   }
   .qad-comp-render-container>.qad-content-pane{
-    width:320px;
-    height:665px;
+    width:340px;
+    height:100%;
+    min-height: 720px;
     background:rgba(255,255,255,1);
     box-shadow:0 3px 24px rgba(0,0,0,0.08);
     font-size:12px;
@@ -104,8 +105,5 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  .selected{
-    border: solid 1px #00a57b;
   }
 </style>

@@ -1,5 +1,4 @@
 import {ObjectUtlls} from '@/common/utils'
-import Vue from 'vue'
 import jq from 'jsonpath'
 import {v1 as uuid1} from 'uuid'
 /**
@@ -335,8 +334,8 @@ export class QAUtils{
       title: title,
       val:"",
       notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true,
-      rows:!ObjectUtlls.isUndef(rows) && !ObjectUtlls.isNull(minLen)?minLen:0,
-      cols:!ObjectUtlls.isUndef(cols) && !ObjectUtlls.isNull(maxLen)?maxLen:0}
+      rows:!ObjectUtlls.isUndef(rows) && !ObjectUtlls.isNull(rows)?rows:0,
+      cols:!ObjectUtlls.isUndef(cols) && !ObjectUtlls.isNull(cols)?cols:0}
   }
 
   /**
@@ -368,7 +367,7 @@ export class QAUtils{
       key:uuid1(),
       val:[], /*选中项*/
       options:options,/*待选项*/
-      notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true,
+      notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true
     }
   }
 
@@ -389,13 +388,13 @@ export class QAUtils{
       val:[],
       options:options,
       notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true,
-      minOptions:{
-        enabled:ObjectUtlls.isUndef(minOptionCnt),
-        val:!ObjectUtlls.isUndef(minOptionCnt) && !ObjectUtlls.isNull(minOptionCnt)?minOptionCnt:true
+      minSelection:{
+        enabled:false,
+        val:1
       },
-      maxOptions:{
-        enabled:ObjectUtlls.isUndef(maxOptionCnt),
-        val:!ObjectUtlls.isUndef(maxOptionCnt) && !ObjectUtlls.isNull(maxOptionCnt)?maxOptionCnt:true
+      maxSelection:{
+        enabled:false,
+        val:3
       }
     }
   }
@@ -405,19 +404,20 @@ export class QAUtils{
    * 创建地区组件数据
    * @param {string}title 标题
    * @param{bool} notEmpty 是否非空
-   * @param {string} provinceKey 省关键字
-   * @param {string} cityKey 市关键字
-   * @param {string}coutyKey 县关键字
+   * @param {string} province 省关键字
+   * @param {string} city 市关键字
+   * @param {string}county 县关键字
    * @returns {object}
    */
-  static createfAreaItemData(title, notEmpty,provinceKey, cityKey, coutyKey){
+  static createfAreaItemData(title, notEmpty,province, city, county){
     return {
       type:"fitem_area",
       key:uuid1(),
+      title:title,
       notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true,
-      provinceKey:!ObjectUtlls.isUndef(provinceKey) && !ObjectUtlls.isNull(provinceKey)?provinceKey:0,
-      cityKey:!ObjectUtlls.isUndef(cityKey) && !ObjectUtlls.isNull(cityKey)?cityKey:0,
-      coutyKey:!ObjectUtlls.isUndef(coutyKey) && !ObjectUtlls.isNull(coutyKey)?coutyKey:0
+      province:!ObjectUtlls.isUndef(province) && !ObjectUtlls.isNull(province)?province:0,
+      city:!ObjectUtlls.isUndef(city) && !ObjectUtlls.isNull(city)?city:0,
+      county:!ObjectUtlls.isUndef(county) && !ObjectUtlls.isNull(county)?county:0
     }
   }
 }

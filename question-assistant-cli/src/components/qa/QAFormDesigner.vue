@@ -100,8 +100,6 @@ export default {
     padding: 0;
   }
   .qad-container{
-    width:1920px;
-    height:1080px;
     background:rgba(247,247,247,1);
     opacity:1;
     display: flex;
@@ -109,7 +107,6 @@ export default {
     flex-wrap: nowrap;
     justify-content: center;/*水平居中*/
     justify-items: flex-start;
-    /*align-items: center;*/
     line-height: 20px;
   }
   .qad-container>.qad-header{

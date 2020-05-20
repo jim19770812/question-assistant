@@ -1,7 +1,9 @@
 <template>
-  <div v-bind:class="{'qad-item-name':true, selected:selected}"  @click="click">
-    <div class="title">{{item?item.title:""}} <span class="red" v-show="item">*</span></div>
-    <div class="input"></div>
+  <div>
+    <div v-bind:class="{'qad-item-name':true, selected:selected}"  @click="click">
+      <div class="title">{{item?item.title:""}} <span class="red" v-show="item">*</span></div>
+      <div class="input"></div>
+    </div>
   </div>
 </template>
 
@@ -67,5 +69,8 @@ export default {
     border:1px solid rgba(222,226,230,1);
     opacity:1;
     border-radius:4px;
+  }
+  .selected{
+    border: solid 1px #00a57b;
   }
 </style>
