@@ -11,6 +11,9 @@ import QAPhoneFormItemEditor from '@/components/qa/editors/QAPhoneFormItemEditor
 import { ObjectUtlls } from '@/common/utils'
 import QAWeixinFormItemEditor from '@/components/qa/editors/QAWeixinFormItemEditor'
 import QATextLineFormItemEditor from '@/components/qa/editors/QATextLineFormItemEditor'
+import QARadioButtonFormItemEditor from '@/components/qa/editors/QARadioButtonFormItemEditor'
+import QACheckboxFormItemEditor from '@/components/qa/editors/QACheckboxFormItemEditor'
+
 export default {
   name: 'QAEditorContainer',
   data:function(){
@@ -37,7 +40,9 @@ export default {
     "item-name-editor":QANameFormItemEditor,
     "item-phone-editor":QAPhoneFormItemEditor,
     "item-wechat-editor":QAWeixinFormItemEditor,
-    "item-text-editor":QATextLineFormItemEditor
+    "item-text-editor":QATextLineFormItemEditor,
+    "item-radio-editor":QARadioButtonFormItemEditor,
+    "item-mulselet-editor":QACheckboxFormItemEditor
   }
 }
 </script>

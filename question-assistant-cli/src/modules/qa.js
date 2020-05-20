@@ -33,9 +33,9 @@ const typeClassMapper={
     render:"item-text-render"
   },
   fitem_radio:{
-    designer:"item-select-designer",
-    editor:"item-select-editor",
-    render:"item-select-render"
+    designer:"item-radio-designer",
+    editor:"item-radio-editor",
+    render:"item-radio-render"
   },
   fitem_mulselet:{
     designer:"item-mulselet-designer",
@@ -210,7 +210,7 @@ const mutations={
   /**
    * 更新组件对象
    * @param {object}states 状态对象
-   * @param {{path, newVal}} payload 载荷，path是jsonpath路径，item是更新后的值
+   * @param {{path, key, newVal}} payload 负载对象（path：jsonpath路径，key是项的唯一索引，newVal是更新后的值
    * @returns {void}
    */
   updateValue(states, payload){
@@ -231,10 +231,41 @@ const mutations={
       console.log("after updateValue, ret=",  ret)
     }
   },
+  // eslint-disable-next-line valid-jsdoc
+  /**
+   * 应用更新，按照传入的jsonpath找到匹配项列表，然后依次执行回调
+   * @param {object}states vue状态对象
+   * @param {path, key, function(node):void} payload 负载对象（path：jsonpath路径，key是项的唯一索引，function(node):void是个找到匹配项之后要执行的回调（注意：可能要执行多次））
+   * @returns {void}
+   */
+  applyUpdate(states, payload){
+    if (!ObjectUtlls.hasProperty(payload, "path")){
+      throw new Error("updateValue时发现未传入有效的更新路径")
+    }
+    if (!ObjectUtlls.hasProperty(payload, "callback")){
+      throw new Error("updateValue时发现未传入有效的回调函数")
+    }
+    if (typeof(payload.callback)!=="function"){
+      throw new Error("updateValue时发现未传入有效的回调函数，callback参数必须是function类型")
+    }
+    const node=jq.query(states.container, payload.path, 100)
+    if (ObjectUtlls.isUndef(node) || !(node instanceof Array)){
+      throw new Error(`未能根据jsonpath：${payload.path}修改对象值`)
+    }
+    node.forEach(n=>{
+      payload.callback(n)
+    })
+    if (ObjectUtlls.hasProperty(payload, "key")){
+      const index=states.container.indexByKey(payload.key)
+      console.log("after updateValue, ret=",  node, JSON.stringify(states.container.items[index]))
+    }else{
+      console.log("after updateValue, ret=",  node)
+    }
+  },
   /**
    * 批量更新组件对象值
    * @param {object}states
-   * @param {[{path, newVal}]} payload
+   * @param {[{path, key, newVal}]} payload
    */
   updateValues(states, payload){
     if (!(payload instanceof Array)){
@@ -333,9 +364,11 @@ export class QAUtils{
   static createfRadioItemData(title, notEmpty, options){
     return {
       type:"fitem_radio",
+      title:title,
       key:uuid1(),
-      val:options,
-      notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true
+      val:[], /*选中项*/
+      options:options,/*待选项*/
+      notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true,
     }
   }
 
@@ -352,13 +385,15 @@ export class QAUtils{
     return {
       type:"fitem_mulselet",
       key:uuid1(),
-      val:options,
+      title:title,
+      val:[],
+      options:options,
       notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true,
-      minOptionCnt:{
+      minOptions:{
         enabled:ObjectUtlls.isUndef(minOptionCnt),
         val:!ObjectUtlls.isUndef(minOptionCnt) && !ObjectUtlls.isNull(minOptionCnt)?minOptionCnt:true
       },
-      maxOptionCnt:{
+      maxOptions:{
         enabled:ObjectUtlls.isUndef(maxOptionCnt),
         val:!ObjectUtlls.isUndef(maxOptionCnt) && !ObjectUtlls.isNull(maxOptionCnt)?maxOptionCnt:true
       }

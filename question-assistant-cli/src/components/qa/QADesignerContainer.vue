@@ -25,6 +25,8 @@ import QANameFormItemDesigner from '@/components/qa/designers/QANameFormItemDesi
 import QAPhoneFormItemDesigner from '@/components/qa/designers/QAPhoneFormItemDesigner'
 import QAWeixinFormItemDesigner from '@/components/qa/designers/QAWeixinFormItemDesigner'
 import QATextLineFormItemDesigner from '@/components/qa/designers/QATextLineFormItemDesigner'
+import QARadioButtonFormItemDesigner from '@/components/qa/designers/QARadioButtonFormItemDesigner'
+import QACheckboxFormItemDesigner from '@/components/qa/designers/QACheckboxFormItemDesigner'
 
 /*表单项设计器容器*/
 export default {
@@ -56,7 +58,7 @@ export default {
       } else if (clazz === "fitem_area") {
         data = QAUtils.createfAreaItemData("省市区", true, "", "", "")
       } else if (clazz === "fitem_radio") {
-        data = QAUtils.createfRadioItemData("单项选择", true, "", "", "")
+        data = QAUtils.createfRadioItemData("单项选择", true, ["选项1","选项2","选项3"], "", "")
       } else if (clazz === "fitem_mulselet") {
         data = QAUtils.createfMulseletItemData("多项选择", true, [])
       } else {
@@ -70,8 +72,9 @@ export default {
     "item-name-designer":QANameFormItemDesigner,
     "item-phone-designer":QAPhoneFormItemDesigner,
     "item-wechat-designer":QAWeixinFormItemDesigner,
-    "item-text-designer":QATextLineFormItemDesigner
-
+    "item-text-designer":QATextLineFormItemDesigner,
+    "item-radio-designer":QARadioButtonFormItemDesigner,
+    "item-mulselet-designer":QACheckboxFormItemDesigner,
   }
 }
 
@@ -105,5 +108,4 @@ export default {
   .selected{
     border: solid 1px #00a57b;
   }
-
 </style>

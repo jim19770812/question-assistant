@@ -1,11 +1,8 @@
 <template>
-  <div>
-    <div v-bind:class="{'qad-item-weichat': true, selected: selected}"  @click="click">
-      <div class="title">微信 <span class="red" v-show="item.notEmpty">*</span></div>
-      <div class="input"></div>
-    </div>
+  <div v-bind:class="{'qad-item-weichat': true, selected: selected}"  @click="click">
+    <div class="title">微信 <span class="red" v-show="item.notEmpty">*</span></div>
+    <div class="input"></div>
   </div>
-
 </template>
 
 <script>
@@ -67,8 +64,5 @@ export default {
     border:1px solid rgba(222,226,230,1);
     opacity:1;
     border-radius:4px;
-  }
-  .selected{
-    border: solid 1px #00a57b;
   }
 </style>
