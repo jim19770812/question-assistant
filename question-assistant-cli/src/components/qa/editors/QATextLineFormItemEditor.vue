@@ -1,19 +1,19 @@
 <template>
-  <div class="qae-item-name">
+  <div class="qae-item-textline">
     <div>标题</div>
     <input type="text" v-model="title"/>
-    <div>值</div>
-    <input type="text"/>
     <div>校验</div>
     <div>
       <input type="checkbox" v-model="notEmpty"/><span>是否必填</span>
     </div>
     <div>
-      <input type="checkbox" v-model="minLenEnabled"/><span>最少<input type="text" v-model.number="minLenVal" :disabled="!minLenEnabled">个字</span>
+      行数
     </div>
+    <input type="text" v-model.number="rows">
     <div>
-      <input type="checkbox" v-model="maxLenEnabled"/><span>最多<input type="text" v-model.number="maxLenVal" :disabled="!maxLenEnabled">个字</span>
+      列数
     </div>
+    <input type="text" v-model.number="cols">
   </div>
 </template>
 
@@ -59,59 +59,30 @@ export default {
         }
       }
     },
-    minLenEnabled:{
+    rows:{
       get(){
         const item=this.$store.state.qa.container.getItem(this.key)
-        return ObjectUtlls.isNull(item)?"":item.minLen.enabled
+        return ObjectUtlls.isNull(item)?"":item.rows
       },
       set(val){
         if (!ObjectUtlls.isNull(this.$store.state.qa.container.getItem(this.key))){
           const index=this.$store.state.qa.container.indexByKey(this.key)
-          this.$store.commit("qa/updateValue", {path: `$.items[${index}].minLen.enabled`,
+          this.$store.commit("qa/updateValue", {path: `$.items[${index}].rows`,
             newVal: val,
             key:this.key
           })
         }
       }
     },
-    minLenVal:{
+    cols:{
       get(){
         const item=this.$store.state.qa.container.getItem(this.key)
-        return ObjectUtlls.isNull(item)?"":item.minLen.val
+        return ObjectUtlls.isNull(item)?"":item.cols
       },
       set(val){
         if (!ObjectUtlls.isNull(this.$store.state.qa.container.getItem(this.key))){
           const index=this.$store.state.qa.container.indexByKey(this.key)
-          this.$store.commit("qa/updateValue", {path: `$.items[${index}].minLen.val`,
-            newVal: val,
-            key:this.key
-          })
-        }
-      }
-    },
-    maxLenEnabled:{
-      get(){
-        const item=this.$store.state.qa.container.getItem(this.key)
-        return ObjectUtlls.isNull(item)?"":item.maxLen.enabled
-      },
-      set(val){
-        if (!ObjectUtlls.isNull(this.$store.state.qa.container.getItem(this.key))){
-          this.$store.commit("qa/updateValue", {path: `$.items[${this.index}].maxLen.enabled`,
-            newVal: val,
-            key:this.key
-          })
-        }
-      }
-    },
-    maxLenVal:{
-      get(){
-        const item=this.$store.state.qa.container.getItem(this.key)
-        return ObjectUtlls.isNull(item)?"":item.maxLen.val
-      },
-      set(val){
-        if (!ObjectUtlls.isNull(this.$store.state.qa.container.getItem(this.key))){
-          const index=this.$store.state.qa.container.indexByKey(this.key)
-          this.$store.commit("qa/updateValue", {path: `$.items[${index}].maxLen.val`,
+          this.$store.commit("qa/updateValue", {path: `$.items[${index}].cols`,
             newVal: val,
             key:this.key
           })
@@ -122,6 +93,36 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+  .qae-item-textline{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .qae-item-textline>*{
+    margin: 12px 20px;
+    width:280px;
+    text-align: left;
+  }
+  .qae-item-textline>.title{
+    height:18px;
+    font-size:13px;
+    font-family:PingFang SC;
+    font-weight:500;
+    line-height:16px;
+    color:rgba(51,51,51,1);
+    opacity:1;
+  }
+  .qae-item-textline>.title>.red{
+    color:red
+  }
+  .qae-item-textline>.input{
+    height:36px;
+    background:rgba(246,246,246,1);
+    border:1px solid rgba(222,226,230,1);
+    opacity:1;
+    border-radius:4px;
+  }
 </style>

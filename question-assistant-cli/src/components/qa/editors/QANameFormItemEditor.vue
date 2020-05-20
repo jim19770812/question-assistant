@@ -2,8 +2,6 @@
   <div class="qae-item-name">
     <div>标题</div>
     <input type="text" v-model="title"/>
-    <div>值</div>
-    <input type="text" v-model="val"/>
     <div>校验</div>
     <div>
       <input type="checkbox" v-model="notEmpty"/><span>是否必填</span>

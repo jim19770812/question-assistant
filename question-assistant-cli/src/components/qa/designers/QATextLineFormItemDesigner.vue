@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-bind:class="{'qad-item-text':true, selected:selected}"  @click="click">
-      <div class="title">{{item?item.title:""}} <span class="red" v-show="item">*</span></div>
+      <div class="title">{{item?item.title:""}} <span class="red" v-show="item.notEmpty">*</span></div>
       <div class="input"></div>
     </div>
   </div>
@@ -64,7 +64,7 @@ export default {
     color:red
   }
   .qad-item-text>.input{
-    height:36px;
+    height:108px;
     background:rgba(246,246,246,1);
     border:1px solid rgba(222,226,230,1);
     opacity:1;

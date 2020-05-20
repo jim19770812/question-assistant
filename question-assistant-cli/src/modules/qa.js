@@ -293,20 +293,19 @@ export class QAUtils{
    * 创建文本组件数据
    * @param {string}title 标题
    * @param {bool}notEmpty 是否非空
-   * @param {int}minLen 最小长度
-   * @param {int}maxLen 最大长度
+   * @param {int}rows 行数
+   * @param {int}cols 列数
    * @returns {object}
    */
-  static createfTextItemData(title, notEmpty, minLen, maxLen){
+  static createfTextItemData(title, notEmpty, rows, cols){
     return {
       type:"fitem_text",
       key:uuid1(),
       title: title,
       val:"",
       notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true,
-      rows:!ObjectUtlls.isUndef(minLen) && !ObjectUtlls.isNull(minLen)?minLen:0,
-      lines:!ObjectUtlls.isUndef(maxLen) && !ObjectUtlls.isNull(maxLen)?maxLen:0
-    }
+      rows:!ObjectUtlls.isUndef(rows) && !ObjectUtlls.isNull(minLen)?minLen:0,
+      cols:!ObjectUtlls.isUndef(cols) && !ObjectUtlls.isNull(maxLen)?maxLen:0}
   }
 
   /**

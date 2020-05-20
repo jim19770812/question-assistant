@@ -1,7 +1,7 @@
 <template>
   <div class="qae-item-weichat">
     <div>微信</div>
-    <input type="text" v-model="val"/>
+    <div></div>
     <div>校验</div>
     <div>
       <input type="checkbox" v-model="notEmpty"/><span>是否必填</span>
@@ -19,18 +19,6 @@ export default {
   computed:{
     key(){
       return this.$store.state.qa.container.key
-    },
-    val:{
-      get(){
-        return this.$store.state.qa.container.getItem(this.key).val
-      },
-      set(newVal){
-        const index=this.$store.state.qa.container.indexByKey(this.key)
-        this.$store.commit("qa/updateValue", {path: `$.items[${index}].val`,
-          newVal: newVal,
-          key:this.key
-        })
-      }
     },
     notEmpty:{
       get(){
