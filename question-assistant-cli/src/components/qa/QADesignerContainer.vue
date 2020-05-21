@@ -1,8 +1,8 @@
 <template>
   <div class="qad-comp-render-container">
-    <input type="text" v-model="searchKey">
-    <button @click="test">测试</button>
-    <button @click="test2">测试2</button>
+<!--    <input type="text" v-model="searchKey">-->
+<!--    <button @click="test">测试</button>-->
+<!--    <button @click="test2">测试2</button>-->
       <div :class="{'qad-content-pane':true, 'align-center':this.container.isEmpty(), 'align-start':!this.container.isEmpty()}" @dragover.prevent @drop="formItemDrop($event)">
         <div v-if="this.container.isEmpty()">
           请从左侧选择一个题目并拖拽到这里
