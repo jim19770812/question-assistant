@@ -1,14 +1,19 @@
 <template>
-  <div v-bind:class="{'qad-item-area':true, selected:selected}"  @click="click">
-    <div class="title">{{item?item.title:""}} <span class="red" v-show="item.notEmpty">*</span>
+  <div class="qad-item-area-box">
+    <div v-bind:class="{'qad-item-area':true, selected:selected}"  @click="click">
+      <div class="title">{{item?item.title:""}} <span class="red" v-show="item.notEmpty">*</span>
+      </div>
+      <div class="input"><div class="input-offset">省份</div></div>
+      <div class="input"><div class="input-offset">城市</div></div>
+      <div class="input"><div class="input-offset">区县</div></div>
     </div>
-    <div class="input"><div class="input-offset">省份</div></div>
-    <div class="input"><div class="input-offset">城市</div></div>
-    <div class="input"><div class="input-offset">区县</div></div>
+    <designer-tool-box :componentKey="item.key"></designer-tool-box>
   </div>
 </template>
 
 <script>
+import QADesignerToolBox from '@/components/qa/QADesignerToolBox'
+
 export default {
   name: 'QAAreaFormItemDesigner',
   data:function(){
@@ -17,7 +22,9 @@ export default {
     }
   },
   created:function(){
-    this.key=this.$store.state.qa.container.getLastestItem().key
+    if (this.key===""){
+      this.key=this.$store.state.qa.container.getLastestItem().key
+    }
   },
   methods:{
     click:function(){
@@ -35,11 +42,26 @@ export default {
     selected:function(){
       return this.$store.state.qa.container.key===this.key
     }
+  },
+  components:{
+    "designer-tool-box":QADesignerToolBox
+  },
+  watch:{
+    key(newVal, oldVal){
+      console.log("地区-key发生变化", newVal, oldVal)
+    }
   }
 }
 </script>
 
 <style lang="less" scoped>
+  .qad-item-area-box{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items:flex-start;
+  }
   .qad-item-area{
     display: flex;
     flex-direction: column;

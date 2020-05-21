@@ -1,15 +1,20 @@
 <template>
-  <div v-bind:class="{'qad-item-radio':true, selected:selected}" @click="click">
-    <div class="title">
-      {{item?item.title:""}}<span class="red" v-show="item.notEmpty">*</span>
+  <div class="qad-item-radio-box">
+    <div v-bind:class="{'qad-item-radio':true, selected:selected}" @click="click">
+      <div class="title">
+        {{item?item.title:""}}<span class="red" v-show="item.notEmpty">*</span>
+      </div>
+      <div v-for="(op,index) in item.options" :key="index">
+        <input type="radio" disabled="disabled"/> <label>{{op}}</label>
+      </div>
     </div>
-    <div v-for="(op,index) in item.options" :key="index">
-      <input type="radio" disabled="disabled"/> <label>{{op}}</label>
-    </div>
+    <designer-tool-box :componentKey="item.key"></designer-tool-box>
   </div>
 </template>
 
 <script>
+import QADesignerToolBox from '@/components/qa/QADesignerToolBox'
+
 export default {
   name: 'QARadioButtonFormItemDesigner',
   data:function(){
@@ -18,7 +23,9 @@ export default {
     }
   },
   created:function(){
-    this.key=this.$store.state.qa.container.getLastestItem().key
+    if (this.key===""){
+      this.key=this.$store.state.qa.container.getLastestItem().key
+    }
   },
   methods:{
     click:function(){
@@ -35,11 +42,26 @@ export default {
     selected:function(){
       return this.$store.state.qa.container.key===this.key
     }
+  },
+  components:{
+    "designer-tool-box":QADesignerToolBox
+  },
+  watch:{
+    key(newVal, oldVal){
+      console.log("单项选择-key发生变化", newVal, oldVal)
+    }
   }
 }
 </script>
 
 <style lang="less" scoped>
+  .qad-item-radio-box{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items:flex-start;
+  }
   .qad-item-radio{
     display: flex;
     flex-direction: column;

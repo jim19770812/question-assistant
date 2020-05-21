@@ -1,6 +1,9 @@
 import {ObjectUtlls} from '@/common/utils'
+import {EventBus} from '@/common/vue-bus'
 import jq from 'jsonpath'
 import {v1 as uuid1} from 'uuid'
+import Vue from 'vue'
+
 /**
  * 定义类型和对应组件设计器/编辑器/渲染器的映射关系
  * @type {object}
@@ -44,7 +47,7 @@ const typeClassMapper={
 }
 
 class Container{
-  constructor () {
+  constructor() {
     console.log("constructor")
     this.items=[]
     this.key="" //当前选中项的key
@@ -185,12 +188,18 @@ const mutations={
   /**
    * 移除
    * @param {object} states
-   * @param {string}key
+   * @param {string} payload
    */
-  remove:(states, key)=>{
-    const idx=states.container.indexByKey(key)
+  remove:(states, payload)=>{
+    const idx=states.container.indexByKey(payload)
+    if (idx<0){
+      throw new Error("remove时发现未能根据传入的key找到对应的项")
+    }
+    if (idx<0 || idx>=states.container.items.length){
+      throw new Error("remove时发现索引越界")
+    }
     if (idx>=0){
-      states.container.remove(key)
+      states.container.remove(payload)
     }
     console.log("remove，states.container", states.container)
   },
@@ -273,6 +282,52 @@ const mutations={
     payload.forEach(payLoadItem=>{
       this.updateValue(states, payLoadItem)
     })
+  },
+  /**
+   * 向上/向下移动项
+   * @param {object}states
+   * @param {{vueComponent, key, incr}} payload 载荷，incr正数是向下移动，否则就是向上移动
+   */
+  move(states, payload){
+    console.log(states)
+    if (!ObjectUtlls.hasProperty(payload, "key")){
+      throw new Error("move时发现未传入有效的key")
+    }
+    if (!ObjectUtlls.hasProperty(payload, "incr")){
+      throw new Error("move时发现未传入有效的移动步长")
+    }
+    if (!ObjectUtlls.hasProperty(payload, "vueComponent")){
+      throw new Error("move时发现未传入有效的vueComponent")
+    }
+    if (states.container.items.length===0){
+      throw new Error("move时发现项目为空，无法移动")
+    }
+    const idx=states.container.indexByKey(payload.key)
+    if (idx<0){
+      throw new Error("move时发现未能根据传入的key找到对应的项")
+    }
+    let newIndex=idx+payload.incr
+    if (newIndex<0){
+      newIndex=0
+    }
+    if (newIndex>=states.container.items.length){
+      newIndex=states.container.items.length-1
+    }
+    if (idx===newIndex){
+      console.log("原索引和新索引相同，不需要移动")
+      return
+    }
+    const tmp=states.container.items[idx]
+    payload.vueComponent.$set(states.container.items, idx, states.container.items[newIndex])
+    payload.vueComponent.$set(states.container.items, newIndex, tmp)
+    // const minIndex=Math.min(idx, newIndex)
+    // const maxIndex=Math.max(idx, newIndex)
+    // states.container.items.push(states.container.items[maxIndex])
+    // states.container.items.push(states.container.items[minIndex])
+    // states.container.items.splice(maxIndex, 1)
+    // states.container.items.splice(minIndex, 1)
+    EventBus.$emit("refersh_designer_container", "move")
+    console.log("after update", JSON.stringify(states.container.items))
   }
 }
 

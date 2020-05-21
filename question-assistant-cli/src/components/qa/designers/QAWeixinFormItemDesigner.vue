@@ -1,11 +1,16 @@
 <template>
-  <div v-bind:class="{'qad-item-weichat': true, selected: selected}"  @click="click">
-    <div class="title">微信 <span class="red" v-show="item.notEmpty">*</span></div>
-    <div class="input"></div>
+  <div class="qad-item-weichat-box">
+    <div v-bind:class="{'qad-item-weichat': true, selected: selected}"  @click="click">
+      <div class="title">微信 <span class="red" v-show="item.notEmpty">*</span></div>
+      <div class="input"></div>
+    </div>
+    <designer-tool-box :componentKey="item.key"></designer-tool-box>
   </div>
 </template>
 
 <script>
+import QADesignerToolBox from '@/components/qa/QADesignerToolBox'
+
 export default {
   name: 'QAWeixinFormItemDesigner',
   data:function(){
@@ -14,7 +19,9 @@ export default {
     }
   },
   created:function(){
-    this.key=this.$store.state.qa.container.getLastestItem().key
+    if (this.key===""){
+      this.key=this.$store.state.qa.container.getLastestItem().key
+    }
   },
   methods:{
     click:function(){
@@ -29,11 +36,26 @@ export default {
     selected:function(){
       return this.$store.state.qa.container.key===this.key
     }
+  },
+  components:{
+    "designer-tool-box":QADesignerToolBox
+  },
+  watch:{
+    key(newVal, oldVal){
+      console.log("微信-key发生变化", newVal, oldVal)
+    }
   }
 }
 </script>
 
 <style lang="less" scoped>
+  .qad-item-weichat-box{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items:flex-start;
+  }
   .qad-item-weichat{
     display: flex;
     flex-direction: column;

@@ -25,11 +25,11 @@ export default {
     return {
     }
   },
-  watch:{
-    '$route'(to, from){
-      console.log("watch ", to, from, this.$route)
-    }
-  },
+  // watch:{
+  //   '$route'(to, from){
+  //     console.log("watch ", to, from, this.$route)
+  //   }
+  // },
   computed:{
     compName:function(){
       return this.$store.getters.compName

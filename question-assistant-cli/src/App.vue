@@ -8,7 +8,9 @@
       <router-link to="/qalist">问题列表</router-link>
       <router-link to="/qadesigner">问题表单设计器</router-link>
     </div>
-    <router-view/>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
   </div>
 </template>
 

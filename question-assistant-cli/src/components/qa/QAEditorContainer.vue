@@ -24,7 +24,6 @@ export default {
   computed:{
     item:function(){
       const ret=this.$store.state.qa.container.getItem(this.$store.state.qa.container.key)
-      console.log("item:", ret)
       return ret
     },
     type:function(){

@@ -1,9 +1,6 @@
 <template>
   <div class="qad-comp-render-container">
-<!--      <div>-->
-<!--        {{this.container}}-->
-<!--      </div>-->
-      <div class="qad-content-pane" @dragover.prevent @drop="formItemDrop($event)">
+      <div :class="{'qad-content-pane':true, 'align-center':this.container.isEmpty(), 'align-start':!this.container.isEmpty()}" @dragover.prevent @drop="formItemDrop($event)" v-if="visible">
         <div v-if="this.container.isEmpty()">
           请从左侧选择一个题目并拖拽到这里
           <button @click="showThis">showThis</button>
@@ -18,6 +15,7 @@
 </template>
 
 <script>
+import {EventBus} from '../../common/vue-bus'
 import {QAUtils} from '../../modules/qa.js'
 import QANameFormItemDesigner from '@/components/qa/designers/QANameFormItemDesigner'
 import QAPhoneFormItemDesigner from '@/components/qa/designers/QAPhoneFormItemDesigner'
@@ -31,12 +29,36 @@ import QAAreaFormItemDesigner from '@/components/qa/designers/QAAreaFormItemDesi
 export default {
   name: 'QaDesignerContainer',
   data: function () {
-    return {}
+    return {
+      visible:true
+    }
   },
   computed: {
     container () {
       return this.$store.state.qa.container
     }
+  },
+  created(){
+    EventBus.$on("refersh_designer_container", (event)=>{
+      console.log("即将刷新组件", this.$children)
+      this.$children.forEach(o=>{
+        this.$nextTick(()=>{
+          // this.visible=false
+          // this.visible=true
+          o.$forceUpdate()
+          console.log("强制刷新组件", o)
+        })
+        // o.$forceUpdate()
+      })
+      // this.$nextTick(()=>{
+      //   this.visible=false
+      //   this.visible=true
+      //   // this.$forceUpdate()
+      // })
+      // this.visible=false
+      // this.visible=true
+      console.log("刷新组件结束", this.$children)
+    })
   },
   methods: {
     showThis () {
@@ -63,6 +85,7 @@ export default {
       } else {
         data = QAUtils.createfTextItemData("多行文本", true)
       }
+      console.log(`添加组件${data.type}-key${data.key}`)
       this.$store.commit('qa/add', data)
       // this.$forceUpdate()
     }
@@ -91,7 +114,7 @@ export default {
     flex:1;
   }
   .qad-comp-render-container>.qad-content-pane{
-    width:340px;
+    width:320px;
     height:100%;
     min-height: 720px;
     background:rgba(255,255,255,1);
@@ -103,7 +126,13 @@ export default {
     color:rgba(51,51,51,1);
     opacity:0.4;
     display: flex;
+  }
+  .qad-comp-render-container>.align-center{
     justify-content: center;
     align-items: center;
+  }
+  .qad-comp-render-container>.align-start{
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 </style>

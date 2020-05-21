@@ -127,7 +127,7 @@ module.exports = {
     "fun-call-spacing": "off", //函数调用时，函数名与()之间不能有空格
     "no-ternary": "off", //不允许使用三目运算符
     "no-trailing-spaces": "off", //一行最后不允许有空格
-    "no-underscore-dangle": "error", //不允许标识符以下划线开头
+    "no-underscore-dangle": "off", //不允许标识符以下划线开头
     "no-extra-parens": "off", //不允许出现多余的括号
     "one-var": "off", //强制变量声明放在一起
     "operator-assignment": "off", //赋值运算符的风格
