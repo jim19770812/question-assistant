@@ -180,15 +180,12 @@ const state={
 }
 
 const mutations={
-  showThis:(states)=>{
-    console.log("showThis, states.container", states.container)
-  },
   /**
    * 添加
    * @param {object} states
    * @param {object} payload 载荷：需要添加的json对象
    */
-  add: (states, payload)=> {
+  add:(states, payload)=> {
     states.container.add(payload)
     console.log("add，states.container", states.container)
   },
@@ -318,14 +315,9 @@ const mutations={
     const source=states.container.items[idx]
     const sourceKey=source.key
     const targetKey=states.container.items[newIndex].key
+
     payload.vueComponent.$set(states.container.items, idx, states.container.items[newIndex])
     payload.vueComponent.$set(states.container.items, newIndex, source)
-    // const minIndex=Math.min(idx, newIndex)
-    // const maxIndex=Math.max(idx, newIndex)
-    // states.container.items.push(states.container.items[maxIndex])
-    // states.container.items.push(states.container.items[minIndex])
-    // states.container.items.splice(maxIndex, 1)
-    // states.container.items.splice(minIndex, 1)
     EventBus.$emit("refersh_designer_container", {type:"move",
       source:sourceKey,
       target:targetKey

@@ -8,8 +8,8 @@
           请从左侧选择一个题目并拖拽到这里
         </div>
           <div v-if="!this.container.isEmpty()">
-            <div v-for="(comp, idx) in this.container.getItems()" :key="idx">
-              <component :is="container.getDesignerClass(comp.type)" key="idx"></component>
+            <div v-for="(item) in this.container.getItems()" :key="item.key">
+              <component :is="container.getDesignerClass(item.type)"></component>
             </div>
           </div>
       </div>
@@ -42,17 +42,7 @@ export default {
   },
   created(){
     EventBus.$on("refersh_designer_container", (event)=>{
-      console.log("即将刷新组件", event.type, event.source, event.target)
-      const compSource=this.findVueComponentByKey(event.source)
-      const compTarget=this.findVueComponentByKey(event.target)
-      compSource.key=event.target
-      compTarget.key=event.source
-      this.$children.forEach(o=>{
-        this.$nextTick(()=>{
-          o.$forceUpdate()
-          console.log("强制刷新组件", o)
-        })
-      })
+      this.$forceUpdate()
       console.log("刷新组件结束", this.$children)
     })
   },

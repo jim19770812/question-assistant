@@ -18,22 +18,22 @@ export default {
   },
   methods:{
     moveUpIt(event){
-      console.log("需要移动的key", this.componentKey, this)
-      this.$store.commit("qa/move", {key:this.componentKey,
+      console.log("需要移动的key", this.$parent.key, this)
+      this.$store.commit("qa/move", {key:this.$parent.key,
         incr:-1,
         vueComponent:this
       })
 
     },
     moveDownIt(event){
-      this.$store.commit("qa/move", {key:this.componentKey,
+      this.$store.commit("qa/move", {key:this.$parent.key,
         incr:1,
         vueComponent:this
       })
       this.refershItems()
     },
     deleteIt(event){
-      this.$store.commit("qa/remove", this.componentKey)
+      this.$store.commit("qa/remove", this.$parent.key)
       this.refershItems()
     },
     refershItems(){
@@ -42,7 +42,6 @@ export default {
   },
   computed:{
     visibled(){
-      //return this.componentKey===this.$store.state.qa.container.key
       return this.$parent.key===this.$store.state.qa.container.key
     }
   }
