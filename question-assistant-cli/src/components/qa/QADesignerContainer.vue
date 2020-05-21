@@ -1,9 +1,11 @@
 <template>
   <div class="qad-comp-render-container">
-      <div :class="{'qad-content-pane':true, 'align-center':this.container.isEmpty(), 'align-start':!this.container.isEmpty()}" @dragover.prevent @drop="formItemDrop($event)" v-if="visible">
+    <input type="text" v-model="searchKey">
+    <button @click="test">测试</button>
+    <button @click="test2">测试2</button>
+      <div :class="{'qad-content-pane':true, 'align-center':this.container.isEmpty(), 'align-start':!this.container.isEmpty()}" @dragover.prevent @drop="formItemDrop($event)">
         <div v-if="this.container.isEmpty()">
           请从左侧选择一个题目并拖拽到这里
-          <button @click="showThis">showThis</button>
         </div>
           <div v-if="!this.container.isEmpty()">
             <div v-for="(comp, idx) in this.container.getItems()" :key="idx">
@@ -30,7 +32,7 @@ export default {
   name: 'QaDesignerContainer',
   data: function () {
     return {
-      visible:true
+      searchKey:""
     }
   },
   computed: {
@@ -40,28 +42,41 @@ export default {
   },
   created(){
     EventBus.$on("refersh_designer_container", (event)=>{
-      console.log("即将刷新组件", this.$children)
+      console.log("即将刷新组件", event.type, event.source, event.target)
+      const compSource=this.findVueComponentByKey(event.source)
+      const compTarget=this.findVueComponentByKey(event.target)
+      compSource.key=event.target
+      compTarget.key=event.source
       this.$children.forEach(o=>{
         this.$nextTick(()=>{
-          // this.visible=false
-          // this.visible=true
           o.$forceUpdate()
           console.log("强制刷新组件", o)
         })
-        // o.$forceUpdate()
       })
-      // this.$nextTick(()=>{
-      //   this.visible=false
-      //   this.visible=true
-      //   // this.$forceUpdate()
-      // })
-      // this.visible=false
-      // this.visible=true
       console.log("刷新组件结束", this.$children)
     })
   },
   methods: {
-    showThis () {
+    /**
+     * 根据key查找组件
+     * @param {str} key
+     * @returns {VueComponent}
+     */
+    findVueComponentByKey(key){
+      const ret=this.$children.filter(o=>o.key===key)
+      if (ret.length>0){
+        return ret[0]
+      }
+      return null
+    },
+    test(){
+      const t=this.findVueComponentByKey(this.searchKey)
+      console.log(t)
+    },
+    test2() {
+      this.$children.forEach(o=>{
+        console.log(o.key)
+      })
     },
     /**
      *

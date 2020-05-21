@@ -7,7 +7,7 @@
       <div class="input"><div class="input-offset">城市</div></div>
       <div class="input"><div class="input-offset">区县</div></div>
     </div>
-    <designer-tool-box :componentKey="item.key"></designer-tool-box>
+    <designer-tool-box></designer-tool-box>
   </div>
 </template>
 

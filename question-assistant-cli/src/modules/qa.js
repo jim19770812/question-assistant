@@ -73,10 +73,17 @@ class Container{
    */
   remove(key){
     const idx=this.indexByKey(key)
+    if (idx<0){
+      throw new Error("remove时发现未能根据传入的key找到对应的项")
+    }
+    if (idx<0 || idx>=this.items.length){
+      throw new Error("remove时发现索引越界")
+    }
     let ret=null
     if (idx>=0){
-      ret=this.items.splice(idx)
+      ret=this.items.splice(idx, 1)
     }
+    console.log("after remove，states.container", this)
     return ret?1:0
   }
 
@@ -191,17 +198,7 @@ const mutations={
    * @param {string} payload
    */
   remove:(states, payload)=>{
-    const idx=states.container.indexByKey(payload)
-    if (idx<0){
-      throw new Error("remove时发现未能根据传入的key找到对应的项")
-    }
-    if (idx<0 || idx>=states.container.items.length){
-      throw new Error("remove时发现索引越界")
-    }
-    if (idx>=0){
-      states.container.remove(payload)
-    }
-    console.log("remove，states.container", states.container)
+    states.container.remove(payload)
   },
   /**
    * 根据key选中组件
@@ -214,6 +211,7 @@ const mutations={
     if (idx>=0){
       states.container.key=key
     }
+    // EventBus.$emit("refersh_designer_container", "select")
   },
   /**
    * 更新组件对象
@@ -317,16 +315,21 @@ const mutations={
       console.log("原索引和新索引相同，不需要移动")
       return
     }
-    const tmp=states.container.items[idx]
+    const source=states.container.items[idx]
+    const sourceKey=source.key
+    const targetKey=states.container.items[newIndex].key
     payload.vueComponent.$set(states.container.items, idx, states.container.items[newIndex])
-    payload.vueComponent.$set(states.container.items, newIndex, tmp)
+    payload.vueComponent.$set(states.container.items, newIndex, source)
     // const minIndex=Math.min(idx, newIndex)
     // const maxIndex=Math.max(idx, newIndex)
     // states.container.items.push(states.container.items[maxIndex])
     // states.container.items.push(states.container.items[minIndex])
     // states.container.items.splice(maxIndex, 1)
     // states.container.items.splice(minIndex, 1)
-    EventBus.$emit("refersh_designer_container", "move")
+    EventBus.$emit("refersh_designer_container", {type:"move",
+      source:sourceKey,
+      target:targetKey
+    })
     console.log("after update", JSON.stringify(states.container.items))
   }
 }

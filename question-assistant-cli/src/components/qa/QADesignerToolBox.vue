@@ -9,7 +9,6 @@
 <script>
 export default {
   name: 'QADesignerToolBox',
-  props:["componentKey"],
   data:function(){
     return{
     }
@@ -43,7 +42,8 @@ export default {
   },
   computed:{
     visibled(){
-      return this.componentKey===this.$store.state.qa.container.key
+      //return this.componentKey===this.$store.state.qa.container.key
+      return this.$parent.key===this.$store.state.qa.container.key
     }
   }
 }

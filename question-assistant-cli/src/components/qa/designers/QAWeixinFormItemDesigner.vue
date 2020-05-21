@@ -4,7 +4,7 @@
       <div class="title">微信 <span class="red" v-show="item.notEmpty">*</span></div>
       <div class="input"></div>
     </div>
-    <designer-tool-box :componentKey="item.key"></designer-tool-box>
+    <designer-tool-box></designer-tool-box>
   </div>
 </template>
 

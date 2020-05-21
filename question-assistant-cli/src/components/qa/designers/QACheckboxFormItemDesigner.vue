@@ -8,7 +8,7 @@
         <input type="checkbox" disabled="disabled"/> <label>{{op}}</label>
       </div>
     </div>
-    <designer-tool-box :componentKey="item.key"></designer-tool-box>
+    <designer-tool-box></designer-tool-box>
   </div>
 
 </template>
