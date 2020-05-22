@@ -95,7 +95,8 @@ export default {
       },
       set(val){
         if (!ObjectUtlls.isNull(this.$store.state.qa.container.getItem(this.key))){
-          this.$store.commit("qa/updateValue", {path: `$.items[${this.index}].maxLen.enabled`,
+          const index=this.$store.state.qa.container.indexByKey(this.key)
+          this.$store.commit("qa/updateValue", {path: `$.items[${index}].maxLen.enabled`,
             newVal: val,
             key:this.key
           })
