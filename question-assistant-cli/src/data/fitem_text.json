@@ -1,9 +1,11 @@
-{
-  "type":"fitem_text",
-  "key":"e7526780-930f-4352-8404-751408b35283",
-  "title": "多行文本",
-  "val":"",
-  "notEmpty":true,
-  "rows":3,
-  "cols":20
-}
+[
+  {
+    "type":"fitem_text",
+    "key":"e7526780-930f-4352-8404-751408b35283",
+    "title": "多行文本",
+    "val":"",
+    "notEmpty":true,
+    "rows":3,
+    "cols":20
+  }
+]

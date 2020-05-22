@@ -1,16 +1,18 @@
-{
-  "type":"fitem_mulselet",
-  "key":"3f93e5f1-3745-4298-946f-ac87c70c2ca5",
-  "title":"所属行业",
-  "val":[],
-  "options":["金融科技","银行业", "畜牧业","水产养殖"],
-  "notEmpty":true,
-  "minSelection":{
-    "enabled":true,
-    "val":1
-  },
-  "maxSelection":{
-    "enabled":true,
-    "val":3
+[
+  {
+    "type":"fitem_mulselet",
+    "key":"3f93e5f1-3745-4298-946f-ac87c70c2ca5",
+    "title":"所属行业",
+    "val":[],
+    "options":["金融科技","银行业", "畜牧业","水产养殖"],
+    "notEmpty":true,
+    "minSelection":{
+      "enabled":true,
+      "val":1
+    },
+    "maxSelection":{
+      "enabled":true,
+      "val":3
+    }
   }
-}
+]

@@ -1,8 +1,10 @@
-{
-  "type":"fitem_radio",
-  "title":"性别",
-  "key":"107bf734-a135-4070-82d1-25d3b6c3a930",
-  "val":"男",
-  "options":["男","女"],
-  "notEmpty":true
-}
+[
+  {
+    "type":"fitem_radio",
+    "title":"性别",
+    "key":"107bf734-a135-4070-82d1-25d3b6c3a930",
+    "val":"男",
+    "options":["男","女"],
+    "notEmpty":true
+  }
+]
