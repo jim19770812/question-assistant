@@ -1,0 +1,14 @@
+{
+  "key": "e1d0c672-9bd2-11ea-aa7d-b3cc2964ccde",
+  "title": "请输入姓名",
+  "val": "张三丰",
+  "notEmpty": false,
+  "minLen": {
+    "enabled": false,
+    "val": 2
+  },
+  "maxLen": {
+    "enabled": false,
+    "val": 40
+  }
+}
