@@ -55,7 +55,6 @@
         <qa-editor-container ref="editor"></qa-editor-container>
       </div>
     </div>
-
   </div>
 </template>
 
