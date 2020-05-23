@@ -16,9 +16,9 @@
         <input type="text" class="title" value="未命名问卷">
         <div>2020年5月22日 15:22:00</div>
         <div class="qar-opt-button-group">
-          <a href="#" class="button1">继续编辑</a>
-          <a href="#" class="button2">查看答卷</a>
-          <a href="#" class="button2">暂停问卷</a>
+          <a href="#" class="button1" @click.stop.prevent="editQQ">继续编辑</a>
+          <a href="#" class="button2" @click.stop.prevent="previewQA">查看答卷</a>
+          <a href="#" class="button2" @click.stop.prevent="stopQA">暂停问卷</a>
         </div>
       </div>
       <div class="qar-share-container">
@@ -36,17 +36,32 @@
 <script>
 /*表单项渲染器容器*/
 import QANameFormItemRender from '@/components/qa/renders/QANameFormItemRender'
+import QAPhoneFormItemRender from '@/components/qa/renders/QAPhoneFormItemRender'
 
 export default {
   name: 'QARenderContainer',
   data:function(){
     return {}
   },
-  mounted () {
-
-  },
   methods:{
-
+    /**
+     * 必填项检查
+     */
+    verify(){
+      for(let i=0; i<=this.$children.length-1;i++){
+        const c=this.$children[i]
+        c.verify()
+      }
+    },
+    editQQ(){
+      window.alert("继续编辑")
+    },
+    previewQA(){
+      this.verify()
+    },
+    stopQA(){
+      window.alert("暂停")
+    }
   },
   computed:{
     getkey(){
@@ -57,7 +72,8 @@ export default {
     }
   },
   components:{
-    "item-name-render":QANameFormItemRender
+    "item-name-render":QANameFormItemRender,
+    "item-phone-render":QAPhoneFormItemRender
   }
 }
 </script>

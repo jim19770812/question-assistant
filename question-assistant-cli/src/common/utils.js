@@ -1,3 +1,5 @@
+import jq from 'jsonpath'
+
 /**
  * 对象工具类
  */
@@ -69,5 +71,34 @@ export class ComponentUtils{
   static toUnderline(name) {
     return name.replace(/([A-Z])/g,"_$1").toLowerCase();
   }
+}
 
+export class JsonPathUtils{
+  /**
+   * 查找单节点
+   * @param {object}obj
+   * @param {string}path
+   * @returns {object}
+   */
+  static findSingleNode(obj, path){
+    const ret=JsonPathUtils.findNodeList(obj, path)
+    return ret[0]
+  }
+
+  /**
+   * 查找节点列表
+   * @param {object}obj
+   * @param {string}path
+   * @returns {object}
+   */
+  static findNodeList(obj, path){
+    const ret=jq.query(obj, path)
+    if (ObjectUtlls.isNull(ret) || ObjectUtlls.isUndef(ret)){
+      return null
+    }
+    if (!Array.isArray(ret)){
+      throw new Error("findSingleNode查找到的节点并非数组！")
+    }
+    return ret
+  }
 }

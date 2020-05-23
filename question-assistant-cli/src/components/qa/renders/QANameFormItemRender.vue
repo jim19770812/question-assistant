@@ -1,14 +1,17 @@
 <template>
   <div class="qar-item-name-box">
-    <div v-bind:class="{'qad-item-name':true, selected:selected}"  @click="click">
-      <div class="title">{{item?item.title:""}} <span class="red" v-show="item.notEmpty">*</span></div>
-      <input class="input" type="text" v-model="val">
+    <div v-bind:class="{'qad-item-name':true}">
+      <div class="title">{{item?item.title:""}}
+        <span class="red" v-if="!errVisible && item.notEmpty">*</span>
+        <span v-if="errVisible" class="error">{{errMessage}}</span>
+      </div>
+      <input class="input" type="text" v-model="val" @input="inputChange($event)" @focus="inputFocus($event)">
     </div>
   </div>
 </template>
 
 <script>
-import { ObjectUtlls } from '@/common/utils'
+import { JsonPathUtils, ObjectUtlls } from '@/common/utils'
 
 export default {
   name: 'QANameFormItemRender',
@@ -18,12 +21,10 @@ export default {
       type:String
     }
   },
-  mounted:function(){
-    console.log("renderKey", this.renderKey)
-  },
   data:function(){
-    return{
-      data:{}
+    return {
+      errVisible:false,
+      errMessage:""
     }
   },
   computed:{
@@ -43,6 +44,42 @@ export default {
     },
     item(){
       return this.$store.state.qa.container.getItem(this.renderKey)
+    },
+    container(){
+      return this.$store.state.qa.container
+    }
+  },
+  methods:{
+    verify:function(){
+      const index=this.$store.state.qa.container.indexByKey(this.renderKey)
+      const notEmpty=JsonPathUtils.findSingleNode(this.container, `$.items[${index}].notEmpty`)
+      const val=JsonPathUtils.findSingleNode(this.container, `$.items[${index}].val`)
+      if (notEmpty && val===""){
+        this.errVisible=true
+        this.errMessage=`${this.item.title}不能是空！`
+        return
+      }
+      const minLen=JsonPathUtils.findSingleNode(this.container, `$.items[${index}].minLen`)
+      if (minLen.enabled && val.length>0 && minLen.val>0 && val.length<=minLen.val){
+        this.errVisible=true
+        this.errMessage=`${this.item.title}长度不足[${minLen.val}]！`
+        return
+      }
+      const maxLen=JsonPathUtils.findSingleNode(this.container, `$.items[${index}].maxLen`)
+      if (maxLen.enabled && maxLen.val>0 && val.length>0 && val.length>maxLen.val){
+        this.errVisible=true
+        this.errMessage=`${this.item.title}长度超过限制[${maxLen.val}]！`
+        return
+      }
+    },
+    inputChange:function(event){
+      if (this.errVisible) {
+        this.errVisible=false;
+        this.errMessage=''
+      }
+    },
+    inputFocus:function(event){
+      event.target.select()
     }
   }
 }

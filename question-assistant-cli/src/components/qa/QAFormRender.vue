@@ -1,8 +1,6 @@
 <template>
   <div class="qar-form-render">
     <qa-render-container></qa-render-container>
-    <div class="qar-optpane">
-    </div>
   </div>
 </template>
 
