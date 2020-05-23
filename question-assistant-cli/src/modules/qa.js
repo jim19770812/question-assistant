@@ -463,6 +463,7 @@ export class QAUtils{
       type:"fitem_area",
       key:uuid1(),
       title:title,
+      val:["","",""],/*选中的省/市县数组*/
       notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true,
       province:!ObjectUtlls.isUndef(province) && !ObjectUtlls.isNull(province)?province:0,
       city:!ObjectUtlls.isUndef(city) && !ObjectUtlls.isNull(city)?city:0,

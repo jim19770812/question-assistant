@@ -1,0 +1,206 @@
+[
+  {
+    "ar_id": 1,
+    "ar_code": "110000",
+    "ar_name": "北京",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 2,
+    "ar_code": "120000",
+    "ar_name": "天津",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 3,
+    "ar_code": "130000",
+    "ar_name": "河北省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 4,
+    "ar_code": "140000",
+    "ar_name": "山西省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 5,
+    "ar_code": "150000",
+    "ar_name": "内蒙古自治区",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 6,
+    "ar_code": "210000",
+    "ar_name": "辽宁省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 7,
+    "ar_code": "220000",
+    "ar_name": "吉林省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 8,
+    "ar_code": "230000",
+    "ar_name": "黑龙江省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 9,
+    "ar_code": "310000",
+    "ar_name": "上海",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 10,
+    "ar_code": "320000",
+    "ar_name": "江苏省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 11,
+    "ar_code": "330000",
+    "ar_name": "浙江省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 12,
+    "ar_code": "340000",
+    "ar_name": "安徽省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 13,
+    "ar_code": "350000",
+    "ar_name": "福建省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 14,
+    "ar_code": "360000",
+    "ar_name": "江西省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 15,
+    "ar_code": "370000",
+    "ar_name": "山东省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 16,
+    "ar_code": "410000",
+    "ar_name": "河南省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 17,
+    "ar_code": "420000",
+    "ar_name": "湖北省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 18,
+    "ar_code": "430000",
+    "ar_name": "湖南省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 19,
+    "ar_code": "440000",
+    "ar_name": "广东省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 20,
+    "ar_code": "450000",
+    "ar_name": "广西壮族自治区",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 21,
+    "ar_code": "460000",
+    "ar_name": "海南省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 22,
+    "ar_code": "500000",
+    "ar_name": "重庆",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 23,
+    "ar_code": "510000",
+    "ar_name": "四川省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 24,
+    "ar_code": "520000",
+    "ar_name": "贵州省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 25,
+    "ar_code": "530000",
+    "ar_name": "云南省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 26,
+    "ar_code": "540000",
+    "ar_name": "西藏自治区",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 27,
+    "ar_code": "610000",
+    "ar_name": "陕西省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 28,
+    "ar_code": "620000",
+    "ar_name": "甘肃省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 29,
+    "ar_code": "630000",
+    "ar_name": "青海省",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 30,
+    "ar_code": "640000",
+    "ar_name": "宁夏回族自治区",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 31,
+    "ar_code": "650000",
+    "ar_name": "新疆维吾尔自治区",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 32,
+    "ar_code": "710000",
+    "ar_name": "台湾",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 33,
+    "ar_code": "810000",
+    "ar_name": "香港特别行政区",
+    "ar_parent_code": "000000"
+  },
+  {
+    "ar_id": 34,
+    "ar_code": "820000",
+    "ar_name": "澳门特别行政区",
+    "ar_parent_code": "000000"
+  }
+]

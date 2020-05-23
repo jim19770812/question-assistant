@@ -41,6 +41,7 @@ import QAWeixinFormItemRender from '@/components/qa/renders/QAWeixinFormItemRend
 import QATextLineFormItemRender from '@/components/qa/renders/QATextLineFormItemRender'
 import QARadioButtonFormItemRender from '@/components/qa/renders/QARadioButtonFormItemRender'
 import QACheckboxFormItemRender from '@/components/qa/renders/QACheckboxFormItemRender'
+import QAAreaFormItemRender from '@/components/qa/renders/QAAreaFormItemRender'
 
 export default {
   name: 'QARenderContainer',
@@ -82,7 +83,8 @@ export default {
     "item-wechat-render":QAWeixinFormItemRender,
     "item-text-render":QATextLineFormItemRender,
     "item-radio-render":QARadioButtonFormItemRender,
-    "item-mulselet-render":QACheckboxFormItemRender
+    "item-mulselet-render":QACheckboxFormItemRender,
+    "item-area-render":QAAreaFormItemRender
   }
 }
 </script>

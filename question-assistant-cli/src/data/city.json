@@ -1,0 +1,1952 @@
+[
+  {
+    "ar_code": "110100",
+    "ar_name": "北京市",
+    "ar_parent_code": "110000"
+  },
+  {
+    "ar_code": "120100",
+    "ar_name": "天津市",
+    "ar_parent_code": "120000"
+  },
+  {
+    "ar_code": "130100",
+    "ar_name": "石家庄市",
+    "ar_parent_code": "130000"
+  },
+  {
+    "ar_code": "130200",
+    "ar_name": "唐山市",
+    "ar_parent_code": "130000"
+  },
+  {
+    "ar_code": "130300",
+    "ar_name": "秦皇岛市",
+    "ar_parent_code": "130000"
+  },
+  {
+    "ar_code": "130400",
+    "ar_name": "邯郸市",
+    "ar_parent_code": "130000"
+  },
+  {
+    "ar_code": "130500",
+    "ar_name": "邢台市",
+    "ar_parent_code": "130000"
+  },
+  {
+    "ar_code": "130600",
+    "ar_name": "保定市",
+    "ar_parent_code": "130000"
+  },
+  {
+    "ar_code": "130700",
+    "ar_name": "张家口市",
+    "ar_parent_code": "130000"
+  },
+  {
+    "ar_code": "130800",
+    "ar_name": "承德市",
+    "ar_parent_code": "130000"
+  },
+  {
+    "ar_code": "130900",
+    "ar_name": "沧州市",
+    "ar_parent_code": "130000"
+  },
+  {
+    "ar_code": "131000",
+    "ar_name": "廊坊市",
+    "ar_parent_code": "130000"
+  },
+  {
+    "ar_code": "131100",
+    "ar_name": "衡水市",
+    "ar_parent_code": "130000"
+  },
+  {
+    "ar_code": "140100",
+    "ar_name": "太原市",
+    "ar_parent_code": "140000"
+  },
+  {
+    "ar_code": "140200",
+    "ar_name": "大同市",
+    "ar_parent_code": "140000"
+  },
+  {
+    "ar_code": "140300",
+    "ar_name": "阳泉市",
+    "ar_parent_code": "140000"
+  },
+  {
+    "ar_code": "140400",
+    "ar_name": "长治市",
+    "ar_parent_code": "140000"
+  },
+  {
+    "ar_code": "140500",
+    "ar_name": "晋城市",
+    "ar_parent_code": "140000"
+  },
+  {
+    "ar_code": "140600",
+    "ar_name": "朔州市",
+    "ar_parent_code": "140000"
+  },
+  {
+    "ar_code": "140700",
+    "ar_name": "晋中市",
+    "ar_parent_code": "140000"
+  },
+  {
+    "ar_code": "140800",
+    "ar_name": "运城市",
+    "ar_parent_code": "140000"
+  },
+  {
+    "ar_code": "140900",
+    "ar_name": "忻州市",
+    "ar_parent_code": "140000"
+  },
+  {
+    "ar_code": "141000",
+    "ar_name": "临汾市",
+    "ar_parent_code": "140000"
+  },
+  {
+    "ar_code": "141100",
+    "ar_name": "吕梁市",
+    "ar_parent_code": "140000"
+  },
+  {
+    "ar_code": "150100",
+    "ar_name": "呼和浩特市",
+    "ar_parent_code": "150000"
+  },
+  {
+    "ar_code": "150200",
+    "ar_name": "包头市",
+    "ar_parent_code": "150000"
+  },
+  {
+    "ar_code": "150300",
+    "ar_name": "乌海市",
+    "ar_parent_code": "150000"
+  },
+  {
+    "ar_code": "150400",
+    "ar_name": "赤峰市",
+    "ar_parent_code": "150000"
+  },
+  {
+    "ar_code": "150500",
+    "ar_name": "通辽市",
+    "ar_parent_code": "150000"
+  },
+  {
+    "ar_code": "150600",
+    "ar_name": "鄂尔多斯市",
+    "ar_parent_code": "150000"
+  },
+  {
+    "ar_code": "150700",
+    "ar_name": "呼伦贝尔市",
+    "ar_parent_code": "150000"
+  },
+  {
+    "ar_code": "150800",
+    "ar_name": "巴彦淖尔市",
+    "ar_parent_code": "150000"
+  },
+  {
+    "ar_code": "150900",
+    "ar_name": "乌兰察布市",
+    "ar_parent_code": "150000"
+  },
+  {
+    "ar_code": "152200",
+    "ar_name": "兴安盟",
+    "ar_parent_code": "150000"
+  },
+  {
+    "ar_code": "152500",
+    "ar_name": "锡林郭勒盟",
+    "ar_parent_code": "150000"
+  },
+  {
+    "ar_code": "152900",
+    "ar_name": "阿拉善盟",
+    "ar_parent_code": "150000"
+  },
+  {
+    "ar_code": "210100",
+    "ar_name": "沈阳市",
+    "ar_parent_code": "210000"
+  },
+  {
+    "ar_code": "210200",
+    "ar_name": "大连市",
+    "ar_parent_code": "210000"
+  },
+  {
+    "ar_code": "210300",
+    "ar_name": "鞍山市",
+    "ar_parent_code": "210000"
+  },
+  {
+    "ar_code": "210400",
+    "ar_name": "抚顺市",
+    "ar_parent_code": "210000"
+  },
+  {
+    "ar_code": "210500",
+    "ar_name": "本溪市",
+    "ar_parent_code": "210000"
+  },
+  {
+    "ar_code": "210600",
+    "ar_name": "丹东市",
+    "ar_parent_code": "210000"
+  },
+  {
+    "ar_code": "210700",
+    "ar_name": "锦州市",
+    "ar_parent_code": "210000"
+  },
+  {
+    "ar_code": "210800",
+    "ar_name": "营口市",
+    "ar_parent_code": "210000"
+  },
+  {
+    "ar_code": "210900",
+    "ar_name": "阜新市",
+    "ar_parent_code": "210000"
+  },
+  {
+    "ar_code": "211000",
+    "ar_name": "辽阳市",
+    "ar_parent_code": "210000"
+  },
+  {
+    "ar_code": "211100",
+    "ar_name": "盘锦市",
+    "ar_parent_code": "210000"
+  },
+  {
+    "ar_code": "211200",
+    "ar_name": "铁岭市",
+    "ar_parent_code": "210000"
+  },
+  {
+    "ar_code": "211300",
+    "ar_name": "朝阳市",
+    "ar_parent_code": "210000"
+  },
+  {
+    "ar_code": "211400",
+    "ar_name": "葫芦岛市",
+    "ar_parent_code": "210000"
+  },
+  {
+    "ar_code": "220100",
+    "ar_name": "长春市",
+    "ar_parent_code": "220000"
+  },
+  {
+    "ar_code": "220200",
+    "ar_name": "吉林市",
+    "ar_parent_code": "220000"
+  },
+  {
+    "ar_code": "220300",
+    "ar_name": "四平市",
+    "ar_parent_code": "220000"
+  },
+  {
+    "ar_code": "220400",
+    "ar_name": "辽源市",
+    "ar_parent_code": "220000"
+  },
+  {
+    "ar_code": "220500",
+    "ar_name": "通化市",
+    "ar_parent_code": "220000"
+  },
+  {
+    "ar_code": "220600",
+    "ar_name": "白山市",
+    "ar_parent_code": "220000"
+  },
+  {
+    "ar_code": "220700",
+    "ar_name": "松原市",
+    "ar_parent_code": "220000"
+  },
+  {
+    "ar_code": "220800",
+    "ar_name": "白城市",
+    "ar_parent_code": "220000"
+  },
+  {
+    "ar_code": "222400",
+    "ar_name": "延边朝鲜族自治州",
+    "ar_parent_code": "220000"
+  },
+  {
+    "ar_code": "230100",
+    "ar_name": "哈尔滨市",
+    "ar_parent_code": "230000"
+  },
+  {
+    "ar_code": "230200",
+    "ar_name": "齐齐哈尔市",
+    "ar_parent_code": "230000"
+  },
+  {
+    "ar_code": "230300",
+    "ar_name": "鸡西市",
+    "ar_parent_code": "230000"
+  },
+  {
+    "ar_code": "230400",
+    "ar_name": "鹤岗市",
+    "ar_parent_code": "230000"
+  },
+  {
+    "ar_code": "230500",
+    "ar_name": "双鸭山市",
+    "ar_parent_code": "230000"
+  },
+  {
+    "ar_code": "230600",
+    "ar_name": "大庆市",
+    "ar_parent_code": "230000"
+  },
+  {
+    "ar_code": "230700",
+    "ar_name": "伊春市",
+    "ar_parent_code": "230000"
+  },
+  {
+    "ar_code": "230800",
+    "ar_name": "佳木斯市",
+    "ar_parent_code": "230000"
+  },
+  {
+    "ar_code": "230900",
+    "ar_name": "七台河市",
+    "ar_parent_code": "230000"
+  },
+  {
+    "ar_code": "231000",
+    "ar_name": "牡丹江市",
+    "ar_parent_code": "230000"
+  },
+  {
+    "ar_code": "231100",
+    "ar_name": "黑河市",
+    "ar_parent_code": "230000"
+  },
+  {
+    "ar_code": "231200",
+    "ar_name": "绥化市",
+    "ar_parent_code": "230000"
+  },
+  {
+    "ar_code": "232700",
+    "ar_name": "大兴安岭地区",
+    "ar_parent_code": "230000"
+  },
+  {
+    "ar_code": "310100",
+    "ar_name": "上海市",
+    "ar_parent_code": "310000"
+  },
+  {
+    "ar_code": "320100",
+    "ar_name": "南京市",
+    "ar_parent_code": "320000"
+  },
+  {
+    "ar_code": "320200",
+    "ar_name": "无锡市",
+    "ar_parent_code": "320000"
+  },
+  {
+    "ar_code": "320300",
+    "ar_name": "徐州市",
+    "ar_parent_code": "320000"
+  },
+  {
+    "ar_code": "320400",
+    "ar_name": "常州市",
+    "ar_parent_code": "320000"
+  },
+  {
+    "ar_code": "320500",
+    "ar_name": "苏州市",
+    "ar_parent_code": "320000"
+  },
+  {
+    "ar_code": "320600",
+    "ar_name": "南通市",
+    "ar_parent_code": "320000"
+  },
+  {
+    "ar_code": "320700",
+    "ar_name": "连云港市",
+    "ar_parent_code": "320000"
+  },
+  {
+    "ar_code": "320800",
+    "ar_name": "淮安市",
+    "ar_parent_code": "320000"
+  },
+  {
+    "ar_code": "320900",
+    "ar_name": "盐城市",
+    "ar_parent_code": "320000"
+  },
+  {
+    "ar_code": "321000",
+    "ar_name": "扬州市",
+    "ar_parent_code": "320000"
+  },
+  {
+    "ar_code": "321100",
+    "ar_name": "镇江市",
+    "ar_parent_code": "320000"
+  },
+  {
+    "ar_code": "321200",
+    "ar_name": "泰州市",
+    "ar_parent_code": "320000"
+  },
+  {
+    "ar_code": "321300",
+    "ar_name": "宿迁市",
+    "ar_parent_code": "320000"
+  },
+  {
+    "ar_code": "330100",
+    "ar_name": "杭州市",
+    "ar_parent_code": "330000"
+  },
+  {
+    "ar_code": "330200",
+    "ar_name": "宁波市",
+    "ar_parent_code": "330000"
+  },
+  {
+    "ar_code": "330300",
+    "ar_name": "温州市",
+    "ar_parent_code": "330000"
+  },
+  {
+    "ar_code": "330400",
+    "ar_name": "嘉兴市",
+    "ar_parent_code": "330000"
+  },
+  {
+    "ar_code": "330500",
+    "ar_name": "湖州市",
+    "ar_parent_code": "330000"
+  },
+  {
+    "ar_code": "330600",
+    "ar_name": "绍兴市",
+    "ar_parent_code": "330000"
+  },
+  {
+    "ar_code": "330700",
+    "ar_name": "金华市",
+    "ar_parent_code": "330000"
+  },
+  {
+    "ar_code": "330800",
+    "ar_name": "衢州市",
+    "ar_parent_code": "330000"
+  },
+  {
+    "ar_code": "330900",
+    "ar_name": "舟山市",
+    "ar_parent_code": "330000"
+  },
+  {
+    "ar_code": "331000",
+    "ar_name": "台州市",
+    "ar_parent_code": "330000"
+  },
+  {
+    "ar_code": "331100",
+    "ar_name": "丽水市",
+    "ar_parent_code": "330000"
+  },
+  {
+    "ar_code": "340100",
+    "ar_name": "合肥市",
+    "ar_parent_code": "340000"
+  },
+  {
+    "ar_code": "340200",
+    "ar_name": "芜湖市",
+    "ar_parent_code": "340000"
+  },
+  {
+    "ar_code": "340300",
+    "ar_name": "蚌埠市",
+    "ar_parent_code": "340000"
+  },
+  {
+    "ar_code": "340400",
+    "ar_name": "淮南市",
+    "ar_parent_code": "340000"
+  },
+  {
+    "ar_code": "340500",
+    "ar_name": "马鞍山市",
+    "ar_parent_code": "340000"
+  },
+  {
+    "ar_code": "340600",
+    "ar_name": "淮北市",
+    "ar_parent_code": "340000"
+  },
+  {
+    "ar_code": "340700",
+    "ar_name": "铜陵市",
+    "ar_parent_code": "340000"
+  },
+  {
+    "ar_code": "340800",
+    "ar_name": "安庆市",
+    "ar_parent_code": "340000"
+  },
+  {
+    "ar_code": "341000",
+    "ar_name": "黄山市",
+    "ar_parent_code": "340000"
+  },
+  {
+    "ar_code": "341100",
+    "ar_name": "滁州市",
+    "ar_parent_code": "340000"
+  },
+  {
+    "ar_code": "341200",
+    "ar_name": "阜阳市",
+    "ar_parent_code": "340000"
+  },
+  {
+    "ar_code": "341300",
+    "ar_name": "宿州市",
+    "ar_parent_code": "340000"
+  },
+  {
+    "ar_code": "341500",
+    "ar_name": "六安市",
+    "ar_parent_code": "340000"
+  },
+  {
+    "ar_code": "341600",
+    "ar_name": "亳州市",
+    "ar_parent_code": "340000"
+  },
+  {
+    "ar_code": "341700",
+    "ar_name": "池州市",
+    "ar_parent_code": "340000"
+  },
+  {
+    "ar_code": "341800",
+    "ar_name": "宣城市",
+    "ar_parent_code": "340000"
+  },
+  {
+    "ar_code": "350100",
+    "ar_name": "福州市",
+    "ar_parent_code": "350000"
+  },
+  {
+    "ar_code": "350200",
+    "ar_name": "厦门市",
+    "ar_parent_code": "350000"
+  },
+  {
+    "ar_code": "350300",
+    "ar_name": "莆田市",
+    "ar_parent_code": "350000"
+  },
+  {
+    "ar_code": "350400",
+    "ar_name": "三明市",
+    "ar_parent_code": "350000"
+  },
+  {
+    "ar_code": "350500",
+    "ar_name": "泉州市",
+    "ar_parent_code": "350000"
+  },
+  {
+    "ar_code": "350600",
+    "ar_name": "漳州市",
+    "ar_parent_code": "350000"
+  },
+  {
+    "ar_code": "350700",
+    "ar_name": "南平市",
+    "ar_parent_code": "350000"
+  },
+  {
+    "ar_code": "350800",
+    "ar_name": "龙岩市",
+    "ar_parent_code": "350000"
+  },
+  {
+    "ar_code": "350900",
+    "ar_name": "宁德市",
+    "ar_parent_code": "350000"
+  },
+  {
+    "ar_code": "360100",
+    "ar_name": "南昌市",
+    "ar_parent_code": "360000"
+  },
+  {
+    "ar_code": "360200",
+    "ar_name": "景德镇市",
+    "ar_parent_code": "360000"
+  },
+  {
+    "ar_code": "360300",
+    "ar_name": "萍乡市",
+    "ar_parent_code": "360000"
+  },
+  {
+    "ar_code": "360400",
+    "ar_name": "九江市",
+    "ar_parent_code": "360000"
+  },
+  {
+    "ar_code": "360500",
+    "ar_name": "新余市",
+    "ar_parent_code": "360000"
+  },
+  {
+    "ar_code": "360600",
+    "ar_name": "鹰潭市",
+    "ar_parent_code": "360000"
+  },
+  {
+    "ar_code": "360700",
+    "ar_name": "赣州市",
+    "ar_parent_code": "360000"
+  },
+  {
+    "ar_code": "360800",
+    "ar_name": "吉安市",
+    "ar_parent_code": "360000"
+  },
+  {
+    "ar_code": "360900",
+    "ar_name": "宜春市",
+    "ar_parent_code": "360000"
+  },
+  {
+    "ar_code": "361000",
+    "ar_name": "抚州市",
+    "ar_parent_code": "360000"
+  },
+  {
+    "ar_code": "361100",
+    "ar_name": "上饶市",
+    "ar_parent_code": "360000"
+  },
+  {
+    "ar_code": "370100",
+    "ar_name": "济南市",
+    "ar_parent_code": "370000"
+  },
+  {
+    "ar_code": "370200",
+    "ar_name": "青岛市",
+    "ar_parent_code": "370000"
+  },
+  {
+    "ar_code": "370300",
+    "ar_name": "淄博市",
+    "ar_parent_code": "370000"
+  },
+  {
+    "ar_code": "370400",
+    "ar_name": "枣庄市",
+    "ar_parent_code": "370000"
+  },
+  {
+    "ar_code": "370500",
+    "ar_name": "东营市",
+    "ar_parent_code": "370000"
+  },
+  {
+    "ar_code": "370600",
+    "ar_name": "烟台市",
+    "ar_parent_code": "370000"
+  },
+  {
+    "ar_code": "370700",
+    "ar_name": "潍坊市",
+    "ar_parent_code": "370000"
+  },
+  {
+    "ar_code": "370800",
+    "ar_name": "济宁市",
+    "ar_parent_code": "370000"
+  },
+  {
+    "ar_code": "370900",
+    "ar_name": "泰安市",
+    "ar_parent_code": "370000"
+  },
+  {
+    "ar_code": "371000",
+    "ar_name": "威海市",
+    "ar_parent_code": "370000"
+  },
+  {
+    "ar_code": "371100",
+    "ar_name": "日照市",
+    "ar_parent_code": "370000"
+  },
+  {
+    "ar_code": "371200",
+    "ar_name": "莱芜市",
+    "ar_parent_code": "370000"
+  },
+  {
+    "ar_code": "371300",
+    "ar_name": "临沂市",
+    "ar_parent_code": "370000"
+  },
+  {
+    "ar_code": "371400",
+    "ar_name": "德州市",
+    "ar_parent_code": "370000"
+  },
+  {
+    "ar_code": "371500",
+    "ar_name": "聊城市",
+    "ar_parent_code": "370000"
+  },
+  {
+    "ar_code": "371600",
+    "ar_name": "滨州市",
+    "ar_parent_code": "370000"
+  },
+  {
+    "ar_code": "371700",
+    "ar_name": "菏泽市",
+    "ar_parent_code": "370000"
+  },
+  {
+    "ar_code": "410100",
+    "ar_name": "郑州市",
+    "ar_parent_code": "410000"
+  },
+  {
+    "ar_code": "410200",
+    "ar_name": "开封市",
+    "ar_parent_code": "410000"
+  },
+  {
+    "ar_code": "410300",
+    "ar_name": "洛阳市",
+    "ar_parent_code": "410000"
+  },
+  {
+    "ar_code": "410400",
+    "ar_name": "平顶山市",
+    "ar_parent_code": "410000"
+  },
+  {
+    "ar_code": "410500",
+    "ar_name": "安阳市",
+    "ar_parent_code": "410000"
+  },
+  {
+    "ar_code": "410600",
+    "ar_name": "鹤壁市",
+    "ar_parent_code": "410000"
+  },
+  {
+    "ar_code": "410700",
+    "ar_name": "新乡市",
+    "ar_parent_code": "410000"
+  },
+  {
+    "ar_code": "410800",
+    "ar_name": "焦作市",
+    "ar_parent_code": "410000"
+  },
+  {
+    "ar_code": "410881",
+    "ar_name": "济源市",
+    "ar_parent_code": "410000"
+  },
+  {
+    "ar_code": "410900",
+    "ar_name": "濮阳市",
+    "ar_parent_code": "410000"
+  },
+  {
+    "ar_code": "411000",
+    "ar_name": "许昌市",
+    "ar_parent_code": "410000"
+  },
+  {
+    "ar_code": "411100",
+    "ar_name": "漯河市",
+    "ar_parent_code": "410000"
+  },
+  {
+    "ar_code": "411200",
+    "ar_name": "三门峡市",
+    "ar_parent_code": "410000"
+  },
+  {
+    "ar_code": "411300",
+    "ar_name": "南阳市",
+    "ar_parent_code": "410000"
+  },
+  {
+    "ar_code": "411400",
+    "ar_name": "商丘市",
+    "ar_parent_code": "410000"
+  },
+  {
+    "ar_code": "411500",
+    "ar_name": "信阳市",
+    "ar_parent_code": "410000"
+  },
+  {
+    "ar_code": "411600",
+    "ar_name": "周口市",
+    "ar_parent_code": "410000"
+  },
+  {
+    "ar_code": "411700",
+    "ar_name": "驻马店市",
+    "ar_parent_code": "410000"
+  },
+  {
+    "ar_code": "420100",
+    "ar_name": "武汉市",
+    "ar_parent_code": "420000"
+  },
+  {
+    "ar_code": "420200",
+    "ar_name": "黄石市",
+    "ar_parent_code": "420000"
+  },
+  {
+    "ar_code": "420300",
+    "ar_name": "十堰市",
+    "ar_parent_code": "420000"
+  },
+  {
+    "ar_code": "420500",
+    "ar_name": "宜昌市",
+    "ar_parent_code": "420000"
+  },
+  {
+    "ar_code": "420600",
+    "ar_name": "襄阳市",
+    "ar_parent_code": "420000"
+  },
+  {
+    "ar_code": "420700",
+    "ar_name": "鄂州市",
+    "ar_parent_code": "420000"
+  },
+  {
+    "ar_code": "420800",
+    "ar_name": "荆门市",
+    "ar_parent_code": "420000"
+  },
+  {
+    "ar_code": "420900",
+    "ar_name": "孝感市",
+    "ar_parent_code": "420000"
+  },
+  {
+    "ar_code": "421000",
+    "ar_name": "荆州市",
+    "ar_parent_code": "420000"
+  },
+  {
+    "ar_code": "421100",
+    "ar_name": "黄冈市",
+    "ar_parent_code": "420000"
+  },
+  {
+    "ar_code": "421200",
+    "ar_name": "咸宁市",
+    "ar_parent_code": "420000"
+  },
+  {
+    "ar_code": "421300",
+    "ar_name": "随州市",
+    "ar_parent_code": "420000"
+  },
+  {
+    "ar_code": "422800",
+    "ar_name": "恩施土家族苗族自治州",
+    "ar_parent_code": "420000"
+  },
+  {
+    "ar_code": "429004",
+    "ar_name": "仙桃市",
+    "ar_parent_code": "420000"
+  },
+  {
+    "ar_code": "429005",
+    "ar_name": "潜江市",
+    "ar_parent_code": "420000"
+  },
+  {
+    "ar_code": "429006",
+    "ar_name": "天门市",
+    "ar_parent_code": "420000"
+  },
+  {
+    "ar_code": "429021",
+    "ar_name": "神农架林区",
+    "ar_parent_code": "420000"
+  },
+  {
+    "ar_code": "430100",
+    "ar_name": "长沙市",
+    "ar_parent_code": "430000"
+  },
+  {
+    "ar_code": "430200",
+    "ar_name": "株洲市",
+    "ar_parent_code": "430000"
+  },
+  {
+    "ar_code": "430300",
+    "ar_name": "湘潭市",
+    "ar_parent_code": "430000"
+  },
+  {
+    "ar_code": "430400",
+    "ar_name": "衡阳市",
+    "ar_parent_code": "430000"
+  },
+  {
+    "ar_code": "430500",
+    "ar_name": "邵阳市",
+    "ar_parent_code": "430000"
+  },
+  {
+    "ar_code": "430600",
+    "ar_name": "岳阳市",
+    "ar_parent_code": "430000"
+  },
+  {
+    "ar_code": "430700",
+    "ar_name": "常德市",
+    "ar_parent_code": "430000"
+  },
+  {
+    "ar_code": "430800",
+    "ar_name": "张家界市",
+    "ar_parent_code": "430000"
+  },
+  {
+    "ar_code": "430900",
+    "ar_name": "益阳市",
+    "ar_parent_code": "430000"
+  },
+  {
+    "ar_code": "431000",
+    "ar_name": "郴州市",
+    "ar_parent_code": "430000"
+  },
+  {
+    "ar_code": "431100",
+    "ar_name": "永州市",
+    "ar_parent_code": "430000"
+  },
+  {
+    "ar_code": "431200",
+    "ar_name": "怀化市",
+    "ar_parent_code": "430000"
+  },
+  {
+    "ar_code": "431300",
+    "ar_name": "娄底市",
+    "ar_parent_code": "430000"
+  },
+  {
+    "ar_code": "433100",
+    "ar_name": "湘西土家族苗族自治州",
+    "ar_parent_code": "430000"
+  },
+  {
+    "ar_code": "440100",
+    "ar_name": "广州市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "440200",
+    "ar_name": "韶关市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "440300",
+    "ar_name": "深圳市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "440400",
+    "ar_name": "珠海市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "440500",
+    "ar_name": "汕头市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "440600",
+    "ar_name": "佛山市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "440700",
+    "ar_name": "江门市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "440800",
+    "ar_name": "湛江市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "440900",
+    "ar_name": "茂名市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "441200",
+    "ar_name": "肇庆市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "441300",
+    "ar_name": "惠州市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "441400",
+    "ar_name": "梅州市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "441500",
+    "ar_name": "汕尾市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "441600",
+    "ar_name": "河源市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "441700",
+    "ar_name": "阳江市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "441800",
+    "ar_name": "清远市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "441900",
+    "ar_name": "东莞市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "442000",
+    "ar_name": "中山市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "442101",
+    "ar_name": "东沙群岛",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "445100",
+    "ar_name": "潮州市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "445200",
+    "ar_name": "揭阳市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "445300",
+    "ar_name": "云浮市",
+    "ar_parent_code": "440000"
+  },
+  {
+    "ar_code": "450100",
+    "ar_name": "南宁市",
+    "ar_parent_code": "450000"
+  },
+  {
+    "ar_code": "450200",
+    "ar_name": "柳州市",
+    "ar_parent_code": "450000"
+  },
+  {
+    "ar_code": "450300",
+    "ar_name": "桂林市",
+    "ar_parent_code": "450000"
+  },
+  {
+    "ar_code": "450400",
+    "ar_name": "梧州市",
+    "ar_parent_code": "450000"
+  },
+  {
+    "ar_code": "450500",
+    "ar_name": "北海市",
+    "ar_parent_code": "450000"
+  },
+  {
+    "ar_code": "450600",
+    "ar_name": "防城港市",
+    "ar_parent_code": "450000"
+  },
+  {
+    "ar_code": "450700",
+    "ar_name": "钦州市",
+    "ar_parent_code": "450000"
+  },
+  {
+    "ar_code": "450800",
+    "ar_name": "贵港市",
+    "ar_parent_code": "450000"
+  },
+  {
+    "ar_code": "450900",
+    "ar_name": "玉林市",
+    "ar_parent_code": "450000"
+  },
+  {
+    "ar_code": "451000",
+    "ar_name": "百色市",
+    "ar_parent_code": "450000"
+  },
+  {
+    "ar_code": "451100",
+    "ar_name": "贺州市",
+    "ar_parent_code": "450000"
+  },
+  {
+    "ar_code": "451200",
+    "ar_name": "河池市",
+    "ar_parent_code": "450000"
+  },
+  {
+    "ar_code": "451300",
+    "ar_name": "来宾市",
+    "ar_parent_code": "450000"
+  },
+  {
+    "ar_code": "451400",
+    "ar_name": "崇左市",
+    "ar_parent_code": "450000"
+  },
+  {
+    "ar_code": "460100",
+    "ar_name": "海口市",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "460200",
+    "ar_name": "三亚市",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "460300",
+    "ar_name": "三沙市",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "469001",
+    "ar_name": "五指山市",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "469002",
+    "ar_name": "琼海市",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "469003",
+    "ar_name": "儋州市",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "469005",
+    "ar_name": "文昌市",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "469006",
+    "ar_name": "万宁市",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "469007",
+    "ar_name": "东方市",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "469025",
+    "ar_name": "定安县",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "469026",
+    "ar_name": "屯昌县",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "469027",
+    "ar_name": "澄迈县",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "469028",
+    "ar_name": "临高县",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "469030",
+    "ar_name": "白沙黎族自治县",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "469031",
+    "ar_name": "昌江黎族自治县",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "469033",
+    "ar_name": "乐东黎族自治县",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "469034",
+    "ar_name": "陵水黎族自治县",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "469035",
+    "ar_name": "保亭黎族苗族自治县",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "469036",
+    "ar_name": "琼中黎族苗族自治县",
+    "ar_parent_code": "460000"
+  },
+  {
+    "ar_code": "500100",
+    "ar_name": "重庆市",
+    "ar_parent_code": "500000"
+  },
+  {
+    "ar_code": "510100",
+    "ar_name": "成都市",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "510300",
+    "ar_name": "自贡市",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "510400",
+    "ar_name": "攀枝花市",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "510500",
+    "ar_name": "泸州市",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "510600",
+    "ar_name": "德阳市",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "510700",
+    "ar_name": "绵阳市",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "510800",
+    "ar_name": "广元市",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "510900",
+    "ar_name": "遂宁市",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "511000",
+    "ar_name": "内江市",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "511100",
+    "ar_name": "乐山市",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "511300",
+    "ar_name": "南充市",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "511400",
+    "ar_name": "眉山市",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "511500",
+    "ar_name": "宜宾市",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "511600",
+    "ar_name": "广安市",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "511700",
+    "ar_name": "达州市",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "511800",
+    "ar_name": "雅安市",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "511900",
+    "ar_name": "巴中市",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "512000",
+    "ar_name": "资阳市",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "513200",
+    "ar_name": "阿坝藏族羌族自治州",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "513300",
+    "ar_name": "甘孜藏族自治州",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "513400",
+    "ar_name": "凉山彝族自治州",
+    "ar_parent_code": "510000"
+  },
+  {
+    "ar_code": "520100",
+    "ar_name": "贵阳市",
+    "ar_parent_code": "520000"
+  },
+  {
+    "ar_code": "520200",
+    "ar_name": "六盘水市",
+    "ar_parent_code": "520000"
+  },
+  {
+    "ar_code": "520300",
+    "ar_name": "遵义市",
+    "ar_parent_code": "520000"
+  },
+  {
+    "ar_code": "520400",
+    "ar_name": "安顺市",
+    "ar_parent_code": "520000"
+  },
+  {
+    "ar_code": "522200",
+    "ar_name": "铜仁市",
+    "ar_parent_code": "520000"
+  },
+  {
+    "ar_code": "522300",
+    "ar_name": "黔西南布依族苗族自治州",
+    "ar_parent_code": "520000"
+  },
+  {
+    "ar_code": "522400",
+    "ar_name": "毕节市",
+    "ar_parent_code": "520000"
+  },
+  {
+    "ar_code": "522600",
+    "ar_name": "黔东南苗族侗族自治州",
+    "ar_parent_code": "520000"
+  },
+  {
+    "ar_code": "522700",
+    "ar_name": "黔南布依族苗族自治州",
+    "ar_parent_code": "520000"
+  },
+  {
+    "ar_code": "530100",
+    "ar_name": "昆明市",
+    "ar_parent_code": "530000"
+  },
+  {
+    "ar_code": "530300",
+    "ar_name": "曲靖市",
+    "ar_parent_code": "530000"
+  },
+  {
+    "ar_code": "530400",
+    "ar_name": "玉溪市",
+    "ar_parent_code": "530000"
+  },
+  {
+    "ar_code": "530500",
+    "ar_name": "保山市",
+    "ar_parent_code": "530000"
+  },
+  {
+    "ar_code": "530600",
+    "ar_name": "昭通市",
+    "ar_parent_code": "530000"
+  },
+  {
+    "ar_code": "530700",
+    "ar_name": "丽江市",
+    "ar_parent_code": "530000"
+  },
+  {
+    "ar_code": "530800",
+    "ar_name": "普洱市",
+    "ar_parent_code": "530000"
+  },
+  {
+    "ar_code": "530900",
+    "ar_name": "临沧市",
+    "ar_parent_code": "530000"
+  },
+  {
+    "ar_code": "532300",
+    "ar_name": "楚雄彝族自治州",
+    "ar_parent_code": "530000"
+  },
+  {
+    "ar_code": "532500",
+    "ar_name": "红河哈尼族彝族自治州",
+    "ar_parent_code": "530000"
+  },
+  {
+    "ar_code": "532600",
+    "ar_name": "文山壮族苗族自治州",
+    "ar_parent_code": "530000"
+  },
+  {
+    "ar_code": "532800",
+    "ar_name": "西双版纳傣族自治州",
+    "ar_parent_code": "530000"
+  },
+  {
+    "ar_code": "532900",
+    "ar_name": "大理白族自治州",
+    "ar_parent_code": "530000"
+  },
+  {
+    "ar_code": "533100",
+    "ar_name": "德宏傣族景颇族自治州",
+    "ar_parent_code": "530000"
+  },
+  {
+    "ar_code": "533300",
+    "ar_name": "怒江傈僳族自治州",
+    "ar_parent_code": "530000"
+  },
+  {
+    "ar_code": "533400",
+    "ar_name": "迪庆藏族自治州",
+    "ar_parent_code": "530000"
+  },
+  {
+    "ar_code": "540100",
+    "ar_name": "拉萨市",
+    "ar_parent_code": "540000"
+  },
+  {
+    "ar_code": "542100",
+    "ar_name": "昌都地区",
+    "ar_parent_code": "540000"
+  },
+  {
+    "ar_code": "542200",
+    "ar_name": "山南地区",
+    "ar_parent_code": "540000"
+  },
+  {
+    "ar_code": "542300",
+    "ar_name": "日喀则地区",
+    "ar_parent_code": "540000"
+  },
+  {
+    "ar_code": "542400",
+    "ar_name": "那曲地区",
+    "ar_parent_code": "540000"
+  },
+  {
+    "ar_code": "542500",
+    "ar_name": "阿里地区",
+    "ar_parent_code": "540000"
+  },
+  {
+    "ar_code": "542600",
+    "ar_name": "林芝地区",
+    "ar_parent_code": "540000"
+  },
+  {
+    "ar_code": "610100",
+    "ar_name": "西安市",
+    "ar_parent_code": "610000"
+  },
+  {
+    "ar_code": "610200",
+    "ar_name": "铜川市",
+    "ar_parent_code": "610000"
+  },
+  {
+    "ar_code": "610300",
+    "ar_name": "宝鸡市",
+    "ar_parent_code": "610000"
+  },
+  {
+    "ar_code": "610400",
+    "ar_name": "咸阳市",
+    "ar_parent_code": "610000"
+  },
+  {
+    "ar_code": "610500",
+    "ar_name": "渭南市",
+    "ar_parent_code": "610000"
+  },
+  {
+    "ar_code": "610600",
+    "ar_name": "延安市",
+    "ar_parent_code": "610000"
+  },
+  {
+    "ar_code": "610700",
+    "ar_name": "汉中市",
+    "ar_parent_code": "610000"
+  },
+  {
+    "ar_code": "610800",
+    "ar_name": "榆林市",
+    "ar_parent_code": "610000"
+  },
+  {
+    "ar_code": "610900",
+    "ar_name": "安康市",
+    "ar_parent_code": "610000"
+  },
+  {
+    "ar_code": "611000",
+    "ar_name": "商洛市",
+    "ar_parent_code": "610000"
+  },
+  {
+    "ar_code": "620100",
+    "ar_name": "兰州市",
+    "ar_parent_code": "620000"
+  },
+  {
+    "ar_code": "620200",
+    "ar_name": "嘉峪关市",
+    "ar_parent_code": "620000"
+  },
+  {
+    "ar_code": "620300",
+    "ar_name": "金昌市",
+    "ar_parent_code": "620000"
+  },
+  {
+    "ar_code": "620400",
+    "ar_name": "白银市",
+    "ar_parent_code": "620000"
+  },
+  {
+    "ar_code": "620500",
+    "ar_name": "天水市",
+    "ar_parent_code": "620000"
+  },
+  {
+    "ar_code": "620600",
+    "ar_name": "武威市",
+    "ar_parent_code": "620000"
+  },
+  {
+    "ar_code": "620700",
+    "ar_name": "张掖市",
+    "ar_parent_code": "620000"
+  },
+  {
+    "ar_code": "620800",
+    "ar_name": "平凉市",
+    "ar_parent_code": "620000"
+  },
+  {
+    "ar_code": "620900",
+    "ar_name": "酒泉市",
+    "ar_parent_code": "620000"
+  },
+  {
+    "ar_code": "621000",
+    "ar_name": "庆阳市",
+    "ar_parent_code": "620000"
+  },
+  {
+    "ar_code": "621100",
+    "ar_name": "定西市",
+    "ar_parent_code": "620000"
+  },
+  {
+    "ar_code": "621200",
+    "ar_name": "陇南市",
+    "ar_parent_code": "620000"
+  },
+  {
+    "ar_code": "622900",
+    "ar_name": "临夏回族自治州",
+    "ar_parent_code": "620000"
+  },
+  {
+    "ar_code": "623000",
+    "ar_name": "甘南藏族自治州",
+    "ar_parent_code": "620000"
+  },
+  {
+    "ar_code": "630100",
+    "ar_name": "西宁市",
+    "ar_parent_code": "630000"
+  },
+  {
+    "ar_code": "632100",
+    "ar_name": "海东市",
+    "ar_parent_code": "630000"
+  },
+  {
+    "ar_code": "632200",
+    "ar_name": "海北藏族自治州",
+    "ar_parent_code": "630000"
+  },
+  {
+    "ar_code": "632300",
+    "ar_name": "黄南藏族自治州",
+    "ar_parent_code": "630000"
+  },
+  {
+    "ar_code": "632500",
+    "ar_name": "海南藏族自治州",
+    "ar_parent_code": "630000"
+  },
+  {
+    "ar_code": "632600",
+    "ar_name": "果洛藏族自治州",
+    "ar_parent_code": "630000"
+  },
+  {
+    "ar_code": "632700",
+    "ar_name": "玉树藏族自治州",
+    "ar_parent_code": "630000"
+  },
+  {
+    "ar_code": "632800",
+    "ar_name": "海西蒙古族藏族自治州",
+    "ar_parent_code": "630000"
+  },
+  {
+    "ar_code": "640100",
+    "ar_name": "银川市",
+    "ar_parent_code": "640000"
+  },
+  {
+    "ar_code": "640200",
+    "ar_name": "石嘴山市",
+    "ar_parent_code": "640000"
+  },
+  {
+    "ar_code": "640300",
+    "ar_name": "吴忠市",
+    "ar_parent_code": "640000"
+  },
+  {
+    "ar_code": "640400",
+    "ar_name": "固原市",
+    "ar_parent_code": "640000"
+  },
+  {
+    "ar_code": "640500",
+    "ar_name": "中卫市",
+    "ar_parent_code": "640000"
+  },
+  {
+    "ar_code": "650100",
+    "ar_name": "乌鲁木齐市",
+    "ar_parent_code": "650000"
+  },
+  {
+    "ar_code": "650200",
+    "ar_name": "克拉玛依市",
+    "ar_parent_code": "650000"
+  },
+  {
+    "ar_code": "652100",
+    "ar_name": "吐鲁番地区",
+    "ar_parent_code": "650000"
+  },
+  {
+    "ar_code": "652200",
+    "ar_name": "哈密地区",
+    "ar_parent_code": "650000"
+  },
+  {
+    "ar_code": "652300",
+    "ar_name": "昌吉回族自治州",
+    "ar_parent_code": "650000"
+  },
+  {
+    "ar_code": "652700",
+    "ar_name": "博尔塔拉蒙古自治州",
+    "ar_parent_code": "650000"
+  },
+  {
+    "ar_code": "652800",
+    "ar_name": "巴音郭楞蒙古自治州",
+    "ar_parent_code": "650000"
+  },
+  {
+    "ar_code": "652900",
+    "ar_name": "阿克苏地区",
+    "ar_parent_code": "650000"
+  },
+  {
+    "ar_code": "653000",
+    "ar_name": "克孜勒苏柯尔克孜自治州",
+    "ar_parent_code": "650000"
+  },
+  {
+    "ar_code": "653100",
+    "ar_name": "喀什地区",
+    "ar_parent_code": "650000"
+  },
+  {
+    "ar_code": "653200",
+    "ar_name": "和田地区",
+    "ar_parent_code": "650000"
+  },
+  {
+    "ar_code": "654000",
+    "ar_name": "伊犁哈萨克自治州",
+    "ar_parent_code": "650000"
+  },
+  {
+    "ar_code": "654200",
+    "ar_name": "塔城地区",
+    "ar_parent_code": "650000"
+  },
+  {
+    "ar_code": "654300",
+    "ar_name": "阿勒泰地区",
+    "ar_parent_code": "650000"
+  },
+  {
+    "ar_code": "659001",
+    "ar_name": "石河子市",
+    "ar_parent_code": "650000"
+  },
+  {
+    "ar_code": "659002",
+    "ar_name": "阿拉尔市",
+    "ar_parent_code": "650000"
+  },
+  {
+    "ar_code": "659003",
+    "ar_name": "图木舒克市",
+    "ar_parent_code": "650000"
+  },
+  {
+    "ar_code": "659004",
+    "ar_name": "五家渠市",
+    "ar_parent_code": "650000"
+  },
+  {
+    "ar_code": "710100",
+    "ar_name": "台北市",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "710200",
+    "ar_name": "高雄市",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "710300",
+    "ar_name": "台南市",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "710400",
+    "ar_name": "台中市",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "710500",
+    "ar_name": "金门县",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "710600",
+    "ar_name": "南投县",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "710700",
+    "ar_name": "基隆市",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "710800",
+    "ar_name": "新竹市",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "710900",
+    "ar_name": "嘉义市",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "711100",
+    "ar_name": "新北市",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "711200",
+    "ar_name": "宜兰县",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "711300",
+    "ar_name": "新竹县",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "711400",
+    "ar_name": "桃园县",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "711500",
+    "ar_name": "苗栗县",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "711700",
+    "ar_name": "彰化县",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "711900",
+    "ar_name": "嘉义县",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "712100",
+    "ar_name": "云林县",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "712400",
+    "ar_name": "屏东县",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "712500",
+    "ar_name": "台东县",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "712600",
+    "ar_name": "花莲县",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "712700",
+    "ar_name": "澎湖县",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "712800",
+    "ar_name": "连江县",
+    "ar_parent_code": "710000"
+  },
+  {
+    "ar_code": "810100",
+    "ar_name": "香港岛",
+    "ar_parent_code": "810000"
+  },
+  {
+    "ar_code": "810200",
+    "ar_name": "九龙",
+    "ar_parent_code": "810000"
+  },
+  {
+    "ar_code": "810300",
+    "ar_name": "新界",
+    "ar_parent_code": "810000"
+  },
+  {
+    "ar_code": "820100",
+    "ar_name": "澳门半岛",
+    "ar_parent_code": "820000"
+  },
+  {
+    "ar_code": "820200",
+    "ar_name": "离岛",
+    "ar_parent_code": "820000"
+  }
+]
