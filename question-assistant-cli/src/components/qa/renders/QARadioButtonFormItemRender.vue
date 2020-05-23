@@ -5,7 +5,6 @@
         <span class="red" v-if="!errVisible && item.notEmpty">*</span>
         <span v-if="errVisible" class="red">{{errMessage}}</span>
       </div>
-<!--      <input class="input" type="text" v-model="val" @input="inputChange($event)" @focus="inputFocus($event)">-->
       <div v-for="(op, index) in item.options" :value="op" :key="index" >
         <input :id="namedId(index)" :name="radioName" type="radio" v-model="val" :value="op" @input="changeOptionValue(index, $event)"/>
         <label :for="namedId(index)">{{op}}</label>
