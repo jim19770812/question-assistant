@@ -51,6 +51,7 @@ export default {
       for(let i=0; i<=this.$children.length-1;i++){
         const c=this.$children[i]
         c.verify()
+        console.log(c)
       }
     },
     editQQ(){

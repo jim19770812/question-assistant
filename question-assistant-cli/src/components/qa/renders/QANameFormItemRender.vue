@@ -3,7 +3,7 @@
     <div v-bind:class="{'qad-item-name':true}">
       <div class="title">{{item?item.title:""}}
         <span class="red" v-if="!errVisible && item.notEmpty">*</span>
-        <span v-if="errVisible" class="error">{{errMessage}}</span>
+        <span v-if="errVisible" class="red">{{errMessage}}</span>
       </div>
       <input class="input" type="text" v-model="val" @input="inputChange($event)" @focus="inputFocus($event)">
     </div>
