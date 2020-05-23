@@ -380,8 +380,9 @@ export class QAUtils{
       title: title,
       val:"",
       notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true,
-      rows:!ObjectUtlls.isUndef(rows) && !ObjectUtlls.isNull(rows)?rows:0,
-      cols:!ObjectUtlls.isUndef(cols) && !ObjectUtlls.isNull(cols)?cols:0}
+      rows:!ObjectUtlls.isUndef(rows) && !ObjectUtlls.isNull(rows)?rows:5,
+      cols:!ObjectUtlls.isUndef(cols) && !ObjectUtlls.isNull(cols)?cols:20
+    }
   }
 
   /**

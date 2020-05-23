@@ -2,6 +2,7 @@
   <div class="qad-item-text-box">
     <div v-bind:class="{'qad-item-text':true, selected:selected}"  @click="click">
       <div class="title">{{item?item.title:""}} <span class="red" v-show="item.notEmpty">*</span></div>
+      <textarea class="input" :cols="cols" :rows="rows" readonly disabled></textarea>
       <div class="input"></div>
     </div>
     <designer-tool-box></designer-tool-box>
@@ -37,6 +38,12 @@ export default {
     },
     selected:function(){
       return this.$store.state.qa.container.key===this.key
+    },
+    cols:function(){
+      return this.item.cols
+    },
+    rows:function(){
+      return this.item.rows
     }
   },
   components:{
@@ -83,11 +90,12 @@ export default {
     color:red
   }
   .qad-item-text>.input{
-    height:108px;
+    /*height:108px;*/
     background:rgba(246,246,246,1);
     border:1px solid rgba(222,226,230,1);
     opacity:1;
     border-radius:4px;
+    resize: none;
   }
   .selected{
     border: solid 1px #00a57b;

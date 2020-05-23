@@ -38,6 +38,7 @@
 import QANameFormItemRender from '@/components/qa/renders/QANameFormItemRender'
 import QAPhoneFormItemRender from '@/components/qa/renders/QAPhoneFormItemRender'
 import QAWeixinFormItemRender from '@/components/qa/renders/QAWeixinFormItemRender'
+import QATextLineFormItemRender from '@/components/qa/renders/QATextLineFormItemRender'
 
 export default {
   name: 'QARenderContainer',
@@ -76,7 +77,8 @@ export default {
   components:{
     "item-name-render":QANameFormItemRender,
     "item-phone-render":QAPhoneFormItemRender,
-    "item-wechat-render":QAWeixinFormItemRender
+    "item-wechat-render":QAWeixinFormItemRender,
+    "item-text-render":QATextLineFormItemRender
   }
 }
 </script>
