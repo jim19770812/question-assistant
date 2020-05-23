@@ -156,6 +156,7 @@ module.exports = {
     "comma-spacing":"off", //逗号前后加空格
     "spaced-comment":"off", //注释前后的空格
     "arrow-spacing":"off", //箭头前后空格
-    "no-unused-components":"off" //未使用的组件
+    "no-unused-components":"off", //未使用的组件
+    "no-useless-return":"off" //无用的return
   }
 }
