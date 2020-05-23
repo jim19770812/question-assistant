@@ -121,20 +121,6 @@ export default {
     }
   },
   computed:{
-    // val:{
-    //   get(){
-    //     return this.$store.state.qa.container.getItem(this.renderKey).val
-    //   },
-    //   set(newVal){
-    //     if (!ObjectUtlls.isNull(this.$store.state.qa.container.getItem(this.renderKey))){
-    //       const index=this.$store.state.qa.container.indexByKey(this.renderKey)
-    //       this.$store.commit("qa/updateValue", {path: `$.items[${index}].val`,
-    //         newVal: newVal,
-    //         key:this.renderKey
-    //       })
-    //     }
-    //   }
-    // },
     item(){
       return this.$store.state.qa.container.getItem(this.renderKey)
     },
