@@ -1,5 +1,4 @@
-import {ObjectUtlls} from '@/common/utils'
-import {EventBus} from '@/common/vue-bus'
+import { ObjectUtlls, StringUtils } from '@/common/utils'
 import jq from 'jsonpath'
 import {v1 as uuid1} from 'uuid'
 import Vue from 'vue'
@@ -208,7 +207,6 @@ const mutations={
     if (idx>=0){
       states.container.key=key
     }
-    // EventBus.$emit("refersh_designer_container", "select")
   },
   /**
    * 更新组件对象
@@ -318,10 +316,6 @@ const mutations={
 
     payload.vueComponent.$set(states.container.items, idx, states.container.items[newIndex])
     payload.vueComponent.$set(states.container.items, newIndex, source)
-    EventBus.$emit("refersh_designer_container", {type:"move",
-      source:sourceKey,
-      target:targetKey
-    })
     console.log("after update", JSON.stringify(states.container.items))
   }
 }
@@ -356,13 +350,15 @@ export class QAUtils{
 
   /**
    * 创建电话组件数据
+   * @param {string} title 标题
    * @param {string} phone 手机号
    * @param {bool} notEmpty 是否非空
    * @returns {object}
    */
-  static createfPhoneItemData(phone, notEmpty){
+  static createfPhoneItemData(title, phone, notEmpty){
     return {
       type:"fitem_phone",
+      title:title,
       key:uuid1(),
       val:phone,
       notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true
@@ -390,14 +386,16 @@ export class QAUtils{
 
   /**
    * 创建微信组件数据
+   * @param {string} title 标题
    * @param {string} weixin 微信号
    * @param {bool} notEmpty 是否非空
    * @returns {object}
    */
-  static createfWeixinItemData(weixin, notEmpty){
+  static createfWeixinItemData(title, weixin, notEmpty){
     return {
       type:"fitem_wechat",
       key:uuid1(),
+      title:title,
       val:weixin,
       notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true
     }

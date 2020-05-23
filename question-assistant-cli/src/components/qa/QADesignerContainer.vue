@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import {EventBus} from '../../common/vue-bus'
 import {QAUtils} from '../../modules/qa.js'
 import QANameFormItemDesigner from '@/components/qa/designers/QANameFormItemDesigner'
 import QAPhoneFormItemDesigner from '@/components/qa/designers/QAPhoneFormItemDesigner'
@@ -39,12 +38,6 @@ export default {
     container () {
       return this.$store.state.qa.container
     }
-  },
-  created(){
-    EventBus.$on("refersh_designer_container", (event)=>{
-      this.$forceUpdate()
-      console.log("刷新组件结束", this.$children)
-    })
   },
   methods: {
     /**
@@ -78,9 +71,9 @@ export default {
       if (clazz === "fitem_name") {
         data = QAUtils.createfNameItemData("姓名", "", true)
       } else if (clazz === "fitem_phone") {
-        data = QAUtils.createfPhoneItemData("", true)//手机号
+        data = QAUtils.createfPhoneItemData("手机号", "", true)//手机号
       } else if (clazz === "fitem_wechat") {
-        data = QAUtils.createfWeixinItemData("", true)//微信
+        data = QAUtils.createfWeixinItemData("微信号", "", true)//微信
       } else if (clazz === "fitem_area") {
         data = QAUtils.createfAreaItemData("省市区", true, "", "", "")
       } else if (clazz === "fitem_radio") {

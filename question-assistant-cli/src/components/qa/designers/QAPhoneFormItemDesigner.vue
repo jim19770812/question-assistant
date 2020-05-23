@@ -1,7 +1,7 @@
 <template>
   <div class="qad-item-phone-box">
     <div v-bind:class="{'qad-item-phone':true, selected:selected}"  @click="click">
-      <div class="title">电话 <span class="red" v-show="item.notEmpty">*</span></div>
+      <div class="title">{{item.title}} <span class="red" v-show="item.notEmpty">*</span></div>
       <div class="input"></div>
     </div>
     <designer-tool-box></designer-tool-box>
