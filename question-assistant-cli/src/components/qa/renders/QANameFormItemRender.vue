@@ -60,7 +60,7 @@ export default {
         return
       }
       const minLen=JsonPathUtils.findSingleNode(this.container, `$.items[${index}].minLen`)
-      if (minLen.enabled && val.length>0 && minLen.val>0 && val.length<=minLen.val){
+      if (minLen.enabled && val.length>0 && minLen.val>0 && val.length<minLen.val){
         this.errVisible=true
         this.errMessage=`${this.item.title}长度不足[${minLen.val}]！`
         return

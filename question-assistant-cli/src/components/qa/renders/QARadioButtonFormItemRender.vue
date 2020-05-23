@@ -6,7 +6,7 @@
         <span v-if="errVisible" class="red">{{errMessage}}</span>
       </div>
       <div v-for="(op, index) in item.options" :value="op" :key="index" >
-        <input :id="namedId(index)" :name="radioName" type="radio" v-model="val" :value="op" @input="changeOptionValue(index, $event)"/>
+        <input :id="namedId(index)" :name="radioName" type="radio" v-model="val" :value="op" @input="radioInput"/>
         <label :for="namedId(index)">{{op}}</label>
       </div>
     </div>
@@ -68,6 +68,12 @@ export default {
         this.errVisible=true
         this.errMessage=`${this.item.title}不能是空！`
         return
+      }
+    },
+    radioInput(){
+      if (this.errVisible){
+        this.errVisible=false
+        this.errMessage=''
       }
     }
   }
