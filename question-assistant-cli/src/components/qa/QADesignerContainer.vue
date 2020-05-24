@@ -75,7 +75,7 @@ export default {
       } else if (clazz === "fitem_wechat") {
         data = QAUtils.createfWeixinItemData("微信号", "", true)//微信
       } else if (clazz === "fitem_area") {
-        data = QAUtils.createfAreaItemData("省市区", true, "", "", "")
+        data = QAUtils.createfAreaItemData("省市区", true, "", "", "", 2)
       } else if (clazz === "fitem_radio") {
         data = QAUtils.createfRadioItemData("单项选择", true, ["选项1","选项2","选项3"], "", "")
       } else if (clazz === "fitem_mulselet") {

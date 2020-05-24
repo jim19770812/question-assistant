@@ -6,6 +6,12 @@
     <div>
       <input type="checkbox" v-model="notEmpty"/><span>是否必填</span>
     </div>
+    <div>
+      <select class="input" v-model="minLevel">
+        <option :value="1" selected>最小选择到市</option>
+        <option :value="2">最小选择到县</option>
+      </select>
+    </div>
   </div>
 </template>
 
@@ -109,6 +115,21 @@ export default {
           })
         }
       }
+    },
+    minLevel:{
+      get(){
+        const item=this.$store.state.qa.container.getItem(this.key)
+        return ObjectUtlls.isNull(item)?"":item.minLevel
+      },
+      set(newVal){
+        if (!ObjectUtlls.isNull(this.$store.state.qa.container.getItem(this.key))){
+          const index=this.$store.state.qa.container.indexByKey(this.key)
+          this.$store.commit("qa/updateValue", {path: `$.items[${index}].minLevel`,
+            newVal: newVal,
+            key:this.key
+          })
+        }
+      }
     }
   }
 }
@@ -139,7 +160,7 @@ export default {
   .qae-item-area>.title>.red{
     color:red
   }
-  .qae-item-area>.input{
+  .qae-item-area .input{
     height:36px;
     background:rgba(246,246,246,1);
     border:1px solid rgba(222,226,230,1);

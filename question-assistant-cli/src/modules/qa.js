@@ -456,9 +456,10 @@ export class QAUtils{
    * @param {string} province 省关键字
    * @param {string} city 市关键字
    * @param {string}county 县关键字
+   * @param {number} minLevel 最小层级
    * @returns {object}
    */
-  static createfAreaItemData(title, notEmpty,province, city, county){
+  static createfAreaItemData(title, notEmpty,province, city, county,minLevel){
     return {
       type:"fitem_area",
       key:uuid1(),
@@ -467,7 +468,8 @@ export class QAUtils{
       notEmpty:ObjectUtlls.isUndef(notEmpty) && !ObjectUtlls.isNull(notEmpty)?notEmpty:true,
       province:!ObjectUtlls.isUndef(province) && !ObjectUtlls.isNull(province)?province:0,
       city:!ObjectUtlls.isUndef(city) && !ObjectUtlls.isNull(city)?city:0,
-      county:!ObjectUtlls.isUndef(county) && !ObjectUtlls.isNull(county)?county:0
+      county:!ObjectUtlls.isUndef(county) && !ObjectUtlls.isNull(county)?county:0,
+      minLevel:2 /*最小层级0：省，1：市，2：区县*/
     }
   }
 }

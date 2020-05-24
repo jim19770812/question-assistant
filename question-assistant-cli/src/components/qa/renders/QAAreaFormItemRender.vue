@@ -111,12 +111,15 @@ export default {
         this.errMessage=`${this.item.title}不能是空！`
         return
       }
-      if (notEmpty && Array.isArray(val) && val.filter(o=>{
-        return o===""
-      }).length>0){
-        this.errVisible=true
-        this.errMessage=`${this.item.title}无效，每项都要选择！`
-        return
+      if (notEmpty && Array.isArray(val)){
+        const minLevel=JsonPathUtils.findSingleNode(this.container, `$.items[${index}].minLevel`)
+        for(let i=0; i<minLevel; i++){
+          if (ObjectUtlls.isUndef(val[i]) || ObjectUtlls.isNull(val[i]) || (val[i]==="")){
+            this.errVisible=true
+            this.errMessage=`${this.item.title}最小层级选择不正确！`
+            return
+          }
+        }
       }
     }
   },
