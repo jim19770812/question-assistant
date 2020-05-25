@@ -20,8 +20,8 @@ public class DateUtil {
 	//public final static String DATE_FORMAT = "yyyy-MM-dd";
 	public final static String TIME_FORMAT = "HH:mm:ss";
 	public final static long DAY_MILLISECOND = 24L * 60L * 60L * 1000L;
-	private final static String MINI_DATE_STR = "1899-12-31 23:59:59";
-	public final static Date MINI_DATE = DateUtil.getMiniDate();
+	private final static String ZERO_DATE_STR = DateUtil.getDateStr(DateUtil.getMiniDate());
+	public final static Date ZERO_DATE = DateUtil.getMiniDate();
 
 	/**
 	 * 根据指定格式，解释字符串，生成日期对象
@@ -64,7 +64,9 @@ public class DateUtil {
 
 	private synchronized static Date getMiniDate() {
 		try{
-			return parseDate(MINI_DATE_STR, LONG_DATE_TIME_FORMAT);
+			var ret=new Date();
+			ret.setTime(0);
+			return ret;
 		}catch(Exception e){
 			return new Date();
 		}

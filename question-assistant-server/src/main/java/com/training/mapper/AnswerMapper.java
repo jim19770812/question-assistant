@@ -3,14 +3,14 @@ package com.training.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import java.math.BigDecimal;
 import org.springframework.stereotype.Component;
-import com.training.beans.QuestionSheets;
+import com.training.beans.Answer;
 
 /**
  * @author hanxiaofeng
- * @date 2020-02-16 20:19:30
+ * @date 2020-05-24 22:37:29
  * @description 
  */
 
 @Component
-public interface QuestionSheetsMapper extends BaseMapper<QuestionSheets> {
+public interface AnswerMapper extends BaseMapper<Answer> {
 }

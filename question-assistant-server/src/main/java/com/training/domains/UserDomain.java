@@ -9,11 +9,14 @@ import com.training.auths.JwtUtil;
 import com.training.beans.MUser;
 import com.training.exceptions.APIException;
 import com.training.mapper.MUserMapper;
+import com.training.vos.UserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.helpers.MessageFormatter;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.data.convert.EntityWriter;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -56,5 +59,15 @@ public class UserDomain implements AuthenticationVerify {
         var token= JwtUtil.sign(result, usr.getUsr_slat());
         result.setToken(token);
         return result;
+    }
+
+    /**
+     * 获取已经登录的用户信息
+     * @return
+     */
+    public static UserInfo getLoginedUserInfo(){
+        var requestAttributes=RequestContextHolder.getRequestAttributes();
+        var ret=requestAttributes.getAttribute("usrinfo", RequestAttributes.SCOPE_REQUEST);
+        return (UserInfo)ret;
     }
 }

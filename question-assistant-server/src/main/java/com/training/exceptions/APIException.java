@@ -1,9 +1,11 @@
 package com.training.exceptions;
 
+import org.springframework.http.HttpStatus;
+
 /**
  * API异常
  */
-public class APIException extends Exception {
+public class APIException extends RuntimeException {
     public final static int SUCC=1000; //成功
     public final static int ERR_1001=1001; //业务异常,通常用于弹窗提示直接输出错误,如存在关联无法删除之类的业务异常
     public final static int ERR_1002=1002; //登录令牌错误,需要刷新令牌后重新尝试登录
@@ -32,5 +34,13 @@ public class APIException extends Exception {
     public APIException(final int code, final String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
         this.code=code;
+    }
+
+    public APIException(final HttpStatus httpStatus, final String message){
+        this(httpStatus.value(), message);
+    }
+
+    public APIException(final HttpStatus httpStatus, final String message, Throwable cause) {
+        this(httpStatus.value(), message, cause);
     }
 }

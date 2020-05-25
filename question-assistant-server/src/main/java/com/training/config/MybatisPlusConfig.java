@@ -1,7 +1,9 @@
 package com.training.config;
 
+import com.baomidou.mybatisplus.extension.handlers.GsonTypeHandler;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
+import com.google.gson.Gson;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.aop.interceptor.PerformanceMonitorInterceptor;
 import org.springframework.context.annotation.Bean;
@@ -9,13 +11,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.annotation.PostConstruct;
 import java.util.Properties;
 
 @Configuration
 @MapperScan("com.training.mapper")
 @EnableTransactionManagement
 public class MybatisPlusConfig {
-
     /**
      * SQL执行效率插件
      * @return

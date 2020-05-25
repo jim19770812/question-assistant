@@ -21,6 +21,8 @@ import java.util.ArrayList;
 @EnableSwagger2
 @ComponentScan(basePackages = {"com.training"})
 public class Swagger2Config {
+    @Value("${server.port}")
+    private String serverPort;
     @Value("${app.swagger2.enable}")
     private boolean swaggerEnabled;
 
@@ -75,9 +77,9 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
-                .title("投票助手")
+                .title("投票助手2")
                 .description("投票助手api测试工具")
-                .termsOfServiceUrl("127.0.0.1:8080")
+                .termsOfServiceUrl("127.0.0.1:"+this.serverPort)
                 .version("1.0")
                 .build();
     }

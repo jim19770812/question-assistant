@@ -1,6 +1,7 @@
 package com.training.exceptions;
 
 import com.common.objects.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.system.SystemProperties;
@@ -24,14 +25,9 @@ import java.util.stream.Collectors;
  */
 @ControllerAdvice
 @ResponseBody
+@Slf4j
 public class GlobalExceptionHandler {
-
     private Logger logger = LoggerFactory.getLogger(getClass());
-
-
-//    @Resource
-//    SystemProperties systemProperties;
-
 
     @ExceptionHandler(IllegalAccessException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -45,7 +41,6 @@ public class GlobalExceptionHandler {
         return Result.fail(1001, e.getMessage());
     }
 
-
     @ExceptionHandler(NoPermissionException.class)
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public Result noPermissionExceptionException(NoPermissionException e) {
@@ -58,7 +53,6 @@ public class GlobalExceptionHandler {
     public Result springBindExceptionException(org.springframework.validation.BindException e) {
         return Result.fail(HttpStatus.PAYMENT_REQUIRED.value(), e.getMessage());
     }
-
 
 //    @ExceptionHandler(APIException.class)
 //    @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -74,7 +68,6 @@ public class GlobalExceptionHandler {
 
         return Result.fail(HttpStatus.INTERNAL_SERVER_ERROR.value(), errorMsg);
     }
-
 
     private List<Map<String, String>> parseValidMethod(MethodArgumentNotValidException e) {
         return e.getBindingResult().getAllErrors().stream().map(obj -> {

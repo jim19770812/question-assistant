@@ -1,19 +1,16 @@
 package com.training.dtos;
 
-import lombok.Data;
-import lombok.Builder;
-import lombok.ToString;
-import lombok.EqualsAndHashCode;
+import com.google.gson.JsonObject;
+import lombok.*;
+
 import java.util.Date;
 import java.math.BigDecimal;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiModel;
 
-import javax.validation.constraints.NotNull;
-
 /**
  * @author hanxiaofeng
- * @date 2020-02-16 20:06:46
+ * @date 2020-05-24 21:17:33
  * @description 
  */
 
@@ -21,8 +18,14 @@ import javax.validation.constraints.NotNull;
 @Data
 @ToString
 @EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel("问卷表DTO")
 public class QuestionSheetDTO {
+
+	/**
+	 * 问卷ID
+	 */
 	@ApiModelProperty("问卷ID")
 	private Integer qs_id;
 
@@ -30,12 +33,13 @@ public class QuestionSheetDTO {
 	 * 问卷名称
 	 */
 	@ApiModelProperty("问卷名称")
-	@NotNull
 	private String qs_name;
 
 	/**
-	 * 问卷停止时间
+	 * 问卷内容模板
 	 */
-	@ApiModelProperty("问卷停止时间")
-	private Date qs_stop_time;
+	@ApiModelProperty("问卷内容模板")
+	private String qs_template;
+
+
 }

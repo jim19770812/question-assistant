@@ -4,6 +4,7 @@ import com.common.objects.Result;
 import com.common.utils.StringUtil;
 import com.training.exceptions.APIException;
 import com.training.mapper.MUserMapper;
+import com.training.vos.UserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -62,37 +63,15 @@ public class ShiroRealm extends AuthorizingRealm {
             throw new AuthenticationException("令牌无效");
         }
         var usr=this.userMapper.selectById(usrId);
-        var ret=(AuthenticationInfo)new SimpleAuthenticationInfo(token, token, "ShiroRealm");
-        return ret;
-//        String token=(String)authenticationToken.getCredentials();
-//        return this.getAuthInfo(token);
-    }
-
-    protected AuthenticationInfo getAuthInfo(final String token) throws AuthenticationException {
-        var tmp=JwtUtil.getAttrFromToken(token, "usr_id");
-        if (StringUtil.isNull(tmp) || !StringUtil.isNumber(tmp)){
-            throw new AuthenticationException("无效token");
-        }
-        var usrId=Integer.parseInt(tmp);
-        var usr=this.userMapper.selectById(usrId);
         if (usr==null){
             throw new AuthenticationException("未能根据用户id找到用户");
         }
-        var authInfo=new JwtAuthInfo();
-        authInfo.put("usr_id", Integer.toString(usr.getUsr_id()));
-        authInfo.put("usr_name", usr.getUsr_name());
-        authInfo.put("usr_email", usr.getUsr_email());
-        var ret=JwtUtil.verify(token, authInfo, usr.getUsr_slat());
-        if (!Result.isFail(ret)){
-            throw new AuthenticationException(ret.getMessage());
-        }
-        var requestAttributes=RequestContextHolder.getRequestAttributes();
-        requestAttributes.setAttribute("usr_id", usr.getUsr_id(), RequestAttributes.SCOPE_REQUEST);
-        requestAttributes.setAttribute("usr_email", usr.getUsr_email(), RequestAttributes.SCOPE_REQUEST);
-        requestAttributes.setAttribute("usr_name", usr.getUsr_name(), RequestAttributes.SCOPE_REQUEST);
+        //向请求作用域保存用户信息
+        RequestContextHolder.getRequestAttributes().setAttribute("usrinfo", new UserInfo(usr.getUsr_id(), usr.getUsr_name(), usr.getUsr_email()), RequestAttributes.SCOPE_REQUEST);
         MDC.put("usr_id", usr !=null ? Integer.toString(usr.getUsr_id()):"");
         MDC.put("usr_name", usr !=null ? usr.getUsr_name():"");
         MDC.put("usr_email", usr !=null ? usr.getUsr_email():"");
-        return new SimpleAuthenticationInfo(token, token,"ShiroRealm");
+        var ret=(AuthenticationInfo)new SimpleAuthenticationInfo(token, token, "ShiroRealm");
+        return ret;
     }
 }

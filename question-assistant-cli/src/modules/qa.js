@@ -2,6 +2,7 @@ import { ObjectUtlls, StringUtils } from '@/common/utils'
 import jq from 'jsonpath'
 import {v1 as uuid1} from 'uuid'
 import Vue from 'vue'
+import { isString } from 'element-ui/src/utils/types'
 
 /**
  * 定义类型和对应组件设计器/编辑器/渲染器的映射关系
@@ -317,6 +318,20 @@ const mutations={
     payload.vueComponent.$set(states.container.items, idx, states.container.items[newIndex])
     payload.vueComponent.$set(states.container.items, newIndex, source)
     console.log("after update", JSON.stringify(states.container.items))
+  },
+  /**
+   * 加载项目json数据
+   * @param {object}states
+   * @param {string | object}itemsJson
+   */
+  loadItemsData(states, itemsJson){
+    let items=null
+    if (isString(itemsJson)){
+      items=JSON.parse(itemsJson)
+    }else{
+      items=itemsJson
+    }
+    states.constructor.items=items
   }
 }
 
