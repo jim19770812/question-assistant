@@ -55,49 +55,50 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .qad-item-area-box{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items:flex-start;
-  }
-  .qad-item-area{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  .qad-item-area>*{
-    margin: 12px 20px;
-    width:280px;
-    text-align: left;
-  }
-  .qad-item-area>.title{
-    height:18px;
-    font-size:13px;
-    font-family:PingFang SC;
-    font-weight:500;
-    line-height:16px;
-    color:rgba(51,51,51,1);
-    opacity:1;
-  }
-  .qad-item-area>.title>.red{
-    color:red
-  }
-  .qad-item-area>.input{
-    height:36px;
-    background:rgba(246,246,246,1);
-    border:1px solid rgba(222,226,230,1);
-    opacity:1;
-    border-radius:4px;
-  }
-  .qad-item-area>.input> *{
-    margin: 8px auto auto 4px;
-  }
-  .selected{
-    border: solid 1px #00a57b;
-  }
+@import "../../../assets/styles/common.less";
+.qad-item-area-box{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items:flex-start;
+}
+.qad-item-area{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+.qad-item-area>*{
+  margin: 12px 20px;
+  width:280px;
+  text-align: left;
+}
+.qad-item-area>.title{
+  height:18px;
+  font-size:13px;
+  font-family:PingFang SC;
+  font-weight:500;
+  line-height:16px;
+  color:rgba(51,51,51,1);
+  opacity:1;
+}
+.qad-item-area>.title>.red{
+  color:red
+}
+.qad-item-area>.input{
+  height:36px;
+  background:rgba(246,246,246,1);
+  border:1px solid rgba(222,226,230,1);
+  opacity:1;
+  border-radius:4px;
+}
+.qad-item-area>.input> *{
+  margin: 8px auto auto 4px;
+}
+.selected{
+  border: solid 1px #00a57b;
+}
 </style>
 

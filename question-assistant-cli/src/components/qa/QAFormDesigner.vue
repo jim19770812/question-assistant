@@ -7,8 +7,8 @@
         <div class="qad-header-buttons-container">
           <a href="#" class="enabled">预览</a>
           <a href="#" class="enabled">保存</a>
-          <a href="#" class="enabled">发布</a>
-          <a href="#" class="disabled">退出</a>
+          <a href="#" class="enabled" @click="publish">发布</a>
+          <a href="#" class="disabled" @click="quit">退出</a>
         </div>
       </div>
       <div class="qad-main-container">
@@ -61,6 +61,8 @@
 <script>
 import QaDesignerContainer from "@/components/qa/QADesignerContainer"
 import QAEditorContainer from "@/components/qa/QAEditorContainer"
+import {TokenUtils} from '@/common/utils'
+
 export default {
   name: 'QAFormDesigner',
   components: {
@@ -86,6 +88,14 @@ export default {
     formItemDragEnd(event){
       console.log("dragend")
       event.dataTransfer.clearData()
+    },
+    publish(){
+      const token="123456"
+      TokenUtils.saveToken(token)
+    },
+    quit(){
+      const token=TokenUtils.getToken()
+      console.log("token", token)
     }
   }
 
