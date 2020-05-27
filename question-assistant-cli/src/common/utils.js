@@ -1,4 +1,6 @@
 import jq from 'jsonpath'
+import axios from 'axios'
+import { APIException, ErrorConsts } from '@/exceptions/exceptions'
 
 /**
  * 对象工具类
@@ -97,8 +99,128 @@ export class JsonPathUtils{
       return null
     }
     if (!Array.isArray(ret)){
-      throw new Error("findSingleNode查找到的节点并非数组！")
+      throw new APIException(ErrorConsts.CLI_1006, "findSingleNode查找到的节点并非数组！")
     }
     return ret
+  }
+}
+
+/**
+ * SessionStorage工具类
+ */
+export class StorageUtils{
+  /**
+   * 从storage中获取属性
+   * @param {string} attrName
+   * @returns {string|null}
+   */
+  static get(attrName){
+    if (StorageUtils.contains(attrName)){
+      return sessionStorage.getItem(attrName)
+    }
+    return null;
+  }
+
+  /**
+   * 向storage中写入属性
+   * @param {string} attrName
+   * @param {string} attrVal
+   * @returns {void}
+   */
+  static set(attrName, attrVal){
+    sessionStorage.setItem(attrName, attrVal)
+  }
+
+  /**
+   * 判断是否包含某属性
+   * @param {string} attrName
+   * @returns {boolean}
+   */
+  static contains(attrName){
+    return ObjectUtlls.hasProperty(sessionStorage, attrName)
+  }
+
+  /**
+   * 从storage中移除属性
+   * @param {string} attrName
+   * @returns {void}
+   */
+  static remove(attrName){
+    const ret=StorageUtils.contains(attrName)
+    if (ret){
+      sessionStorage.removeItem(attrName)
+    }
+  }
+}
+
+/**
+ * 令牌工具
+ */
+export class TokenUtils{
+  /**
+   * 判断token是否存在
+   * 过期会返回空串，没过期就自动延期24小时
+   * @returns {boolean}
+   */
+  static hasToken(){
+    if (!StorageUtils.contains("token")) {
+      return false
+    }
+    return true;
+  }
+
+  /**
+   * 保存token，默认1天过期
+   * @param {string} token
+   * @returns {boolean}
+   */
+  static saveToken(token){
+    StorageUtils.remove("token")
+    const dt = new Date()
+    StorageUtils.set("token", JSON.stringify({
+      token:token,
+      expire:dt.getTime() + 1000 * 60 * 60 * 24
+    }))
+    return true
+  }
+
+  /**
+   * 获取token,先判断是否过期，
+   * 过期会返回空串，没过期就自动延期24小时
+   * @returns {string}
+   */
+  static getToken(){
+    const temp=StorageUtils.get("token")
+    const t=JSON.parse(temp)
+    if (t!==null) {
+      const dt = new Date()
+      if (t.expire > dt.getTime()) {
+        //未过期，延长过期时间
+        StorageUtils.remove("token")
+        StorageUtils.set("token", JSON.stringify({
+          token: t.token,
+          expire: dt.getTime() + 1000 * 60 * 60 * 24
+        }))
+      }else{
+        //如果过期就返回空串
+        StorageUtils.remove("token")
+        return ""
+      }
+    }
+    return t.token
+  }
+}
+
+/**
+ * 请求工具，是对axios的二次封装
+ */
+export class Request{
+
+  get(url, data){
+    axios.get(url, {}).then(response=>{
+
+    }).catch(resp=>{
+
+    }).finally()
   }
 }
