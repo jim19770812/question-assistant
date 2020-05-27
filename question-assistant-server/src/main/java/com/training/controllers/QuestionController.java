@@ -1,7 +1,6 @@
 package com.training.controllers;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.common.objects.Result;
 import com.common.utils.DateUtil;
@@ -24,11 +23,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -57,7 +53,7 @@ public class QuestionController extends AbstractController {
         if (!this.paramIsNull(qsDTO.getQs_id())){
             qs=this.questionSheetMapper.selectById(qsDTO.getQs_id());
             if (qs == null) {
-                throw new APIException(APIException.ERR_1001, M.format("未能根据问卷ID[{}]找到对应的问卷对象", qsDTO.getQs_id()));
+                throw new APIException(APIException.ERR_1003, M.format("未能根据问卷ID[{}]找到对应的问卷对象", qsDTO.getQs_id()));
             }
         }else{
             qs=new QuestionSheet();
@@ -91,7 +87,7 @@ public class QuestionController extends AbstractController {
         qw.eq(QuestionSheet.COL_QS_STATUS, 0);
         var qs=this.questionSheetMapper.selectOne(qw);
         if (qs==null){
-            throw new APIException(500, "未能根据传入的问卷ID找到对应的问卷");
+            throw new APIException(APIException.ERR_1003, "未能根据传入的问卷ID找到对应的问卷");
         }
         qs.setQs_status(QuestionSheetStatus.PUBLISHED.getStatus());
         var ret=this.questionSheetMapper.updateById(qs);
@@ -109,7 +105,7 @@ public class QuestionController extends AbstractController {
         qw.eq(QuestionSheet.COL_QS_STATUS, 1);
         var qs=this.questionSheetMapper.selectOne(qw);
         if (qs==null){
-            throw new APIException(500, "未能根据传入的问卷ID找到对应的问卷");
+            throw new APIException(APIException.ERR_1003, "未能根据传入的问卷ID找到对应的问卷");
         }
         qs.setQs_status(QuestionSheetStatus.STOPED.getStatus());
         var ret=this.questionSheetMapper.updateById(qs);
@@ -136,7 +132,7 @@ public class QuestionController extends AbstractController {
                                                                  @ApiParam(required = true, value="问卷状态（-1:全部,0：待发布，1：已发布，2：已停止）") @Valid @RequestParam(required = true) @NotNull final List<Integer> qsStatusList,
                                                                  @ApiParam(required = true, value="分页对象") @Valid @ModelAttribute @NotNull final PageDTO pageDTO) throws Exception{
         if (qsStatusList.stream().filter(o->o<0&&o>2).count()>0){
-            throw new APIException(HttpStatus.BAD_REQUEST, "未传入有效的问卷状态，必须是0/1/2之一");
+            throw new APIException(APIException.ERR_1003, "未传入有效的问卷状态，必须是0/1/2之一");
         }
         var qw=new QueryWrapper();
         if (!StringUtil.isNull(idOrName)){
@@ -182,7 +178,7 @@ public class QuestionController extends AbstractController {
             ret=this.answerMapper.updateById(answer);
         }
         if (ret==0){
-            throw new APIException(HttpStatus.BAD_REQUEST, "保存失败");
+            throw new APIException(APIException.ERR_1001, "保存失败");
         }
         log.debug("保存回答完成，影响记录数="+ret);
         AnswerVO vo=new AnswerVO();

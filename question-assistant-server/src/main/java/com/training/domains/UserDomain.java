@@ -32,7 +32,7 @@ public class UserDomain implements AuthenticationVerify {
         wrapper.eq(MUser.COL_USR_EMAIL, userEmail);
         var cnt=this.userMapper.selectCount(wrapper);
         if (cnt==0){
-            throw new APIException(APIException.ERR_1001, "用户已注册");
+            throw new APIException(APIException.ERR_1005, "用户已注册");
         }
         var usr=new MUser();
         usr.setUsr_email(userEmail);
