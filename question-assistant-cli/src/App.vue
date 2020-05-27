@@ -1,14 +1,5 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/auth/login">认证页</router-link>
-      <router-link to="/reset/1" @click.native="goLosePassword">重置密码</router-link>
-      <router-link to="/reset/2" @click.native="goNewPassword">新设密码</router-link>
-      <router-link to="/qalist">问题列表</router-link>
-      <router-link to="/qadesigner">问题表单设计器</router-link>
-      <router-link to="/qarender">问题表单渲染器</router-link>
-    </div>
     <keep-alive>
       <router-view/>
     </keep-alive>
@@ -17,7 +8,18 @@
 
 <script>
 import {mapMutations} from 'vuex'
+import { ObjectUtlls, TokenUtils } from '@/common/utils'
 export default{
+  created(){
+    //页面加载时判断token，没有就登录，有就转向问题列表页
+    const token=TokenUtils.getToken()
+    if (ObjectUtlls.isNull(token)){
+      //未登录，转向登录页
+      this.$router.replace({"path":"login"})
+    }else{
+      this.$router.replace({"name":"qalist"})
+    }
+  },
   methods:{
     ...mapMutations(['/reset']),
     goLosePassword(){
@@ -35,6 +37,8 @@ export default{
 </script>
 
 <style lang="less">
+@import "assets/styles/common.less";
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
