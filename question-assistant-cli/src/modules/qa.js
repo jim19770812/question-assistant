@@ -3,6 +3,7 @@ import jq from 'jsonpath'
 import {v1 as uuid1} from 'uuid'
 import Vue from 'vue'
 import { isString } from 'element-ui/src/utils/types'
+import { APIException, ErrorConsts } from '@/exceptions/exceptions'
 
 /**
  * 定义类型和对应组件设计器/编辑器/渲染器的映射关系
@@ -74,10 +75,10 @@ class Container{
   remove(key){
     const idx=this.indexByKey(key)
     if (idx<0){
-      throw new Error("remove时发现未能根据传入的key找到对应的项")
+      throw new APIException(ErrorConsts.ERR_1006, "remove时发现未能根据传入的key找到对应的项")
     }
     if (idx<0 || idx>=this.items.length){
-      throw new Error("remove时发现索引越界")
+      throw new APIException(ErrorConsts.CLI_1006, "remove时发现索引越界")
     }
     let ret=null
     if (idx>=0){
@@ -212,19 +213,19 @@ const mutations={
   /**
    * 更新组件对象
    * @param {object}states 状态对象
-   * @param {{path, key, newVal}} payload 负载对象（path：jsonpath路径，key是项的唯一索引，newVal是更新后的值
+   * @param {{path:string, key:string, newVal:string}} payload 负载对象（path：jsonpath路径，key是项的唯一索引，newVal是更新后的值
    * @returns {void}
    */
   updateValue(states, payload){
     if (!ObjectUtlls.hasProperty(payload, "path")){
-      throw new Error("updateValue时发现未传入有效的更新路径")
+      throw new APIException(ErrorConsts.CLI_1006, "updateValue时发现未传入有效的更新路径")
     }
     if (!ObjectUtlls.hasProperty(payload, "newVal")){
-      throw new Error("updateValue时发现未传入有效的更新内容")
+      throw new APIException(ErrorConsts.CLI_1006, "updateValue时发现未传入有效的更新内容")
     }
     const ret=jq.value(states.container, payload.path, payload.newVal)
     if (ret !== payload.newVal){
-      throw new Error(`未能根据jsonpath：${payload.path}修改对象值`)
+      throw new APIException(ErrorConsts.CLI_1006, `未能根据jsonpath：${payload.path}修改对象值`)
     }
     if (ObjectUtlls.hasProperty(payload, "key")){
       const index=states.container.indexByKey(payload.key)
@@ -237,22 +238,22 @@ const mutations={
   /**
    * 应用更新，按照传入的jsonpath找到匹配项列表，然后依次执行回调
    * @param {object}states vue状态对象
-   * @param {path, key, function(node):void} payload 负载对象（path：jsonpath路径，key是项的唯一索引，function(node):void是个找到匹配项之后要执行的回调（注意：可能要执行多次））
+   * @param {{path:string, key:string, function(node):void}} payload 负载对象（path：jsonpath路径，key是项的唯一索引，function(node):void是个找到匹配项之后要执行的回调（注意：可能要执行多次））
    * @returns {void}
    */
   applyUpdate(states, payload){
     if (!ObjectUtlls.hasProperty(payload, "path")){
-      throw new Error("updateValue时发现未传入有效的更新路径")
+      throw new APIException(ErrorConsts.CLI_1006, "updateValue时发现未传入有效的更新路径")
     }
     if (!ObjectUtlls.hasProperty(payload, "callback")){
-      throw new Error("updateValue时发现未传入有效的回调函数")
+      throw new APIException(ErrorConsts.CLI_1006, "updateValue时发现未传入有效的回调函数")
     }
     if (typeof(payload.callback)!=="function"){
-      throw new Error("updateValue时发现未传入有效的回调函数，callback参数必须是function类型")
+      throw new APIException(ErrorConsts.CLI_1006, "updateValue时发现未传入有效的回调函数，callback参数必须是function类型")
     }
     const node=jq.query(states.container, payload.path, 100)
     if (ObjectUtlls.isUndef(node) || !(node instanceof Array)){
-      throw new Error(`未能根据jsonpath：${payload.path}修改对象值`)
+      throw new APIException(ErrorConsts.CLI_1006, `未能根据jsonpath：${payload.path}修改对象值`)
     }
     node.forEach(n=>{
       payload.callback(n)
@@ -267,11 +268,11 @@ const mutations={
   /**
    * 批量更新组件对象值
    * @param {object}states
-   * @param {[{path, key, newVal}]} payload
+   * @param {[{path:string, key:string, newVal:string}]} payload
    */
   updateValues(states, payload){
     if (!(payload instanceof Array)){
-      throw new Error("updateValues时发现未传入有效的数组")
+      throw new APIException(ErrorConsts.CLI_1006, "updateValues时发现未传入有效的数组")
     }
     payload.forEach(payLoadItem=>{
       this.updateValue(states, payLoadItem)
@@ -280,25 +281,25 @@ const mutations={
   /**
    * 向上/向下移动项
    * @param {object}states
-   * @param {{vueComponent, key, incr}} payload 载荷，incr正数是向下移动，否则就是向上移动
+   * @param {{vueComponent:object, key:string, incr:number}} payload 载荷，incr正数是向下移动，否则就是向上移动
    */
   move(states, payload){
     console.log(states)
     if (!ObjectUtlls.hasProperty(payload, "key")){
-      throw new Error("move时发现未传入有效的key")
+      throw new APIException(ErrorConsts.CLI_1006, "move时发现未传入有效的key")
     }
     if (!ObjectUtlls.hasProperty(payload, "incr")){
-      throw new Error("move时发现未传入有效的移动步长")
+      throw new APIException(ErrorConsts.CLI_1006, "move时发现未传入有效的移动步长")
     }
     if (!ObjectUtlls.hasProperty(payload, "vueComponent")){
-      throw new Error("move时发现未传入有效的vueComponent")
+      throw new APIException(ErrorConsts.CLI_1006, "move时发现未传入有效的vueComponent")
     }
     if (states.container.items.length===0){
-      throw new Error("move时发现项目为空，无法移动")
+      throw new APIException(ErrorConsts.CLI_1006, "move时发现项目为空，无法移动")
     }
     const idx=states.container.indexByKey(payload.key)
     if (idx<0){
-      throw new Error("move时发现未能根据传入的key找到对应的项")
+      throw new APIException(ErrorConsts.CLI_1006, "move时发现未能根据传入的key找到对应的项")
     }
     let newIndex=idx+payload.incr
     if (newIndex<0){
