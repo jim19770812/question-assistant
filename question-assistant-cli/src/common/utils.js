@@ -1,7 +1,7 @@
 import jq from 'jsonpath'
 import axios from 'axios'
 import { APIException, ErrorConsts } from '@/exceptions/exceptions'
-
+import vue from '@/main'
 /**
  * 对象工具类
  */
@@ -212,15 +212,59 @@ export class TokenUtils{
 }
 
 /**
- * 请求工具，是对axios的二次封装
+ * 下拉通知工具
  */
-export class Request{
+export class NoticeUtils{
+  /**
+   * 显示成功提示
+   * @param {string}message
+   * @returns {void}
+   */
+  static success(message){
+    vue.$message({
+      type:"success",
+      message:message,
+      showClose: true
+    })
+  }
 
-  get(url, data){
-    axios.get(url, {}).then(response=>{
+  /**
+   * 显示提示信息
+   * @param {string}message
+   * @returns {void}
+   */
+  static info(message){
+    vue.$message({
+      type:"info",
+      message:message,
+      showClose: true
+    })
+  }
 
-    }).catch(resp=>{
+  /**
+   * 显示警告提示
+   * @param {string}message
+   * @returns {void}
+   */
+  static warn(message){
+    vue.$message({
+      type:"warning",
+      message:message,
+      showClose: true
+    })
+  }
 
-    }).finally()
+  /**
+   * 显示错误提示
+   * @param {string}message
+   * @returns {void}
+   */
+  static error(message){
+    vue.$message({
+      type: 'error',
+      message: message,
+      showClose: true
+    })
   }
 }
+
