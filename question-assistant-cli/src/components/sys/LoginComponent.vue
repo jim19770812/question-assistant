@@ -1,22 +1,49 @@
 <template>
   <div>
     <div class="form-container">
-      <input class="account-icon" type="text" placeholder="请输入帐号登录" />
-      <input class="password-icon" type="text" placeholder="请输入密码" />
+      <div v-if="invalid" class="red">{{errMessage}}</div>
+      <input class="account-icon" type="text" placeholder="请输入帐号登录" ref="account" />
+      <input class="password-icon" type="text" placeholder="请输入密码" ref="password" />
       <router-link class="lostpassword" :to='{name:"losepassword"}' @click.native="goLosePassword">忘记密码,点击找回</router-link>
-      <button class="next">登录</button>
+      <button class="next" @click="login">登录</button>
     </div>
   </div>
 </template>
 
 <script>
+import { StringUtils } from '@/common/utils'
+
 export default {/*登录组件*/
   name: 'LoginComponent',
+  data:function(){
+    return {
+      invalid:false,
+      errMessage:""
+    }
+  },
   methods:{
     goLosePassword(){
       // console.log("goLosePassword",this.$store.reset)
       this.$store.commit('setSelectedComponent',"lose-password-component")
       this.$router.push({name:"reset"})
+    },
+    login(){
+      if (StringUtils.isBlank(this.$refs.account.trim())){
+        this.showError("帐号不能为空")
+        return
+      }
+      if (StringUtils.isBlank(this.$refs.password.trim())){
+        this.showError("密码不能为空")
+        return
+      }
+    },
+    showError(message){
+      this.invalid=true
+      this.errMessage=message
+    },
+    reset(){
+      this.invalid=false
+      this.errMessage=""
     }
   }
 }

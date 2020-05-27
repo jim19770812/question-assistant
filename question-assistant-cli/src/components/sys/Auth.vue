@@ -7,16 +7,16 @@
             <div class="tab-container">
               <router-link :class="{deactive: this.$store.getters.activeIndex!==0}" :to='{name:"login"}' @click.native="loginClick">登录</router-link>
               <router-link :class="{deactive: activeIndex!==1}" :to='{name:"register"}' @click.native="registerClick">注册</router-link>
-              <router-view></router-view>
+              <keep-alive>
+                <router-view></router-view>
+              </keep-alive>
             </div>
         </div>
       </div>
       <p class="right-picture">
       </p>
     </div>
-
   </div>
-
 </template>
 
 <script>

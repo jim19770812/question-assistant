@@ -5,7 +5,6 @@
       <input class="password-icon" type="text" placeholder="请输入密码" />
       <button class="register">注册</button>
     </div>
-
   </div>
 </template>
 

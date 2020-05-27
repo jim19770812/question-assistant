@@ -8,14 +8,14 @@
 
 <script>
 import {mapMutations} from 'vuex'
-import { ObjectUtlls, TokenUtils } from '@/common/utils'
+import { ObjectUtlls, StringUtils, TokenUtils } from '@/common/utils'
 export default{
   created(){
     //页面加载时判断token，没有就登录，有就转向问题列表页
     const token=TokenUtils.getToken()
-    if (ObjectUtlls.isNull(token)){
+    if (!StringUtils.isBlank(token)){
       //未登录，转向登录页
-      this.$router.replace({"path":"login"})
+      this.$router.replace({"name":"login"})
     }else{
       this.$router.replace({"name":"qalist"})
     }

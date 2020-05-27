@@ -49,7 +49,6 @@ const typeClassMapper={
 
 class Container{
   constructor() {
-    console.log("constructor")
     this.items=[]
     this.key="" //当前选中项的key
   }

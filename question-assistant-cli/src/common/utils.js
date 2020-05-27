@@ -25,6 +25,15 @@ export class ObjectUtlls{
   }
 
   /**
+   * 是否是未定义或null
+   * @param {object | number | string | date} o
+   * @returns {boolean}
+   */
+  static isUnDefOrNull(o){
+    return this.isUndef(o) || this.isNull(o)
+  }
+
+  /**
    * 判断对象是否有某属性
    * @param {object} target
    * @param {string} propName
@@ -191,6 +200,9 @@ export class TokenUtils{
    */
   static getToken(){
     const temp=StorageUtils.get("token")
+    if (ObjectUtlls.isUnDefOrNull(temp)){
+      return ""
+    }
     const t=JSON.parse(temp)
     if (t!==null) {
       const dt = new Date()
