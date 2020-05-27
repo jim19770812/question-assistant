@@ -1,4 +1,5 @@
 const path = require('path')
+console.log("process.env.NODE_ENV", process.env.NODE_ENV)
 const debug = process.env.NODE_ENV !== 'production'   //环境标识
 const resolve = dir => {
   return path.join(__dirname, dir)
@@ -26,11 +27,22 @@ module.exports = {
   devServer: {
     open: false, // 自动打开浏览器
     host: '0.0.0.0',
-    port: 8080,
+    port: 8080, /*代理端口*/
     https: false,
-    historyApiFallback: {
-      index: '/index.html'
+    proxy:{
+      "/xhr":{
+        target:"http://localhost:9090",
+        changeOrigin: true, //是否跨域
+        ws:true, //代理转发 websockets
+        pathRewrite:{//路径重写
+          "^/xhr": ""
+        }
+      }
     },
+    disableHostCheck:false,
+    // historyApiFallback: {
+    //   index: '/index.html'
+    // },
     // 提供在服务器内部的其他中间件之前执行自定义中间件的能力
     before: app => {
     },
