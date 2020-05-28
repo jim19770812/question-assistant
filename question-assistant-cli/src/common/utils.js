@@ -55,7 +55,7 @@ export class StringUtils{
    * @return {boolean}
    */
   static isBlank(o){
-    return !ObjectUtlls.isNull(o) && !ObjectUtlls.isUndef(o) && !isNaN(o) && o!==""
+    return ObjectUtlls.isNull(o) || ObjectUtlls.isUndef(o) || isNaN(o) || o==""
   }
 }
 
