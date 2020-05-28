@@ -55,7 +55,7 @@ public class Result<T> implements Serializable {
     }
 
     public static <T> Result<T> fail(final int code, final String message){
-        var result=new Result(SUCCESS_CODE, message, new HashMap());
+        var result=new Result(code, message, new HashMap());
         return result;
     }
 }

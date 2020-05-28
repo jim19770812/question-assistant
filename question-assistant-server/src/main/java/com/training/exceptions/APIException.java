@@ -1,10 +1,12 @@
 package com.training.exceptions;
 
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 /**
  * API异常
  */
+@Getter
 public class APIException extends RuntimeException {
     public final static int SUCC=1000; //成功
     public final static int ERR_1001=1001; //业务异常,通常用于弹窗提示直接输出错误,如存在关联无法删除之类的业务异常
@@ -34,4 +36,6 @@ public class APIException extends RuntimeException {
         super(message, cause, enableSuppression, writableStackTrace);
         this.code=code;
     }
+
+
 }

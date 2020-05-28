@@ -2,6 +2,7 @@ package com.training.domains;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
+import com.baomidou.mybatisplus.extension.exceptions.ApiException;
 import com.common.utils.UUIDUtils;
 import com.training.auths.AuthenticationVerify;
 import com.training.auths.JwtAuthInfo;
@@ -31,8 +32,8 @@ public class UserDomain implements AuthenticationVerify {
         var wrapper=new QueryWrapper();
         wrapper.eq(MUser.COL_USR_EMAIL, userEmail);
         var cnt=this.userMapper.selectCount(wrapper);
-        if (cnt==0){
-            throw new APIException(APIException.ERR_1005, "用户已注册");
+        if (cnt>0){
+            throw new APIException(APIException.ERR_1001, "用户已注册，如果您忘记了密码，请尝试召回密码");
         }
         var usr=new MUser();
         usr.setUsr_email(userEmail);
@@ -41,7 +42,7 @@ public class UserDomain implements AuthenticationVerify {
         usr.setUsr_slat(UUIDUtils.generate8Key());
         usr.setUsr_pwd(password);
         var ret=userMapper.insert(usr);
-        log.debug(MessageFormatter.format("注册用户{}", userEmail).toString());
+        log.debug(MessageFormatter.format("注册用户{}，影响记录数={}", userEmail, ret).toString());
         return usr;
     }
 
@@ -49,7 +50,7 @@ public class UserDomain implements AuthenticationVerify {
     public JwtAuthInfo login(String authIndentify, String password) throws Exception {
         var usr=this.userMapper.findUserByEmailAndPassword(authIndentify, password);
         if (usr==null){
-            throw new Exception("密码不正确");
+            throw new APIException(APIException.ERR_1003, "密码不正确");
         }
         var result=new JwtAuthInfo();
         result.put("usr_id", Integer.toString(usr.getUsr_id()));

@@ -1,5 +1,7 @@
 package com.common.utils;
 
+import org.springframework.util.StringUtils;
+
 import java.util.*;
 
 public class StringUtil {
@@ -10,25 +12,6 @@ public class StringUtil {
 		};
 	final protected static char[] LOWERCASE_NUMBERS_CHARS =new char[]{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 	final protected static char[] NUMBERS_CHARS =new char[]{'0','1','2','3','4','5','6','7','8','9'};
-
-	/**
-	 * 根据传入数组对象及分隔符，返回连接字符串，最后加分隔符
-	 * 
-	 * @param object 数组对象
-	 * @param split 分隔符
-	 * @return 连接字符串 参数为空时返回""
-	 */
-	public synchronized static String arrayToString(Object[] object, String split) {
-		StringBuffer sb = new StringBuffer("");
-		if (object == null || split == null) {
-			return sb.toString();
-		}
-		for (int i = 0; i < object.length; i++) {
-			sb.append(object[i].toString());
-			sb.append(split);
-		}
-		return sb.toString();
-	}
 
 	/**
 	 * 把传入对象，按分隔符分隔后存入数组返回
@@ -58,26 +41,6 @@ public class StringUtil {
 		} else {
 			return object.toString();
 		}
-	}
-
-	/**
-	 * 过滤字符串的所有空格，并返回
-	 * 
-	 * @param str
-	 * @return String 去掉空格的字符串
-	 */
-	public synchronized static String filterSpaces(String str) {
-		StringBuffer string = new StringBuffer();
-		if (str != null && str.length() > 0) {
-			for (int i = 0; i < str.length(); i++) {
-				String temp = str.substring(i, i + 1);
-				if (temp != null && temp.length() > 0 && (!temp.equals(" "))) {
-					string.append(temp);
-				}
-			}
-			return string.toString();
-		}
-		return "";
 	}
 
 	/**
@@ -134,6 +97,7 @@ public class StringUtil {
 		}
 		return new String(str.getBytes(), 0, tmp);
 	}
+
     /**
      * 判断输入字符串是否符合规定的日期格式
      * 时间格式默认为：yyyy-MM-dd
@@ -399,15 +363,50 @@ public class StringUtil {
 		return "\""+str+"\"";
 	}
 
+	/**
+	 * 左侧脱敏字符串，左边的字符串用*替代
+	 * @param str
+	 * @param keepChars 右侧保留字符个数
+	 * @return
+	 */
+	public static String desensitizeLeft(String str, int keepChars){
+		if (StringUtils.isEmpty(str)) {
+			return "";
+		}
+		String regex = "(\\S+)(\\S{"+keepChars+"})";
+		return str.replaceAll(regex, "****$2");
+	}
+
+	public static String desensitizeRight(String str, int keepChars){
+		if (StringUtils.isEmpty(str)) {
+			return "";
+		}
+		String regex = "(\\S{"+keepChars+"})(\\S+)";
+		return str.replaceAll(regex, "$1****");
+	}
+
+	public static String desensitizeMiddle(String str, int leftKeepChars, int rightKeepChars){
+		if (StringUtils.isEmpty(str)) {
+			return "";
+		}
+		String regex = "(\\S{"+leftKeepChars+"})(\\S+)(\\S{"+rightKeepChars+"})";
+		return str.replaceAll(regex, "$1****$3");
+	}
+
 	public static void main(String[] args) {
-    	String s = "-1.2";
-    	System.out.println(isNumber(s));
-    	byte[] bytes = new byte[5];
-    	bytes[0] = (byte)0;
-    	bytes[1] = (byte)50;
-    	bytes[2] = (byte)0x9c;
-    	bytes[3] = (byte)0xa0;
-    	bytes[4] = (byte)0xb0;
+		//String s="abcdefghijklmn";
+		String s="张无忌";
+		//String ret=desensitizeRight(s, 2);
+		String ret=desensitizeMiddle(s, 1, 1);
+		System.out.println(ret);
+//    	String s = "-1.2";
+//    	System.out.println(isNumber(s));
+//    	byte[] bytes = new byte[5];
+//    	bytes[0] = (byte)0;
+//    	bytes[1] = (byte)50;
+//    	bytes[2] = (byte)0x9c;
+//    	bytes[3] = (byte)0xa0;
+//    	bytes[4] = (byte)0xb0;
 //    	byte[] bts = hex2Bytes("65,4A,77,72,79,63,67,73,56,67,43,69,52,49,57,53,31,4F,49,53,41,43,59,7A,42,52,59,3D", ",");
 //    	s = "65,4A,77,72,79,63,67,73,56,67,43,69,52,49,57,53,31,4F,49,53,41,43,59,7A,42,52,59,3D";
 //    	byte[] bts = hex2Bytes(s, ",");

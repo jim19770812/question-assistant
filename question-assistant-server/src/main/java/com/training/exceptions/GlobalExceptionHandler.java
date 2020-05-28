@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.annotation.Resource;
 import javax.naming.NoPermissionException;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,11 +55,11 @@ public class GlobalExceptionHandler {
         return Result.fail(HttpStatus.PAYMENT_REQUIRED.value(), e.getMessage());
     }
 
-//    @ExceptionHandler(APIException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public Result apiExceptionException(HttpServletResponse response, APIException e) {
-//        return Result.from(HttpStatus.BAD_REQUEST, e.getMessage(), null);
-//    }
+    @ExceptionHandler(APIException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Result apiExceptionException(HttpServletResponse response, APIException e) {
+        return Result.fail(e.getCode(), e.getMessage());
+    }
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
