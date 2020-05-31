@@ -1,19 +1,17 @@
 <template>
   <div id="app">
-    <keep-alive>
-      <router-view/>
-    </keep-alive>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
-import { ObjectUtlls, StringUtils, TokenUtils } from '@/common/utils'
-export default{
-  created(){
-    //页面加载时判断token，没有就登录，有就转向问题列表页
-    const token=TokenUtils.getToken()
-    if (!StringUtils.isBlank(token)){
+import { mapMutations} from 'vuex'
+import { StringUtils, TokenUtils } from '@/common/utils'
+export default {
+  created () {
+    // 页面加载时判断token，没有就登录，有就转向问题列表页
+    const token = TokenUtils.getToken()
+    if (StringUtils.isBlank(token)){
       //未登录，转向登录页
       this.$router.replace({"name":"login"})
     }else{
@@ -38,6 +36,9 @@ export default{
 
 <style lang="less">
 @import "assets/styles/common.less";
+@import '~reset.css';
+//@import 'element-ui/lib/theme-chalk/index.css';
+@import '~element-ui/lib/theme-chalk/index.css';
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

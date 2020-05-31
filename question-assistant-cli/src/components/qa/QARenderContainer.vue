@@ -2,6 +2,7 @@
   <div class="qar-container">
     <div class="qar-preview-container">
       <div class="title">预览</div>
+      <input type="hidden" :value="qsId"/>
       <div class="center" v-if="this.container.isEmpty()">
         无可渲染内容
       </div>
@@ -12,12 +13,14 @@
       </div>
     </div>
     <div class="qar-container-opt">
-      <div>
-        <input type="text" class="title" value="未命名问卷">
-        <div>2020年5月22日 15:22:00</div>
+      <div>cd
+        <input type="text" class="title" placeholder="未命名问卷" v-model.trim="qsName"/>
+        <div>{{currentTime}}</div>
         <div class="qar-opt-button-group">
-          <a href="#" class="button1" @click.stop.prevent="editQQ">继续编辑</a>
-          <a href="#" class="button2" @click.stop.prevent="previewQA">查看答卷</a>
+          <a href="#" class="button1" @click.stop.prevent="test">测试表单</a>
+          <a href="#" class="button1" @click.stop.prevent="save">保存</a>
+          <a href="#" class="button1" @click.stop.prevent="publish">发布</a>
+          <a href="#" class="button2" @click.stop.prevent="editQA">继续编辑</a>
           <a href="#" class="button2" @click.stop.prevent="stopQA">暂停问卷</a>
         </div>
       </div>
@@ -42,31 +45,65 @@ import QATextLineFormItemRender from '@/components/qa/renders/QATextLineFormItem
 import QARadioButtonFormItemRender from '@/components/qa/renders/QARadioButtonFormItemRender'
 import QACheckboxFormItemRender from '@/components/qa/renders/QACheckboxFormItemRender'
 import QAAreaFormItemRender from '@/components/qa/renders/QAAreaFormItemRender'
+import { saveQuestionSheet } from '@/requests/modules/qa_requests'
+import moment from 'moment'
+import { NoticeUtils, StringUtils } from '@/common/utils'
 
 export default {
   name: 'QARenderContainer',
   data:function(){
-    return {}
+    return {
+      currentTime:moment().format("YYYY-MM-DD h:mm:ss")
+    }
   },
   methods:{
     /**
      * 必填项检查
+     * @returns {boolean}
      */
     verify(){
+      if (this.container.isEmpty()){
+        NoticeUtils.warn("问卷没有添加元素！")
+        return false
+      }
       for(let i=0; i<=this.$children.length-1;i++){
         const c=this.$children[i]
-        c.verify()
-        console.log(c)
+        const ret=c.verify()
+        if (!ret){
+          return false
+        }
+      }
+      return true
+    },
+    test(){
+      const ret=this.verify()
+      if (ret){
+        NoticeUtils.info("测试通过")
       }
     },
-    editQQ(){
-      window.alert("继续编辑")
+    editQA(){
+      NoticeUtils.warn("暂未开放")
     },
-    previewQA(){
+    save(){
+      if (StringUtils.isBlank(this.qsName) || StringUtils.isBlank(this.qsName)){
+        NoticeUtils.warn("问卷还没有名字！")
+        return
+      }
+      if (this.container.isEmpty()){
+        NoticeUtils.warn("问卷没有添加元素！")
+        return
+      }
+      saveQuestionSheet(this.container.qsId, this.qsName, this.container.items).then(resp=>{
+        NoticeUtils.info("保存成功")
+      }).catch(resp=>{
+        NoticeUtils.error(resp.message)
+      })
+    },
+    publish(){
       this.verify()
     },
     stopQA(){
-      window.alert("暂停")
+      NoticeUtils.warn("暂未开放")
     }
   },
   computed:{
@@ -75,6 +112,14 @@ export default {
     },
     container:function(){
       return this.$store.state.qa.container
+    },
+    qsName:{
+      get(){
+        return this.container.title
+      },
+      set(newVal){
+        this.$store.commit("qa/setTitle", newVal)
+      }
     }
   },
   components:{

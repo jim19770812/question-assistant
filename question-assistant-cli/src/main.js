@@ -3,12 +3,13 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
-import "reset.css"
-import "@/assets/styles/common.less"
 import Test from '@/views/Test'
 import { globalErrorHandler } from '@/exceptions/exceptions'
+import "reset.css"
+import "@/assets/styles/common.less"
 import 'element-ui/lib/theme-chalk/index.css'
 import ElementUI, { MessageBox, Loading, Message } from 'element-ui'
+import { TokenUtils } from '@/common/utils'
 Vue.use(ElementUI)
 Vue.use(Loading.directive);
 
@@ -33,6 +34,11 @@ const vue=new Vue({
   mounted:function(){
     window.app=this
     console.log(this)
+    const token=TokenUtils.getToken()
+    if (token===""){
+      console.log("token是空，转向登录页")
+      this.$router.replace({name:"login"})
+    }
   }
 }).$mount('#app')
 

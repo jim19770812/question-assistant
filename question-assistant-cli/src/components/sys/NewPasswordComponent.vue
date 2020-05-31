@@ -5,21 +5,36 @@
         <router-link :to='{name:"login"}' replace>&lt;</router-link> {{title}}
       </div>
       <div class="form-container">
-        <input class="password-icon" type="text" placeholder="请输入新密码" />
-        <button class="next">完成</button>
+        <input type="hidden" :value="this.$store.state.resetInfo.ticket">
+        <input class="password-icon" type="text" placeholder="请输入邮箱中的验证码" ref="code" />
+        <input class="password-icon" type="text" placeholder="请输入新密码" ref="password" />
+        <button class="next" @click="done">完成</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import LoginComponent from '@/components/sys/LoginComponent'
-// import RegisterComponent from '@/components/sys/RegisterComponent'
-// import { mapState, mapMutations, mapActions, mapGetters } from 'vuex'
+import { resetPasswordValidateCode } from '@/requests/modules/user_requests'
+import { NoticeUtils } from '@/common/utils'
+
 export default {
+  //密码找回第二步
   data:function(){
     return {
       title:'设置新密码'
+    }
+  },
+  methods:{
+    done(){
+      const ticket=this.$store.state.resetInfo.ticket
+      const code=this.$refs.code.value.trim()
+      const password=this.$refs.password.value.trim()
+      resetPasswordValidateCode(ticket, code, password).then(data=>{
+        NoticeUtils.info("密码重置完成，新密码请记牢")
+      }).catch(e=>{
+        NoticeUtils.error(e.message)
+      })
     }
   }
 }

@@ -2,6 +2,8 @@ import jq from 'jsonpath'
 import axios from 'axios'
 import { APIException, ErrorConsts } from '@/exceptions/exceptions'
 import vue from '@/main'
+import moment from 'moment'
+
 /**
  * 对象工具类
  */
@@ -55,7 +57,8 @@ export class StringUtils{
    * @return {boolean}
    */
   static isBlank(o){
-    return ObjectUtlls.isNull(o) || ObjectUtlls.isUndef(o) || isNaN(o) || o==""
+    const ret=ObjectUtlls.isNull(o) || ObjectUtlls.isUndef(o) || o===""
+    return ret
   }
 }
 
@@ -125,7 +128,7 @@ export class StorageUtils{
    */
   static get(attrName){
     if (StorageUtils.contains(attrName)){
-      return sessionStorage.getItem(attrName)
+      return localStorage.getItem(attrName)
     }
     return null;
   }
@@ -137,7 +140,8 @@ export class StorageUtils{
    * @returns {void}
    */
   static set(attrName, attrVal){
-    sessionStorage.setItem(attrName, attrVal)
+    localStorage.setItem(attrName, attrVal)
+    console.log("Storage 已经写入"+attrName)
   }
 
   /**
@@ -146,7 +150,7 @@ export class StorageUtils{
    * @returns {boolean}
    */
   static contains(attrName){
-    return ObjectUtlls.hasProperty(sessionStorage, attrName)
+    return ObjectUtlls.hasProperty(localStorage, attrName)
   }
 
   /**
@@ -157,7 +161,8 @@ export class StorageUtils{
   static remove(attrName){
     const ret=StorageUtils.contains(attrName)
     if (ret){
-      sessionStorage.removeItem(attrName)
+      localStorage.removeItem(attrName)
+      console.log("Storage 已经移除"+attrName)
     }
   }
 }
@@ -194,6 +199,13 @@ export class TokenUtils{
   }
 
   /**
+   * 移除token
+   * @returns {void}
+   */
+  static removeToken(){
+    StorageUtils.remove("token")
+  }
+  /**
    * 获取token,先判断是否过期，
    * 过期会返回空串，没过期就自动延期24小时
    * @returns {string}
@@ -211,7 +223,7 @@ export class TokenUtils{
         StorageUtils.remove("token")
         StorageUtils.set("token", JSON.stringify({
           token: t.token,
-          expire: dt.getTime() + 1000 * 60 * 60 * 24
+          expire: moment().add(1, 'days').toDate().getTime()
         }))
       }else{
         //如果过期就返回空串

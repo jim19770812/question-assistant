@@ -77,6 +77,10 @@ export default {
     }
   },
   methods:{
+    /**
+     * 校验表单元素
+     * @returns {boolean}
+     */
     verify:function(){
       const index=this.$store.state.qa.container.indexByKey(this.renderKey)
       const notEmpty=JsonPathUtils.findSingleNode(this.container, `$.items[${index}].notEmpty`)
@@ -84,20 +88,21 @@ export default {
       if (notEmpty && val===""){
         this.errVisible=true
         this.errMessage=`${this.item.title}不能是空！`
-        return
+        return false
       }
       const minLen=JsonPathUtils.findSingleNode(this.container, `$.items[${index}].minLen`)
       if (minLen.enabled && val.length>0 && minLen.val>0 && val.length<=minLen.val){
         this.errVisible=true
         this.errMessage=`${this.item.title}长度不足[${minLen.val}]！`
-        return
+        return false
       }
       const maxLen=JsonPathUtils.findSingleNode(this.container, `$.items[${index}].maxLen`)
       if (maxLen.enabled && maxLen.val>0 && val.length>0 && val.length>maxLen.val){
         this.errVisible=true
         this.errMessage=`${this.item.title}长度超过限制[${maxLen.val}]！`
-        return
+        return false
       }
+      return true
     },
     inputChange:function(event){
       if (this.errVisible) {

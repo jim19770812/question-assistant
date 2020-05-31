@@ -1,4 +1,4 @@
-import { ObjectUtlls, StringUtils } from '@/common/utils'
+import { NoticeUtils, ObjectUtlls, StringUtils } from '@/common/utils'
 import jq from 'jsonpath'
 import {v1 as uuid1} from 'uuid'
 import Vue from 'vue'
@@ -51,6 +51,8 @@ class Container{
   constructor() {
     this.items=[]
     this.key="" //当前选中项的key
+    this.qsId=null //null表示新增，非null表示编辑
+    this.title="" //标题
   }
 
   /**
@@ -320,19 +322,53 @@ const mutations={
     console.log("after update", JSON.stringify(states.container.items))
   },
   /**
-   * 加载项目json数据
-   * @param {object}states
-   * @param {string | object}itemsJson
+   * 新增问卷
+   * @param {object} states
    */
-  loadItemsData(states, itemsJson){
+  forCreate(states){
+    states.container.qsId=null
+    states.container.items=[]
+  },
+  /**
+   * 编辑问卷
+   * @param {object} states
+   * @param {{qsId, title, itemsJson}} payload
+   */
+  forEdit(states, payload){
+    console.log("forEdit started")
     let items=null
-    if (isString(itemsJson)){
-      items=JSON.parse(itemsJson)
+    if (isString(payload.itemsJson)){
+      items=JSON.parse(payload.itemsJson)
     }else{
-      items=itemsJson
+      items=payload.itemsJson
     }
-    states.constructor.items=items
+
+    if (items.length>0){
+      states.container.items=[]
+      items.forEach(item=>{
+        states.container.add(item, false)
+      })
+
+      states.container.qsId=payload.qsId
+      states.container.title=payload.title
+    }else{
+      states.container.items=[]
+      states.container.key=""
+      states.container.qsId=null
+      states.container.title=payload.title
+    }
+    console.log("after load container is ",states.container)
+  },
+  /**
+   * 设置标题
+   * @param {state}states
+   * @param {string} payload 标题
+   */
+  setTitle(states, payload){
+    states.container.title=payload
   }
+
+
 }
 
 export class QAUtils{

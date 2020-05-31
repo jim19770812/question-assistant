@@ -10,9 +10,16 @@
 
 <script>
 import QADesignerToolBox from '@/components/qa/QADesignerToolBox'
+import { StringUtils } from '@/common/utils'
 
 export default {
   name: 'QAPhoneFormItemDesigner',
+  props:{
+    designKey:{
+      required:true,
+      type:String
+    }
+  },
   data:function(){
     return {
       key:""
@@ -42,7 +49,9 @@ export default {
   },
   watch:{
     key(newVal, oldVal){
-      console.log("手机号-key发生变化", newVal, oldVal)
+      if (!StringUtils.isBlank(oldVal)){
+        console.log("手机号-key发生变化", newVal, oldVal)
+      }
     }
   }
 }

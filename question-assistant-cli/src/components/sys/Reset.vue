@@ -21,18 +21,14 @@ import NewPasswordComponent from '@/components/sys/NewPasswordComponent'
 // import {mapGetters} from 'vuex'
 export default {
   name: 'Reset',
-  data: function () {
-    return {
+  props:{
+    compName:{
+      type:String,
+      required:true
     }
   },
-  // watch:{
-  //   '$route'(to, from){
-  //     console.log("watch ", to, from, this.$route)
-  //   }
-  // },
-  computed:{
-    compName:function(){
-      return this.$store.getters.compName
+  data: function () {
+    return {
     }
   },
   methods: {

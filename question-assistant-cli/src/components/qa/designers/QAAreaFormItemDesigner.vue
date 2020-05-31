@@ -16,6 +16,12 @@ import QADesignerToolBox from '@/components/qa/QADesignerToolBox'
 
 export default {
   name: 'QAAreaFormItemDesigner',
+  props:{
+    designKey:{
+      required:true,
+      type:String
+    }
+  },
   data:function(){
     return {
       key:""

@@ -64,6 +64,10 @@ export default {
     namedId:function(idx){
       return this.radioName+"_"+idx
     },
+    /**
+     * 校验表单元素
+     * @returns {boolean}
+     */
     verify:function(){
       const index=this.$store.state.qa.container.indexByKey(this.renderKey)
       const notEmpty=JsonPathUtils.findSingleNode(this.container, `$.items[${index}].notEmpty`)
@@ -71,20 +75,21 @@ export default {
       if (notEmpty && Array.isArray(val) && val.length===0){
         this.errVisible=true
         this.errMessage=`${this.item.title}不能是空！`
-        return
+        return false
       }
       const minSelection=JsonPathUtils.findSingleNode(this.container, `$.items[${index}].minSelection`)
       if (minSelection.enabled && val.length>0 && minSelection.val>0 && val.length<minSelection.val){
         this.errVisible=true
         this.errMessage=`${this.item.title}最少可选${minSelection.val}项！`
-        return
+        return false
       }
       const maxSelection=JsonPathUtils.findSingleNode(this.container, `$.items[${index}].maxSelection`)
       if (maxSelection.enabled && maxSelection.val>0 && val.length>0 && val.length>maxSelection.val){
         this.errVisible=true
         this.errMessage=`${this.item.title}最多可选${maxSelection.val}项！`
-        return
+        return false
       }
+      return true
     },
     checkedThis:function(){
       if (this.errVisible){

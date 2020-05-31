@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="qa-list-main">
+    <div class="qa-list-main" @click="clickQaMain">
       <div class="qa-list-container">
         <div class="qa-list-header">
           <div>
@@ -10,12 +10,12 @@
             <div class="qa-list-header-user-flex">
               <a href="#" class="qa-return-home">返回首页</a>
               <span class="qa-default-user-icon"></span>
-              <span class="qa-default-user-name">张三丰</span>
-              <span class="arrow-down"></span>
+              <span class="qa-default-user-name" @click="logoutDropdownClick">{{this.$store.state.usrInfo}}</span>
+              <span class="arrow-down" @click="logoutDropdownClick"></span>
             </div>
-            <div class="qa-list-header-user-opt-list-container">
+            <div v-if="logoutInfo.visible" class="qa-list-header-user-opt-list-container">
               <div class="qa-list-header-user-opt-list">
-                <a href="#" class="logout-txt">退出登录</a>
+                <a href="#" class="logout-txt" @click="logout">退出登录</a>
                 <a href="#" class="logout-button"></a>
               </div>
             </div>
@@ -23,40 +23,40 @@
         </div>
         <div class="qa-list-header-container">
           <div class="qa-list-header-container-tabs">
-            <div class="qa-list-header-container-tab qa-list-header-container-tab-active">
-              <div class="qa-list-header-container-number">325</div>
+            <div :class="{'qa-list-header-container-tab':true, 'qa-list-header-container-tab-active':this.tableInfo.activeIndex==0, 'qa-list-header-container-tab-deactive':this.tableInfo.activeIndex!=0}" @click="tabChange(0)">
+              <div class="qa-list-header-container-number">{{this.tableInfo.statsMap['-1']}}</div>
               <div class="qa-list-header-container-status">全部问卷</div>
             </div>
-            <div class="qa-list-header-container-tab qa-list-header-container-tab-deactive">
-              <div class="qa-list-header-container-number">94</div>
+            <div :class="{'qa-list-header-container-tab':true, 'qa-list-header-container-tab-active':this.tableInfo.activeIndex==1, 'qa-list-header-container-tab-deactive':this.tableInfo.activeIndex!=1}" @click="tabChange(1)">
+              <div class="qa-list-header-container-number">{{this.tableInfo.statsMap['0']}}</div>
               <div class="qa-list-header-container-status">待发布</div>
             </div>
-            <div class="qa-list-header-container-tab qa-list-header-container-tab-deactive">
-              <div class="qa-list-header-container-number">129</div>
+            <div :class="{'qa-list-header-container-tab':true, 'qa-list-header-container-tab-active':this.tableInfo.activeIndex==2, 'qa-list-header-container-tab-deactive':this.tableInfo.activeIndex!=2}" @click="tabChange(2)">
+              <div class="qa-list-header-container-number">{{this.tableInfo.statsMap['1']}}</div>
               <div class="qa-list-header-container-status">已发布</div>
             </div>
-            <div class="qa-list-header-container-tab qa-list-header-container-tab-deactive">
-              <div class="qa-list-header-container-number">211</div>
+            <div :class="{'qa-list-header-container-tab':true, 'qa-list-header-container-tab-active':this.tableInfo.activeIndex==3, 'qa-list-header-container-tab-deactive':this.tableInfo.activeIndex!=3}" @click="tabChange(3)">
+              <div class="qa-list-header-container-number">{{this.tableInfo.statsMap['2']}}</div>
               <div class="qa-list-header-container-status">已停止</div>
             </div>
           </div>
           <div class="qa-list-operator-bar">
             <div class="qa-list-operator-bar-box">
-              <input class="bar-search-input" type="text" placeholder="请输入问卷名称/ID"/>
-              <a href="#" class="bar-search-del-btn"></a>
-              <a href="#" class="bar-search-find-btn"></a>
-              <a class="bar-operate-add-or-close" href="#" @click="barOperateAddOrCloseClicked">{{barOperateAddOrCloseTitle}}</a>
+              <input class="bar-search-input" type="text" placeholder="请输入问卷名称/ID" v-model.trim="tableInfo.searchKey" @keydown.enter.stop.prevent="inputInvokeSearch"/>
+              <a href="#" class="bar-search-del-btn" @click="inputSearchClear"></a>
+              <a href="#" class="bar-search-find-btn" @click="inputInvokeSearch"></a>
+              <a class="bar-operate-add-or-close" href="#" @click.prevent.stop="optInfoIconClick">{{optInfoIcon}}</a>
             </div>
-            <div class="popup-dialog" v-if="barOperatAdd">
+            <div class="popup-dialog" v-if="optInfo.visible">
               <div class="popup-dialog-row">
-                <div class="popup-dialog-cell">
+                <div class="popup-dialog-cell" @click="clickAddQATemplate">
                   <div class="dlg-container right-border">
                     <div class="dlg-template-icon"></div>
                     <div class="dialog-item-title">问卷模板</div>
                     <div class="dialog-item-content">项目会议、品牌活动等 报名表模板</div>
                   </div>
                 </div>
-                <div class="popup-dialog-cell">
+                <div class="popup-dialog-cell" @click="clickAddQAEmpty">
                   <div class="dlg-container">
                     <div class="dlg-template-empty-qa"></div>
                     <div class="dialog-item-title">空白问卷</div>
@@ -89,66 +89,43 @@
             </div>
           </div>
           <div class="qa-list-body-container">
-            <div class="qa-list-body-container-row">
+<!--            <div class="qa-list-body-container-row" v-for="(item, idx) in this.tableInfo.qsList">-->
+<!--              {{item}}-->
+<!--            </div>-->
+            <div class="qa-list-body-container-row" v-for="(item, index) in this.tableInfo.qsList" :key="index">
               <div class="qa-list-body-content-cell" style="width:148px">
                 <div class="qa-list-body-qa-id qa-list-body-qa-id-st1">
-                  问卷ID
+                  {{item.qs_id}}
                 </div>
               </div>
               <div class="qa-list-body-content-cell" style="width:334px">
-                <span class="qa-list-body-qa-name">问卷名称问卷名称问卷名称问卷名称问卷名称问卷名称</span>
+                <span class="qa-list-body-qa-name">{{item.qs_name}}</span>
                 <span class="qa-list-body-qa-name-ellipsis"></span>
               </div>
               <div class="qa-list-body-content-cell" style="width:148px">
                 <span class="qa-list-body-qa-st1-icon"></span>
-                <span>问卷状态</span>
+                <span>{{item.qs_status | status2Str}}</span>
               </div>
               <div class="qa-list-body-content-cell" style="width:120px">
-                <span class="qa-list-body-qa-count">34</span>
+                <span class="qa-list-body-qa-count">{{item.qs_feedback_count}}</span>
               </div>
               <div class="qa-list-body-content-cell" style="width:194px">
-                <span class="qa-list-body-create-time">2020/5/15/ 16:34:15</span>
+                <span class="qa-list-body-create-time">{{item.create_time | dateFormat}}</span>
               </div>
               <div class="qa-list-body-content-cell" style="width:168px">
-                <a href="#" class="qa-list-body-op-copy"></a>
-                <a href="#" class="qa-list-body-op-edit"></a>
-                <a href="#" class="qa-list-body-op-del"></a>
-              </div>
-            </div>
-            <div class="qa-list-body-container-row">
-              <div class="qa-list-body-content-cell" style="width:148px">
-                <div class="qa-list-body-qa-id qa-list-body-qa-id-st2">
-                  问卷ID
-                </div>
-              </div>
-              <div class="qa-list-body-content-cell" style="width:334px">
-                <span class="qa-list-body-qa-name">问卷名称问卷名称问卷名称问卷名称问卷名称问卷名称</span>
-                <span class="qa-list-body-qa-name-ellipsis"></span>
-              </div>
-              <div class="qa-list-body-content-cell" style="width:148px">
-                <span class="qa-list-body-qa-st2-icon"></span>
-                <span>问卷状态</span>
-              </div>
-              <div class="qa-list-body-content-cell" style="width:120px">
-                <span class="qa-list-body-qa-count">34</span>
-              </div>
-              <div class="qa-list-body-content-cell" style="width:194px">
-                <span class="qa-list-body-create-time">2020/5/15/ 16:34:15</span>
-              </div>
-              <div class="qa-list-body-content-cell" style="width:168px">
-                <a href="#" class="qa-list-body-op-copy"></a>
-                <a href="#" class="qa-list-body-op-edit"></a>
-                <a href="#" class="qa-list-body-op-del"></a>
+                <a href="#" class="qa-list-body-op-copy" @click="copyQA(item.qs_id)"></a>
+                <a href="#" class="qa-list-body-op-edit" @click="editQA(item.qs_id)"></a>
+                <a href="#" class="qa-list-body-op-del" @click="removeQA(item.qs_id)"></a>
               </div>
             </div>
           </div>
-          <div class="qa-list-footer">
-            <a href="#" class="qa-list-footer-pageup"></a>
-            <input class="qa-list-footer-pagenum" type="text" value="3"/>
-            <span>/</span>
-            <a href="#" class="qa-list-footer-pagecount">10</a>
-            <a href="#" class="qa-list-footer-pagedown"></a>
-          </div>
+          <el-pagination class="qa-list-footer-pageup"
+            :page-size="tableInfo.page.size"
+            :pager-count="5"
+            :current-page="tableInfo.page.current"
+            layout="prev, pager, next, jumper"
+            :total="tableInfo.page.total" @current-change="tableInfoPageChanged">
+          </el-pagination>
         </div>
       </div>
     </div>
@@ -157,25 +134,175 @@
 </template>
 
 <script>
+  import {
+    getQuestionSheet,
+    getQuestionSheetList,
+    getQuestionSheetStats,
+    removeQuestionSheet
+  } from '@/requests/modules/qa_requests'
+import { NoticeUtils } from '@/common/utils'
+import moment from 'moment'
+
 export default {
   name: 'QAList',
   data:function(){
     return {
-      barOperatAdd:true /*是否是添加操作*/
+      logoutInfo:{ //登出信息
+        visible:false
+      },
+      tableInfo:{//表格信息
+        activeIndex:0, //页签索引,
+        searchKey:"",
+        activeStatusArray:function(){
+          switch(this.activeIndex){
+            case 1:return [0]
+            case 2:return [1]
+            case 3:return [2]
+            default:return [0,1,2]
+          }
+        },
+        page:{
+          current:-1,   //当前页码
+          size:5,      //每页记录数
+          pages:0,  //总页数
+          total:0       //总记录数
+        },
+        statsMap:{////状态数量Map，用于选项卡标题显示
+          "-1":0,
+          "0":0,
+          "1":0,
+          "2":0
+        },
+        qsList:[], //数据列表
+      },
+      optInfo:{//操作信息（添加问卷/空白问卷）
+        visible:false,
+        icon:""
+      }
+    }
+  },
+  created:function(){
+    this.pageNum=0
+  },
+  filters:{
+    dateFormat(dt){
+      return moment(dt).format("YYYY-MM-DD HH:mm:ss")
+    },
+    /**
+     * 状态转中文
+     * @param {number} status
+     * @returns {string}
+     */
+    status2Str(status){
+      switch (status) {
+        case 0: return "待处理"
+        case 1: return "已发布"
+        default: return "已停止"
+
+      }
     }
   },
   computed:{
-    barOperateAddOrCloseTitle:function(){ /*添加/关闭按钮,点击切换图标*/
-      if (this.barOperatAdd){
-        return "+"
-      }else{
+    optInfoIcon:function() {
+      /*添加/关闭按钮,点击切换图标*/
+      if (this.optInfo.visible){
         return "x"
+      }else{
+        return "+"
+      }
+    },
+    pageNum:{
+      get(){
+        return this.tableInfo.page.current
+      },
+      set(newVal){
+        const statusList=this.tableInfo.activeStatusArray()
+        const _thisVue=this
+        this.$axios.all([getQuestionSheetStats(), getQuestionSheetList(this.tableInfo.searchKey, newVal, this.tableInfo.page.size, statusList)])
+          .then(this.$axios.spread(function(respStats, respQSList){
+            console.log("respStats.ret", JSON.stringify(respStats.ret))
+            _thisVue.tableInfo.statsMap={}
+            respStats.ret.forEach(o=>{
+              _thisVue.tableInfo.statsMap[o.qs_status]=o.cnt
+            })
+            console.log("this.statsMap", _thisVue.tableInfo.statsMap)
+            // console.log("respQSList.ret.records", respQSList.ret.records)
+            _thisVue.tableInfo.qsList= respQSList.ret.records
+            console.log("this.tableInfo.qsList", _thisVue.tableInfo.qsList)
+            _thisVue.tableInfo.page.size=respQSList.ret.size
+            _thisVue.tableInfo.page.current=respQSList.ret.current
+            _thisVue.tableInfo.page.pages=respQSList.ret.pages
+            _thisVue.tableInfo.page.total=respQSList.ret.total
+          }))
       }
     }
   },
   methods:{
-    barOperateAddOrCloseClicked:function(){
-      this.barOperatAdd=!this.barOperatAdd
+    clickQaMain(){
+      this.optInfo.visible=false
+    },
+    optInfoIconClick:function(){
+      this.optInfo.visible=!this.optInfo.visible
+    },
+    inputSearchClear(){
+      this.tableInfo.searchKey="";
+      this.pageNum=this.tableInfo.page.current
+    },
+    inputInvokeSearch(){
+      this.pageNum=this.tableInfo.page.current
+      console.log("inputInvokeSearch", this.pageNum, this.tableInfo.searchKey)
+    },
+    clickAddQAEmpty(){ //添加空白问卷
+      this.$store.commit("qa/forCreate") //设置为创建问卷模式
+      this.$router.replace({name:"qadesigner"})
+    },
+    clickAddQATemplate(){ //添加问卷模板
+      NoticeUtils.warn("暂未开放")
+    },
+    logoutDropdownClick(){ //登出下拉菜单点击事件
+      this.logoutInfo.visible=!this.logoutInfo.visible
+    },
+    logout(){ //登出
+      this.$store.commit("logout")
+    },
+    tabChange(index){
+      this.tableInfo.activeIndex=index
+      console.log("this.tableInfo.activeIndex", this.tableInfo.activeIndex, this.tableInfo.activeStatusArray())
+      this.pageNum=this.tableInfo.page.current //修改页码=当前页码（触发按照新的页签条件刷新表格）
+    },
+    tableInfoPageChanged(newPageNum){// 表格换页
+      this.pageNum=newPageNum
+    },
+    copyQA(qsId){ //复制问卷
+      NoticeUtils.warn("暂未开放")
+    },
+    editQA(qsId){ // 编辑问卷
+      //获取json数据
+      getQuestionSheet(qsId).then(resp=>{
+        const qs=resp.ret
+        console.log("qs.qs_template", qs)
+        this.$store.commit("qa/forEdit", {qsId:qsId,
+          title:qs.qs_name,
+          itemsJson:qs.qs_template}) //设置为编辑问卷模式
+        this.$router.replace({name:"qadesigner"}) //打开表单设计器
+      }).catch(err=>{
+        NoticeUtils.error(err.message)
+      })
+    },
+    removeQA(qsId){ //删除问卷
+      this.$confirm('真的要删除吗?T_T', '询问', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: '询问'
+      }).then(() => {
+        const thisVue=this
+        removeQuestionSheet(qsId).then(resp=>{
+          thisVue.pageNum=this.tableInfo.page.current
+          NoticeUtils.info("删除成功")
+        }).catch(err=>{
+          NoticeUtils.error(err.message)
+        })
+      });
     }
   }
 }

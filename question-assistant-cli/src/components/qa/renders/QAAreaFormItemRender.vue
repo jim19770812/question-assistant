@@ -101,6 +101,10 @@ export default {
         })
       }
     },
+    /**
+     * 校验表单元素
+     * @returns {boolean}
+     */
     verify:function(){
       const index=this.$store.state.qa.container.indexByKey(this.renderKey)
       const notEmpty=JsonPathUtils.findSingleNode(this.container, `$.items[${index}].notEmpty`)
@@ -109,7 +113,7 @@ export default {
       if (notEmpty && (!Array.isArray(val) || (Array.isArray(val) && val.length===0))){
         this.errVisible=true
         this.errMessage=`${this.item.title}不能是空！`
-        return
+        return false
       }
       if (notEmpty && Array.isArray(val)){
         const minLevel=JsonPathUtils.findSingleNode(this.container, `$.items[${index}].minLevel`)
@@ -117,10 +121,11 @@ export default {
           if (ObjectUtlls.isUndef(val[i]) || ObjectUtlls.isNull(val[i]) || (val[i]==="")){
             this.errVisible=true
             this.errMessage=`${this.item.title}最小层级选择不正确！`
-            return
+            return false
           }
         }
       }
+      return true
     }
   },
   computed:{

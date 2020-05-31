@@ -60,6 +60,10 @@ export default {
     namedId:function(idx){
       return this.radioName+"_"+idx
     },
+    /**
+     * 校验表单元素
+     * @returns {boolean}
+     */
     verify:function(){
       const index=this.$store.state.qa.container.indexByKey(this.renderKey)
       const notEmpty=JsonPathUtils.findSingleNode(this.container, `$.items[${index}].notEmpty`)
@@ -67,8 +71,9 @@ export default {
       if (notEmpty && Array.isArray(val)){
         this.errVisible=true
         this.errMessage=`${this.item.title}不能是空！`
-        return
+        return false
       }
+      return true
     },
     radioInput(){
       if (this.errVisible){

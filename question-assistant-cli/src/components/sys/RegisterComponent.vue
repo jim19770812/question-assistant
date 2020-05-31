@@ -1,16 +1,58 @@
 <template>
   <div>
     <div class="form-container">
-      <input class="account-icon" type="text" placeholder="请输入要注册的帐号" />
-      <input class="password-icon" type="text" placeholder="请输入密码" />
-      <button class="register">注册</button>
+      <div v-if="invalid" class="red">{{errMessage}}</div>
+      <input class="account-icon" type="text" placeholder="请输入要注册的帐号" ref="account" />
+      <input class="password-icon" type="password" placeholder="请输入密码" ref="password" />
+      <button class="register" @click="register">注册</button>
     </div>
   </div>
 </template>
 
 <script>
+import { StringUtils } from '@/common/utils'
+import { register } from "@/requests/modules/user_requests"
 export default {
-  name: 'RegisterComponent'
+  name: 'RegisterComponent',
+  data:function(){
+    return {
+      invalid:false,
+      errMessage:""
+    }
+  },
+  computed:function(){
+  },
+  methods:{
+    register(){
+      this.reset()
+      const account=this.$refs.account.value.trim()
+      let t=StringUtils.isBlank(account)
+      if (t){
+        this.showError("帐号不能为空")
+        return
+      }
+      const password=this.$refs.password.value.trim()
+      t=StringUtils.isBlank(password)
+      if (t){
+        this.showError("密码不能为空")
+        return
+      }
+      register(account, password).then(resp=>{
+        this.$store.commit("setAuthActiveIndex", 0)
+        this.$router.replace({name:"login"})
+      }).catch(e=>{
+        this.showError(e.message)
+      })
+    },
+    showError(message){
+      this.invalid=true
+      this.errMessage=message
+    },
+    reset(){
+      this.invalid=false
+      this.errMessage=""
+    }
+  }
 }
 </script>
 
@@ -37,7 +79,7 @@ export default {
     background:url('../../assets/icon_password.png') no-repeat scroll;
     background-position: 12px 13px;
   }
-  .form-container>input[type="text"]{
+  .form-container>input{
     border-radius:30px;
     border:1px solid rgba(213,223,232,1);
     height:40px;

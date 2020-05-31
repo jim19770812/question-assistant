@@ -23,3 +23,14 @@
 // const s=toUnderline(t)
 // console.log(s)
 
+// const m={}
+// const t=[{"qs_status":0,"cnt":3},{"qs_status":1,"cnt":2},{"qs_status":2,"cnt":2},{"qs_status":-1,"cnt":7}]
+// t.forEach(o=>{
+//   m[o.qs_status]=o.cnt
+// })
+// console.log(m)
+//
+
+var moment = require('moment');
+const t=moment().add(1, 'days')
+console.log(t.toDate().getTime())

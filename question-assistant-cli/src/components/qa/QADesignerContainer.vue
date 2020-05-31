@@ -7,6 +7,9 @@
         <div v-if="this.container.isEmpty()">
           请从左侧选择一个题目并拖拽到这里
         </div>
+        <div>
+<!--          {{this.container.getItems()}}-->
+        </div>
           <div v-if="!this.container.isEmpty()">
             <div v-for="(item) in this.container.getItems()" :key="item.key">
               <component :is="container.getDesignerClass(item.type)"></component>
@@ -38,6 +41,9 @@ export default {
     container () {
       return this.$store.state.qa.container
     }
+  },
+  activated:function(){
+    this.$forceUpdate()
   },
   methods: {
     /**

@@ -10,18 +10,25 @@
 
 <script>
 import QADesignerToolBox from '@/components/qa/QADesignerToolBox'
+import { StringUtils } from '@/common/utils'
 export default {
   name: 'QANameFormItemDesigner',
+  props:{
+    designKey:{
+      required:true,
+      type:String
+    }
+  },
   data:function(){
     return {
       key:""
     }
   },
   created:function(){
-    console.log("重设名字组件的key-before", this.key)
+    // console.log("重设名字组件的key-before", this.key)
     if (this.key===""){
       this.key=this.$store.state.qa.container.getLastestItem().key
-      console.log("重设名字组件的key", this.key)
+      // console.log("重设名字组件的key", this.key)
     }
   },
   methods:{
@@ -46,7 +53,9 @@ export default {
   },
   watch:{
     key(newVal, oldVal){
-      console.log("名字-key发生变化", newVal, oldVal)
+      if (!StringUtils.isBlank(oldVal)){
+        console.log("名字-key发生变化", oldVal, "=>", newVal)
+      }
     }
   }
 }

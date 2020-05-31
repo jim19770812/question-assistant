@@ -5,8 +5,8 @@
         <router-link :to='{name:"login"}' replace>&lt;</router-link> {{title}}
       </div>
       <div class="form-container">
-        <input class="account-icon" type="text" placeholder="请输入您的注册邮箱" />
-        <button class="next">下一步</button>
+        <input class="account-icon" type="text" placeholder="请输入您的注册邮箱" ref="mail" />
+        <button class="next" @click="next">下一步</button>
       </div>
     </div>
   </div>
@@ -16,11 +16,26 @@
 // import LoginComponent from '@/components/sys/LoginComponent'
 // import RegisterComponent from '@/components/sys/RegisterComponent'
 // import { mapState, mapMutations, mapActions, mapGetters } from 'vuex'
+import { resetPasswordSendMail } from '@/requests/modules/user_requests'
+import { NoticeUtils } from '@/common/utils'
+
 export default {
+  //密码找回第一步
   name:'losepassword',
   data:function(){
     return {
       title:'忘记密码'
+    }
+  },
+  methods:{
+    next(){ //下一步
+      const mail=this.$refs.mail.value.trim()
+      resetPasswordSendMail(mail).then(data=>{
+        console.log("resetPasswordSendMail->", data)
+        this.$router.replace({path:"/reset", query:{compName:"new-password-component"}})
+      }).catch(e=>{
+        NoticeUtils.error(e.message)
+      })
     }
   }
 }

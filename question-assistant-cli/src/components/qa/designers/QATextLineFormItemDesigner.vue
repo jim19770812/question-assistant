@@ -13,6 +13,12 @@
 import QADesignerToolBox from '@/components/qa/QADesignerToolBox'
 export default {
   name: 'QATextLineFormItemDesigner',
+  props:{
+    designKey:{
+      required:true,
+      type:String
+    }
+  },
   data:function(){
     return {
       key:""

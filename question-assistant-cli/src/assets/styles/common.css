@@ -6,4 +6,10 @@ a {
   outline: none;
   text-decoration: none;
 }
+input[type="text"] {
+  outline: none;
+}
+.red {
+  color: red;
+}
 /*# sourceMappingURL=common.css.map */

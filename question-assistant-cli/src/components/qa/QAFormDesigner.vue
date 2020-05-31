@@ -5,9 +5,7 @@
         <router-link :to='{name:"qalist"}' class="qad-header-gohome">返回首页</router-link>
         <span>报名助手</span>
         <div class="qad-header-buttons-container">
-          <a href="#" class="enabled">预览</a>
-          <a href="#" class="enabled">保存</a>
-          <a href="#" class="enabled" @click="publish">发布</a>
+          <a href="#" class="enabled" @click="preview">预览</a>
           <a href="#" class="disabled" @click="quit">退出</a>
         </div>
       </div>
@@ -61,7 +59,7 @@
 <script>
 import QaDesignerContainer from "@/components/qa/QADesignerContainer"
 import QAEditorContainer from "@/components/qa/QAEditorContainer"
-import {TokenUtils} from '@/common/utils'
+import { NoticeUtils, TokenUtils } from '@/common/utils'
 
 export default {
   name: 'QAFormDesigner',
@@ -89,9 +87,8 @@ export default {
       console.log("dragend")
       event.dataTransfer.clearData()
     },
-    publish(){
-      const token="123456"
-      TokenUtils.saveToken(token)
+    preview(){
+      this.$router.replace({name:"qarender"})
     },
     quit(){
       const token=TokenUtils.getToken()
@@ -140,7 +137,7 @@ export default {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     width: 360px;
     height: 100%;
@@ -150,6 +147,7 @@ export default {
     text-align: center;
     width:66px;
     height:32px;
+    margin-left: 24px;
     /*background:rgba(0,165,123,1);*/
     box-shadow:0px 2px 12px rgba(0,166,122,0.2);
     opacity:1;

@@ -50,6 +50,10 @@ export default {
     }
   },
   methods:{
+    /**
+     * 校验表单元素
+     * @returns {boolean}
+     */
     verify:function(){
       const index=this.$store.state.qa.container.indexByKey(this.renderKey)
       const notEmpty=JsonPathUtils.findSingleNode(this.container, `$.items[${index}].notEmpty`)
@@ -57,8 +61,9 @@ export default {
       if (notEmpty && val===""){
         this.errVisible=true
         this.errMessage=`${this.item.title}不能是空！`
-        return
+        return false
       }
+      return true
     },
     inputChange:function(event){
       if (this.errVisible) {

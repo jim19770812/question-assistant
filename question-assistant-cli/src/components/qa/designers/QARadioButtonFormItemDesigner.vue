@@ -17,6 +17,12 @@ import QADesignerToolBox from '@/components/qa/QADesignerToolBox'
 
 export default {
   name: 'QARadioButtonFormItemDesigner',
+  props:{
+    designKey:{
+      required:true,
+      type:String
+    }
+  },
   data:function(){
     return {
       key:""

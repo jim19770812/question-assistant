@@ -157,6 +157,7 @@ module.exports = {
     "spaced-comment":"off", //注释前后的空格
     "arrow-spacing":"off", //箭头前后空格
     "no-unused-components":"off", //未使用的组件
-    "no-useless-return":"off" //无用的return
+    "no-useless-return":"off", //无用的return
+    "block-spacing":"off" //块后面要加一个空格
   }
 }

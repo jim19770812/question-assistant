@@ -5,7 +5,7 @@ import { NoticeUtils } from '@/common/utils'
  * 异常定义常量
  * @type {{ERR_1005: number, ERR_1004: number, ERR_1003: number, ERR_1002: number, SUCC: number, ERR_1001: number}}
  */
-const ErrorConsts={
+export const ErrorConsts={
   SUCC:1000,//成功
   ERR_1001:1001,//业务异常,通常用于弹窗提示直接输出错误,如存在关联无法删除之类的业务异常
   ERR_1002:1002,//登录令牌错误,需要刷新令牌后重新尝试登录
@@ -15,7 +15,6 @@ const ErrorConsts={
   CLI_1006:1006  //客户端异常
 }
 Object.freeze(ErrorConsts)
-export {ErrorConsts}
 
 /**
  * 与服务器端异常保持一致，出现此异常是需要出现通知提醒的

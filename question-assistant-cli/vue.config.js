@@ -20,8 +20,8 @@ module.exports = {
   productionSourceMap: false,
   // webpack 链式操作
   chainWebpack: config => {
-    config.resolve.alias
-      .set('@', resolve('src'))
+    config.resolve.alias.set('@', resolve('src'))
+    config.resolve.symlinks(true) //修复HMR
   },
   // webpack-dev-server 相关配置
   devServer: {
@@ -29,6 +29,8 @@ module.exports = {
     host: '0.0.0.0',
     port: 8080, /*代理端口*/
     https: false,
+    hot:true,
+    inline:true, //控制是否热更新
     proxy:{
       "/xhr":{
         target:"http://localhost:9090",
@@ -39,7 +41,7 @@ module.exports = {
         }
       }
     },
-    disableHostCheck:false,
+    disableHostCheck:true, //true可以解决invalid host header问题
     // historyApiFallback: {
     //   index: '/index.html'
     // },

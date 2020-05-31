@@ -2,16 +2,17 @@
   <div>
     <div class="form-container">
       <div v-if="invalid" class="red">{{errMessage}}</div>
-      <input class="account-icon" type="text" placeholder="请输入帐号登录" ref="account" />
-      <input class="password-icon" type="text" placeholder="请输入密码" ref="password" />
-      <router-link class="lostpassword" :to='{name:"losepassword"}' @click.native="goLosePassword">忘记密码,点击找回</router-link>
-      <button class="next" @click="login">登录</button>
+      <input class="account-icon" type="text" placeholder="请输入帐号登录" ref="account" value="hanxiaofeng77@163.com" />
+      <input class="password-icon" type="password" placeholder="请输入密码" ref="password" value="jim" />
+      <router-link class="lostpassword" :to='{path:"/reset", query:"lose-password-component"}' @click.native="goLosePassword">忘记密码,点击找回</router-link>
+      <button class="next" @click="loginClick">登录</button>
     </div>
   </div>
 </template>
 
 <script>
-import { StringUtils } from '@/common/utils'
+import { NoticeUtils, StringUtils, TokenUtils } from '@/common/utils'
+import { login, createRequestWithoutNotice } from '@/requests/modules/user_requests'
 
 export default {/*登录组件*/
   name: 'LoginComponent',
@@ -22,20 +23,37 @@ export default {/*登录组件*/
     }
   },
   methods:{
-    goLosePassword(){
-      // console.log("goLosePassword",this.$store.reset)
-      this.$store.commit('setSelectedComponent',"lose-password-component")
-      this.$router.push({name:"reset"})
+    goLosePassword(){ ////转向重置密码页面
+      this.reset()
+      this.$store.commit("saveTicket", "")//清空ticket
+      this.$router.replace({path:"/reset", query:{compName:"lose-password-component"}})//跳转到忘记密码页面
     },
-    login(){
-      if (StringUtils.isBlank(this.$refs.account.trim())){
+    loginClick(){
+      this.reset()
+      let t=StringUtils.isBlank(this.$refs.account.value.trim())
+      if (t){
         this.showError("帐号不能为空")
         return
       }
-      if (StringUtils.isBlank(this.$refs.password.trim())){
+      t=StringUtils.isBlank(this.$refs.password.value.trim())
+      if (t){
         this.showError("密码不能为空")
         return
       }
+      login(this.$refs.account.value, this.$refs.password.value).then(resp=>{
+        TokenUtils.saveToken(resp.ret.token)
+
+        //保存用户信息
+        this.$store.commit("setUserInfo", {
+          usrId: resp.ret.usr_id,
+          usrEmail:resp.ret.usr_email,
+          usrName:resp.ret.usr_name
+        })
+
+        this.$router.push({name:"qalist"})
+      }).catch(e=>{
+        this.showError(e.message)
+      })
     },
     showError(message){
       this.invalid=true
@@ -52,7 +70,6 @@ export default {/*登录组件*/
 <style scoped lang="less">
   .form-container{
     padding-top: 20px;
-    /*background-color: #efc;*/
     display: flex;
     flex-direction: column;
     text-align: left;
@@ -63,15 +80,17 @@ export default {/*登录组件*/
   }
   .account-icon{
     padding-left: 32px;
+    width:300px;
     background:url('../../assets/icon_account.png') no-repeat scroll;
     background-position: 12px 13px;
   }
   .password-icon{
     padding-left: 32px;
+    width:300px;
     background:url('../../assets/icon_password.png') no-repeat scroll;
     background-position: 12px 13px;
   }
-  .form-container>input[type="text"]{
+  .form-container>input{
     border-radius:30px;
     border:1px solid rgba(213,223,232,1);
     height:40px;
@@ -96,6 +115,6 @@ export default {/*登录组件*/
     opacity:1;
     border-radius:25px;
     outline: none;
+    border:none;
   }
-
 </style>

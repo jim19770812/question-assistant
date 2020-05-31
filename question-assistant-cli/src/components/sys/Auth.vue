@@ -22,6 +22,11 @@
 <script>
 export default {
   name: 'Auth',
+  created(){
+    if (this.$router.history.current.path==="/auth"){
+      this.$router.replace({name:'login'})
+    }
+  },
   computed:{
     activeIndex:function(){
       return this.$store.getters.activeIndex
@@ -29,10 +34,10 @@ export default {
   },
   methods:{
     loginClick:function(){
-      this.$store.commit("loginActived")
+      this.$store.commit("setAuthActiveIndex", 0)
     },
     registerClick:function(){
-      this.$store.commit("registerActived")
+      this.$store.commit("setAuthActiveIndex", 1)
     }
   }
 }
