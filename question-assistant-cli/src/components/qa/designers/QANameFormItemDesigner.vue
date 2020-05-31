@@ -16,24 +16,24 @@ export default {
   props:{
     designKey:{
       required:true,
-      type:String
+      type:String,
+      default:""
     }
   },
   data:function(){
     return {
-      key:""
     }
   },
   created:function(){
-    // console.log("重设名字组件的key-before", this.key)
-    if (this.key===""){
-      this.key=this.$store.state.qa.container.getLastestItem().key
-      // console.log("重设名字组件的key", this.key)
+    // console.log("重设名字组件的key-before", this.designKey)
+    if (this.designKey===""){
+      this.designKey=this.$store.state.qa.container.getLastestItem().key
+      // console.log("重设名字组件的key", this.designKey)
     }
   },
   methods:{
     click:function(){
-      this.$store.commit('qa/select', this.key)
+      this.$store.commit('qa/select', this.designKey)
     }
   },
   computed:{
@@ -41,11 +41,11 @@ export default {
       return this.$store.state.qa.container
     },
     item:function(){
-      const ret=this.$store.state.qa.container.getItem(this.key)
+      const ret=this.$store.state.qa.container.getItem(this.designKey)
       return ret
     },
     selected:function(){
-      return this.$store.state.qa.container.key===this.key
+      return this.$store.state.qa.container.key===this.designKey
     }
   },
   components:{

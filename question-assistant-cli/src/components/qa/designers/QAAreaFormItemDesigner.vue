@@ -19,22 +19,22 @@ export default {
   props:{
     designKey:{
       required:true,
-      type:String
+      type:String,
+      default:""
     }
   },
   data:function(){
     return {
-      key:""
     }
   },
   created:function(){
-    if (this.key===""){
-      this.key=this.$store.state.qa.container.getLastestItem().key
+    if (this.designKey===""){
+      this.designKey=this.$store.state.qa.container.getLastestItem().key
     }
   },
   methods:{
     click:function(){
-      this.$store.commit('qa/select', this.key)
+      this.$store.commit('qa/select', this.designKey)
     }
   },
   computed:{
@@ -42,11 +42,11 @@ export default {
       return this.$store.state.qa.container
     },
     item:function(){
-      const ret=this.$store.state.qa.container.getItem(this.key)
+      const ret=this.$store.state.qa.container.getItem(this.designKey)
       return ret
     },
     selected:function(){
-      return this.$store.state.qa.container.key===this.key
+      return this.$store.state.qa.container.key===this.designKey
     }
   },
   components:{

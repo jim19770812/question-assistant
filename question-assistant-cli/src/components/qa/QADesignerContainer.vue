@@ -12,7 +12,7 @@
         </div>
           <div v-if="!this.container.isEmpty()">
             <div v-for="(item) in this.container.getItems()" :key="item.key">
-              <component :is="container.getDesignerClass(item.type)"></component>
+              <component :is="container.getDesignerClass(item.type)" :designKey="item.key"></component>
             </div>
           </div>
       </div>
