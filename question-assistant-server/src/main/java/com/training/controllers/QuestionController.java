@@ -16,12 +16,14 @@ import com.training.enums.QuestionSheetStatus;
 import com.training.exceptions.APIException;
 import com.training.mapper.AnswerMapper;
 import com.training.mapper.QuestionSheetMapper;
+import com.training.mapper.QuestionSheetMapper.QsStatsVO;
 import com.training.vos.AnswerVO;
 import com.training.vos.QuestionSheetVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.helpers.MessageFormatter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +32,10 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -48,14 +53,26 @@ public class QuestionController extends AbstractController {
 
     @ApiOperation(value = "发布/修改问题", notes = "发布问题")
     @PostMapping(value="/questionSheet", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Result<QuestionSheetVO> saveQuestion(@ApiParam(required = true, value = "调查问卷对象") @RequestBody @Valid QuestionSheetDTO qsDTO) throws Exception{
+    public Result<QuestionSheetVO> saveQuestionSheet(@ApiParam(required = true, value = "调查问卷对象") @RequestBody @Valid QuestionSheetDTO qsDTO) throws Exception{
         QuestionSheet qs=null;
         if (!this.paramIsNull(qsDTO.getQs_id())){
             qs=this.questionSheetMapper.selectById(qsDTO.getQs_id());
             if (qs == null) {
                 throw new APIException(APIException.ERR_1003, M.format("未能根据问卷ID[{}]找到对应的问卷对象", qsDTO.getQs_id()));
             }
+            QueryWrapper qw=new QueryWrapper();
+            qw.eq(QuestionSheet.COL_QS_NAME, qsDTO.getQs_name());
+            qw.ne(QuestionSheet.COL_QS_ID, qsDTO.getQs_id());
+            if (this.questionSheetMapper.selectCount(qw)>0){
+                throw new APIException(APIException.ERR_1003, "问卷《"+qsDTO.getQs_name()+"》已经存在");
+            }
         }else{
+            QueryWrapper qw=new QueryWrapper();
+            qw.eq(QuestionSheet.COL_QS_NAME, qsDTO.getQs_name());
+            if (this.questionSheetMapper.selectCount(qw)>0){
+                throw new APIException(APIException.ERR_1003, "问卷《"+qsDTO.getQs_name()+"》已经存在");
+            }
+
             qs=new QuestionSheet();
             qs.setCreate_time(new Date());
             qs.setCreate_user(0L);
@@ -125,11 +142,31 @@ public class QuestionController extends AbstractController {
         return result;
     }
 
+    @ApiOperation(value="删除回答")
+    @DeleteMapping(value="/questionSheet")
+    public Result<Boolean> removeQuestionSheet(@ApiParam(required = true, value="问卷ID") @Valid @RequestParam(required = false) @NotNull final String qs_id){
+        var qsQuerWrapper=new QueryWrapper();
+        qsQuerWrapper.eq(QuestionSheet.COL_USR_ID, UserDomain.getLoginedUserInfo().getUsrId());
+        qsQuerWrapper.eq(QuestionSheet.COL_QS_ID, qs_id);
+        var qs=this.questionSheetMapper.selectOne(qsQuerWrapper);
+        if (qs==null){
+            throw new APIException(APIException.ERR_1003, "没有找到您要删除的问题");
+        }
+        var awQuerWrapper=new QueryWrapper();
+        awQuerWrapper.eq(Answer.COL_QS_ID, qs_id);
+        var ret=this.answerMapper.delete(awQuerWrapper);
+        log.debug(M.format("已经删除了{}笔回答", ret));
+
+        ret=this.questionSheetMapper.delete(qsQuerWrapper);
+        log.debug(M.format("已经删除了{}笔问卷", ret));
+        return Result.succes(true);
+    }
+
     @GetMapping(value = "/questionSheet/list", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value="查询问题列表", notes = "问题列表")
     @ResponseBody
     public Result<Page<QuestionSheetVO>> queryQuestionSheetList(@ApiParam(required = false, value="问卷名称或ID") @Valid @RequestParam(required = false) final String idOrName,
-                                                                 @ApiParam(required = true, value="问卷状态（-1:全部,0：待发布，1：已发布，2：已停止）") @Valid @RequestParam(required = true) @NotNull final List<Integer> qsStatusList,
+                                                                 @ApiParam(required = true, value="问卷状态（0：待发布，1：已发布，2：已停止）") @Valid @RequestParam(required = true) @NotNull final List<Integer> qsStatusList,
                                                                  @ApiParam(required = true, value="分页对象") @Valid @ModelAttribute @NotNull final PageDTO pageDTO) throws Exception{
         if (qsStatusList.stream().filter(o->o<0&&o>2).count()>0){
             throw new APIException(APIException.ERR_1003, "未传入有效的问卷状态，必须是0/1/2之一");
@@ -153,6 +190,18 @@ public class QuestionController extends AbstractController {
         }).collect(Collectors.toList());
         pages.setRecords((List)t);
         return Result.succes(pages);
+    }
+
+    @ApiOperation(value="获取问题状态统计数量")
+    @GetMapping(value="/questionSheet/stats")
+    public Result<List<QsStatsVO>> getQuestionSheetStats() {
+        var ret = this.questionSheetMapper.getQuestionSheetStats();
+        var total=ret.stream().map(o->o.cnt).collect(Collectors.summarizingLong(Long::longValue)).getSum();
+        var allVO=new QsStatsVO();
+        allVO.cnt=total;
+        allVO.qs_status=-1;
+        ret.add(allVO);
+        return Result.succes(ret);
     }
 
     @ApiOperation(value="保存回答")
@@ -182,6 +231,18 @@ public class QuestionController extends AbstractController {
         }
         log.debug("保存回答完成，影响记录数="+ret);
         AnswerVO vo=new AnswerVO();
+        BeanUtils.copyProperties(answer, vo);
+        return Result.succes(vo);
+    }
+
+    @ApiOperation(value="查询回答列表")
+    @GetMapping(value="/answer")
+    public Result<AnswerVO> getAnswerById(@ApiParam(required = true, value="回答ID") @RequestParam(required = true) @Valid @NotNull Integer awId){
+        QueryWrapper qw=new QueryWrapper();
+        qw.eq(Answer.COL_QS_USR_ID, UserDomain.getLoginedUserInfo().getUsrId());
+        qw.eq(Answer.COL_AW_ID, awId);
+        var answer=this.answerMapper.selectOne(qw);
+        var vo=new AnswerVO();
         BeanUtils.copyProperties(answer, vo);
         return Result.succes(vo);
     }

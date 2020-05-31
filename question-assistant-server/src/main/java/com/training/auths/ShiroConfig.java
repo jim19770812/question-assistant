@@ -45,6 +45,8 @@ public class ShiroConfig {
                 .put("/**.png", "anon")
                 .put("/**.css", "anon")
                 .put("/v1/user/login", "anon")
+                .put("/v1/user/resetPasswordSendMail", "anon")
+                .put("/v1/user/resetPasswordValidateCode", "anon")
                 .put("/**", "jwt") //这条是兜底的规则，anon是不检查权限，jwt是用jwt检查权限
                 .build();
         result.setFilterChainDefinitionMap(filterChainMap);

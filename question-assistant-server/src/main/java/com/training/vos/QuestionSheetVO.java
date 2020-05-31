@@ -52,6 +52,12 @@ public class QuestionSheetVO {
 	private Date qs_pub_time;
 
 	/**
+	 * 创建时间
+	 */
+	@ApiModelProperty("创建时间")
+	private Date create_time;
+
+	/**
 	 * 问卷停止时间
 	 */
 	@ApiModelProperty("问卷停止时间")
