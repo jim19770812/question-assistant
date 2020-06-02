@@ -1,7 +1,7 @@
 /**
  * 认证头请求拦截器插件
  */
-import { NoticeUtils, TokenUtils } from '@/common/utils'
+import { NoticeUtils, ObjectUtlls, TokenUtils } from '@/common/utils'
 import { ErrorConsts } from '@/exceptions/exceptions'
 import axios from 'axios'
 import * as qs from 'qs'
@@ -68,20 +68,26 @@ request.interceptors.response.use(response => {
   if (error.response) {
     const { response, message } = error;
     // 请求异常
-    //store.commit("index/loadingOff"); //loading-1
+    if (response.status!==200){
+      error.message="网络不给力"
+      return Promise.reject(error)
+    }
+
     // 网络异常
     if (message.indexOf("Network Error")>=0) {
-      //msg.showError("网络断开，请重新连接");
-      return Promise.reject(error.response.data);
+      error.message="网络不给力"
+      return Promise.reject(error);
     }
     // 是否取消了请求
     if (axios.isCancel(error)) {
-      return Promise.reject(error.response.data);
+      return Promise.reject(error);
     }
     //自定义错误处理
-    const err=errorHandler(error.response.data.code, error.response.data.message);
-    if (error.response.data.message!==err.message){
-      error.response.data.message=err.message
+    if (ObjectUtlls.isUnDefOrNull(error.response.data.code)){
+      const err=errorHandler(error.response.data.code, error.response.data.message);
+      if (error.response.data.message!==err.message){
+        error.response.data.message=err.message
+      }
     }
   }
   return Promise.reject(error.response.data)

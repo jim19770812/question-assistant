@@ -85,6 +85,36 @@ export function saveQuestionSheet(qsId, qsName, qsTemplate){
 }
 
 /**
+ * 问卷状态0->1
+ * @param {number} qsId 问卷ID
+ * @returns {AxiosPromise}
+ */
+export function questionSheetStatus01(qsId){
+  return request({
+    method:"post",
+    url:"/xhr/v1/qa/questionSheetStatus01",
+    data:{
+      qs_id:qsId
+    }
+  })
+}
+
+/**
+ * 问卷状态1->2
+ * @param {number} qsId 问卷ID
+ * @returns {AxiosPromise}
+ */
+export function questionSheetStatus12(qsId){
+  return request({
+    method:"post",
+    url:"/xhr/v1/qa/questionSheetStatus12",
+    data:{
+      qs_id:qsId
+    }
+  })
+}
+
+/**
  * 保存回答
  * @param {number} awId
  * @param {number} qsId

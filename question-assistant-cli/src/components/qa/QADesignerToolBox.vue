@@ -42,7 +42,7 @@ export default {
   },
   computed:{
     visibled(){
-      return this.$parent.key===this.$store.state.qa.container.key
+      return this.$parent.designKey===this.$store.state.qa.container.key
     }
   }
 }

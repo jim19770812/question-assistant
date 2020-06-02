@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <qa-header></qa-header>
     <router-view/>
   </div>
 </template>
@@ -7,6 +8,7 @@
 <script>
 import { mapMutations} from 'vuex'
 import { StringUtils, TokenUtils } from '@/common/utils'
+import HeaderComponent from '@/components/sys/HeaderComponent'
 export default {
   created () {
     // 页面加载时判断token，没有就登录，有就转向问题列表页
@@ -17,6 +19,9 @@ export default {
     }else{
       this.$router.replace({"name":"qalist"})
     }
+  },
+  components:{
+    "qa-header":HeaderComponent
   },
   methods:{
     ...mapMutations(['/reset']),
@@ -46,6 +51,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  width:1180px;
+  height:1080px;
+  background:rgba(247,247,247,1);
+  opacity:1;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }
 
 #nav {

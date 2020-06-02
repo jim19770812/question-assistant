@@ -13,15 +13,15 @@
       </div>
     </div>
     <div class="qar-container-opt">
-      <div>cd
+      <div>
         <input type="text" class="title" placeholder="未命名问卷" v-model.trim="qsName"/>
         <div>{{currentTime}}</div>
         <div class="qar-opt-button-group">
           <a href="#" class="button1" @click.stop.prevent="test">测试表单</a>
           <a href="#" class="button1" @click.stop.prevent="save">保存</a>
           <a href="#" class="button1" @click.stop.prevent="publish">发布</a>
-          <a href="#" class="button2" @click.stop.prevent="editQA">继续编辑</a>
-          <a href="#" class="button2" @click.stop.prevent="stopQA">暂停问卷</a>
+          <a href="#" class="button2" @click.stop.prevent="edit">继续编辑</a>
+          <a href="#" class="button2" @click.stop.prevent="stop">暂停问卷</a>
         </div>
       </div>
       <div class="qar-share-container">
@@ -45,7 +45,12 @@ import QATextLineFormItemRender from '@/components/qa/renders/QATextLineFormItem
 import QARadioButtonFormItemRender from '@/components/qa/renders/QARadioButtonFormItemRender'
 import QACheckboxFormItemRender from '@/components/qa/renders/QACheckboxFormItemRender'
 import QAAreaFormItemRender from '@/components/qa/renders/QAAreaFormItemRender'
-import { saveQuestionSheet } from '@/requests/modules/qa_requests'
+import {
+  getQuestionSheet,
+  questionSheetStatus01,
+  questionSheetStatus12,
+  saveQuestionSheet
+} from '@/requests/modules/qa_requests'
 import moment from 'moment'
 import { NoticeUtils, StringUtils } from '@/common/utils'
 
@@ -81,8 +86,11 @@ export default {
         NoticeUtils.info("测试通过")
       }
     },
-    editQA(){
-      NoticeUtils.warn("暂未开放")
+    edit(){
+      this.$store.commit("qa/forEdit", {qsId:this.qsId,
+        title:this.qsName,
+        itemsJson:JSON.stringify(this.container.items())}) //设置为编辑问卷模式
+      this.$router.replace({name:"qadesigner"}) //打开表单设计器
     },
     save(){
       if (StringUtils.isBlank(this.qsName) || StringUtils.isBlank(this.qsName)){
@@ -100,10 +108,21 @@ export default {
       })
     },
     publish(){
-      this.verify()
+      console.log("this.container.qsId", this.container.qsId)
+      //状态改成已经发布
+      questionSheetStatus01(this.container.qsId).then(resp=>{
+        NoticeUtils.info("问卷发布成功")
+      }).catch(err=>{
+        NoticeUtils.error(err.message)
+      })
     },
-    stopQA(){
-      NoticeUtils.warn("暂未开放")
+    stop(){
+      //状态改成已停止
+      questionSheetStatus12(this.container.qsId).then(resp=>{
+        NoticeUtils.info("问卷已停止")
+      }).catch(err=>{
+        NoticeUtils.error(err.message)
+      })
     }
   },
   computed:{

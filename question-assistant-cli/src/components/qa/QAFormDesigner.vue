@@ -5,8 +5,10 @@
         <router-link :to='{name:"qalist"}' class="qad-header-gohome">返回首页</router-link>
         <span>报名助手</span>
         <div class="qad-header-buttons-container">
-          <a href="#" class="enabled" @click="preview">预览</a>
-          <a href="#" class="disabled" @click="quit">退出</a>
+          <a href="#" class="enabled" @click="preview" v-if="this.$store.state.qa.container.qsid">预览</a>
+          <a href="#" class="enabled" @click="save" v-if="!this.$store.state.qa.container.qsid">保存</a>
+          <a href="#" class="disabled" @click="quit"  v-if="this.$store.state.qa.container.qsid">退出</a>
+          <a href="#" class="disabled" @click="goBack"  v-if="!this.$store.state.qa.container.qsid">返回</a>
         </div>
       </div>
       <div class="qad-main-container">
@@ -60,6 +62,7 @@
 import QaDesignerContainer from "@/components/qa/QADesignerContainer"
 import QAEditorContainer from "@/components/qa/QAEditorContainer"
 import { NoticeUtils, TokenUtils } from '@/common/utils'
+import { saveQuestionSheet } from '@/requests/modules/qa_requests'
 
 export default {
   name: 'QAFormDesigner',
@@ -90,12 +93,26 @@ export default {
     preview(){
       this.$router.replace({name:"qarender"})
     },
+    save(){
+      saveQuestionSheet(this.container.qsId, this.qsName, this.container.items).then(resp=>{
+        NoticeUtils.info("保存成功")
+      }).catch(resp=>{
+        NoticeUtils.error(resp.message)
+      })
+    },
     quit(){
       const token=TokenUtils.getToken()
       console.log("token", token)
+    },
+    goBack(){
+      this.$router.replace({name:"qalist"})
+    }
+  },
+  computed:{
+    container:function(){
+      return this.$store.state.qa.container
     }
   }
-
 }
 </script>
 

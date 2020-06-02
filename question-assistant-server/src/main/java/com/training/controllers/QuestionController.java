@@ -106,6 +106,9 @@ public class QuestionController extends AbstractController {
         if (qs==null){
             throw new APIException(APIException.ERR_1003, "未能根据传入的问卷ID找到对应的问卷");
         }
+        if (qs.getQs_status()!=QuestionSheetStatus.UN_PUBLISH.getStatus()){
+            throw new APIException(APIException.ERR_1001, "只有待发布状态的问卷才可以变成已发布");
+        }
         qs.setQs_status(QuestionSheetStatus.PUBLISHED.getStatus());
         var ret=this.questionSheetMapper.updateById(qs);
         log.debug("更新问卷状态，影响记录数:"+ret);
@@ -123,6 +126,9 @@ public class QuestionController extends AbstractController {
         var qs=this.questionSheetMapper.selectOne(qw);
         if (qs==null){
             throw new APIException(APIException.ERR_1003, "未能根据传入的问卷ID找到对应的问卷");
+        }
+        if (qs.getQs_status()!=QuestionSheetStatus.PUBLISHED.getStatus()){
+            throw new APIException(APIException.ERR_1001, "只有已发布状态的问卷才可以变成已停止");
         }
         qs.setQs_status(QuestionSheetStatus.STOPED.getStatus());
         var ret=this.questionSheetMapper.updateById(qs);
