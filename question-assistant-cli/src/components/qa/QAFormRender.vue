@@ -1,11 +1,13 @@
 <template>
   <div class="qar-form-render">
-    <qa-render-container></qa-render-container>
+    <qa-viewer></qa-viewer>
+    <qa-render-opt></qa-render-opt>
   </div>
 </template>
 
 <script>
-import QARenderContainer from '@/components/qa/QARenderContainer'
+import QAViewer from '@/components/qa/QAViewer'
+import QARenderOpt from '@/components/qa/QARenderOpt'
 
 export default {
   name: 'QAFormRender',
@@ -14,7 +16,8 @@ export default {
     }
   },
   components:{
-    "qa-render-container":QARenderContainer
+    "qa-viewer":QAViewer,
+    "qa-render-opt": QARenderOpt
   }
 }
 </script>
@@ -26,7 +29,7 @@ export default {
     padding: 0;
   }
   .qar-form-render{
-    height: 800px;
+    height: 100%;
     width: 100%;
     opacity:1;
     display: flex;
@@ -36,7 +39,6 @@ export default {
     justify-items: flex-start;
     line-height: 20px;
     overflow: hidden;
-    /*background-color: blue;*/
     background-color:rgba(255,255,255,1);
   }
 </style>

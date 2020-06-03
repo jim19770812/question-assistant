@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "clipboard": "^2.0.6",
     "core-js": "^3.6.4",
     "element-ui": "^2.13.2",
     "jsonpath": "^1.0.2",
@@ -19,6 +20,8 @@
     "utils": "^0.3.1",
     "uuid": "^8.1.0",
     "vue": "^2.6.11",
+    "vue-clipboard2": "^0.3.1",
+    "vue-resource": "^1.5.1",
     "vue-router": "^3.2.0",
     "vuex": "^3.1.3"
   },

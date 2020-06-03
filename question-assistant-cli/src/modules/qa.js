@@ -328,6 +328,9 @@ const mutations={
   forCreate(states){
     states.container.qsId=null
     states.container.items=[]
+    states.container.status=0
+    states.container.key=""
+    states.container.title=""
   },
   /**
    * 编辑问卷
@@ -351,11 +354,13 @@ const mutations={
 
       states.container.qsId=payload.qsId
       states.container.title=payload.title
+      states.container.status=payload.status
     }else{
       states.container.items=[]
       states.container.key=""
       states.container.qsId=null
       states.container.title=payload.title
+      states.container.status=0
     }
     console.log("after load container is ",states.container)
   },
@@ -367,8 +372,6 @@ const mutations={
   setTitle(states, payload){
     states.container.title=payload
   }
-
-
 }
 
 export class QAUtils{

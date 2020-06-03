@@ -26,7 +26,7 @@
               <input class="bar-search-input" type="text" placeholder="请输入问卷名称/ID" v-model.trim="tableInfo.searchKey" @keydown.enter.stop.prevent="inputInvokeSearch"/>
               <a href="#" class="bar-search-del-btn" @click="inputSearchClear"></a>
               <a href="#" class="bar-search-find-btn" @click="inputInvokeSearch"></a>
-              <a class="bar-operate-add-or-close" href="#" @click.prevent.stop="optInfoIconClick">{{optInfoIcon}}</a>
+              <a :class="{'bar-operate-add-or-close':true, 'el-icon-circle-plus':!this.optInfo.visible, 'el-icon-circle-close':this.optInfo.visible} " @click.prevent.stop="optInfoIconClick"></a>
             </div>
             <div class="popup-dialog" v-if="optInfo.visible">
               <div class="popup-dialog-row">
@@ -94,9 +94,18 @@
                 <span class="qa-list-body-create-time">{{item.create_time | dateFormat}}</span>
               </div>
               <div class="qa-list-body-content-cell" style="width:168px">
-                <a href="#" class="qa-list-body-op-copy" @click="copyQA(item.qs_id)"></a>
-                <a href="#" class="qa-list-body-op-edit" @click="editQA(item.qs_id)"></a>
-                <a href="#" class="qa-list-body-op-del" @click="removeQA(item.qs_id)"></a>
+                <el-tooltip placement="top" content="编辑问卷">
+                  <el-button :autofocus="false" class="qa-list-body-op-button" icon="el-icon-edit" @click="editQA(item.qs_id, item.qs_status)" :disabled="item.qs_status!==0"></el-button>
+                </el-tooltip>
+                <el-tooltip placement="top" content="删除问卷">
+                  <el-button :autofocus="false" class="qa-list-body-op-button" icon="el-icon-delete" @click="removeQA(item.qs_id)" :disabled="item.qs_status!==0"></el-button>
+                </el-tooltip>
+                <el-tooltip placement="top" content="暂停问卷">
+                  <el-button :autofocus="false" class="qa-list-body-op-button" icon="el-icon-circle-close" @click="stopQA(item.qs_id)" :disabled="item.qs_status!==1"></el-button>
+                </el-tooltip>
+                <el-tooltip placement="top" content="预览和分享问卷">
+                  <el-button :autofocus="false" class="qa-list-body-op-button" icon="el-icon-view" @click="viewQA(item)" :disabled="item.qs_status!==1"></el-button>
+                </el-tooltip>
               </div>
             </div>
           </div>
@@ -115,12 +124,12 @@
 </template>
 
 <script>
-import {
-  getQuestionSheet,
-  getQuestionSheetList,
-  getQuestionSheetStats,
-  removeQuestionSheet
-} from '@/requests/modules/qa_requests'
+  import {
+    getQuestionSheet,
+    getQuestionSheetList,
+    getQuestionSheetStats, questionSheetStatus12,
+    removeQuestionSheet
+  } from '@/requests/modules/qa_requests'
 import { NoticeUtils } from '@/common/utils'
 import moment from 'moment'
 
@@ -164,7 +173,7 @@ export default {
   },
   filters:{
     dateFormat(dt){
-      return moment(dt).format("YYYY-MM-DD HH:mm:ss")
+      return moment(dt).format("YYYY-MM-DD ") +moment(dt).format("HH:mm:ss")
     },
     /**
      * 状态转中文
@@ -247,17 +256,23 @@ export default {
     tableInfoPageChanged(newPageNum){// 表格换页
       this.pageNum=newPageNum
     },
-    copyQA(qsId){ //复制问卷
-      NoticeUtils.warn("暂未开放")
-    },
-    editQA(qsId){ // 编辑问卷
+    editQA(qsId, qsStatus){ // 编辑问卷
+      if (qsStatus===1){
+        NoticeUtils.warn("已发布的问卷不允许编辑")
+        return
+      }
+      if (qsStatus===2){
+        NoticeUtils.warn("已停止的问卷不允许编辑")
+        return
+      }
       //获取json数据
       getQuestionSheet(qsId).then(resp=>{
         const qs=resp.ret
         console.log("qs.qs_template", qs)
         this.$store.commit("qa/forEdit", {qsId:qsId,
           title:qs.qs_name,
-          itemsJson:qs.qs_template}) //设置为编辑问卷模式
+          itemsJson:qs.qs_template,
+          status:qs.qs_status}) //设置为编辑问卷模式
         this.$router.replace({name:"qadesigner"}) //打开表单设计器
       }).catch(err=>{
         NoticeUtils.error(err.message)
@@ -276,7 +291,22 @@ export default {
         }).catch(err=>{
           NoticeUtils.error(err.message)
         })
-      });
+      })
+    },
+    viewQA(qsItem){//预览问卷
+      this.$store.commit("qa/forEdit", {qsId:qsItem.qs_id,
+        title:qsItem.qs_name,
+        itemsJson:qsItem.qs_template,
+        status:qsItem.qs_status}) //设置为编辑问卷模式
+      this.$router.replace({name:"qarender"})
+    },
+    stopQA(qsId){
+      //状态改成已停止
+      questionSheetStatus12(this.container.qsId).then(resp=>{
+        NoticeUtils.info("问卷已停止")
+      }).catch(err=>{
+        NoticeUtils.error(err.message)
+      })
     }
   }
 }
@@ -423,18 +453,18 @@ export default {
     margin-left: 285px;
   }
   .qa-list-operator-bar .bar-operate-add-or-close{
-    font-weight: bolder;
-    color: white;
-    font-size: larger;
     width:30px;
     height:30px;
-    background:rgba(0,165,123,1);
-    box-shadow:0px 2px 12px rgba(0,166,122,0.26);
-    border-radius:50%;
+    border:none;
+    font-size: 24px;
+    color:rgba(0,165,123,1);
     opacity:1;
     outline: none;
     text-decoration: none;
-    margin-left: 16px;
+    margin-left: 8px;
+    margin-top: 8px;
+    /*line-height: 20px;*/
+    /*background-color: blue;*/
   }
   .qa-list-main .popup-dialog{
     width:320px;
@@ -657,27 +687,8 @@ export default {
     color:rgba(153,153,153,1);
     opacity:1;
   }
-  .qa-list-body .qa-list-body-content-cell>*{
-    margin-right: 19px;
-  }
-  .qa-list-body .qa-list-body-content-cell .qa-list-body-op-copy{
-    display: block;
-    width: 14px;
-    height: 14px;
-    background-image: url("../../assets/icon_list_copy.png");
-
-  }
-  .qa-list-body .qa-list-body-content-cell .qa-list-body-op-edit{
-    display: block;
-    width: 15px;
-    height: 15px;
-    background-image: url("../../assets/icon_list_edit.png");
-  }
-  .qa-list-body .qa-list-body-content-cell .qa-list-body-op-del{
-    display: block;
-    width: 12px;
-    height: 15px;
-    background-image: url("../../assets/icon_list_del.png");
+  .qa-list-body .qa-list-body-content-cell .qa-list-body-op-button{
+    border:none;
   }
   .qa-list-body .qa-list-footer{
     display: flex;

@@ -9,6 +9,8 @@ import LoginComponent from '@/components/sys/LoginComponent'
 import RegisterComponent from '@/components/sys/RegisterComponent'
 import Reset from '@/components/sys/Reset'
 import QAFormRender from '@/components/qa/QAFormRender'
+import QASharePortal from '@/components/qa/QASharePortal'
+import E404 from '@/components/sys/E404'
 
 Vue.use(VueRouter)
 
@@ -32,19 +34,6 @@ const routes = [{path: '/',
   path:'/reset',
   name:'reset',
   component: Reset
-// },
-// },{ path:'/reset',
-//   name:'reset',
-//   component: Reset,
-//   children:[{
-//     path:'losepassword',
-//     name:'losepassword',
-//     component:LosePasswordComponent
-//   },{
-//     path:'newpassword',
-//     name:'newpassword',
-//     component:NewPasswordComponent
-//   }]
 }, {
   path: '/qalist',
   name: 'qalist',
@@ -57,6 +46,18 @@ const routes = [{path: '/',
   path:'/qarender',
   name:'qarender',
   component: QAFormRender,
+},{
+  path:'/share',
+  name:'share',
+  component: QASharePortal
+},{
+  path:'/share/:id',
+  name:'share',
+  component: QASharePortal
+},{
+  path:'/e404',
+  name:'e404',
+  component: E404
 }]
 
 const router = new VueRouter({

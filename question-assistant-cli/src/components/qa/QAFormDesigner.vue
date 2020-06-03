@@ -5,10 +5,11 @@
         <router-link :to='{name:"qalist"}' class="qad-header-gohome">返回首页</router-link>
         <span>报名助手</span>
         <div class="qad-header-buttons-container">
-          <a href="#" class="enabled" @click="preview" v-if="this.$store.state.qa.container.qsid">预览</a>
-          <a href="#" class="enabled" @click="save" v-if="!this.$store.state.qa.container.qsid">保存</a>
-          <a href="#" class="disabled" @click="quit"  v-if="this.$store.state.qa.container.qsid">退出</a>
-          <a href="#" class="disabled" @click="goBack"  v-if="!this.$store.state.qa.container.qsid">返回</a>
+          <a href="#" class="enabled" @click.stop.prevent="preview" v-if="this.$store.state.qa.container.qsid">预览</a>
+          <a href="#" class="enabled" @click.stop.prevent="save" v-if="!this.$store.state.qa.container.qsid">保存</a>
+          <a href="#" class="enabled" @click.stop.prevent="stop" v-if="this.$store.state.qa.container.qsid">停止</a>
+          <a href="#" class="disabled" @click.stop.prevent="quit"  v-if="this.$store.state.qa.container.qsid">退出</a>
+          <a href="#" class="disabled" @click.stop.prevent="goBack"  v-if="!this.$store.state.qa.container.qsid">返回</a>
         </div>
       </div>
       <div class="qad-main-container">
@@ -62,7 +63,7 @@
 import QaDesignerContainer from "@/components/qa/QADesignerContainer"
 import QAEditorContainer from "@/components/qa/QAEditorContainer"
 import { NoticeUtils, TokenUtils } from '@/common/utils'
-import { saveQuestionSheet } from '@/requests/modules/qa_requests'
+import { questionSheetStatus12, saveQuestionSheet } from '@/requests/modules/qa_requests'
 
 export default {
   name: 'QAFormDesigner',
@@ -98,6 +99,14 @@ export default {
         NoticeUtils.info("保存成功")
       }).catch(resp=>{
         NoticeUtils.error(resp.message)
+      })
+    },
+    stop(){
+      //状态改成已停止
+      questionSheetStatus12(this.container.qsId).then(resp=>{
+        NoticeUtils.info("问卷已停止")
+      }).catch(err=>{
+        NoticeUtils.error(err.message)
       })
     },
     quit(){

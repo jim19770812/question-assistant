@@ -10,6 +10,9 @@ import "@/assets/styles/common.less"
 import 'element-ui/lib/theme-chalk/index.css'
 import ElementUI, { MessageBox, Loading, Message } from 'element-ui'
 import { TokenUtils } from '@/common/utils'
+import VueClipboard from 'vue-clipboard2'
+
+Vue.use(VueClipboard)
 Vue.use(ElementUI)
 Vue.use(Loading.directive);
 
@@ -26,19 +29,33 @@ Vue.prototype.$message = Message
 Vue.prototype.$axios=axios
 //挂载全局异常处理
 Vue.prototype.errorHandler=globalErrorHandler
-
+const conf=require("./config.json")
+console.log(conf)
+Vue.prototype.$home_url=conf.home_url
 const vue=new Vue({
   router,
   store,
-  render: h => h(App),
+  render: h => h(Test),
+  methods:{
+    isAuth(url){
+      const urlArray=["/share", "/e404"]
+      const ret=urlArray.filter(o=>{
+        return url.indexOf(o)>=0
+      })
+      return ret.length===0
+    }
+  },
+  created:function(){
+    if (this.isAuth(this.$route.path)){
+      const token=TokenUtils.getToken()
+      if (token===""){
+        console.log("token是空，转向登录页")
+        this.$router.replace({name:"login"})
+      }
+    }
+  },
   mounted:function(){
     window.app=this
-    console.log(this)
-    const token=TokenUtils.getToken()
-    if (token===""){
-      console.log("token是空，转向登录页")
-      this.$router.replace({name:"login"})
-    }
   }
 }).$mount('#app')
 

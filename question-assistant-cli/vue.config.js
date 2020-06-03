@@ -7,7 +7,7 @@ const resolve = dir => {
 
 module.exports = {
   // 基本路径
-  publicPath: './',
+  publicPath: '/', //这里不能是./，不然刷新/auth/login的页面会报错 Unexpected token <
   // 打包输出文件目录
   outputDir: 'dist',
   // 打包静态资源目录 (js, css, img, fonts)

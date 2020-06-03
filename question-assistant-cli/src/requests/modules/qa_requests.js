@@ -126,9 +126,9 @@ export function saveAnswer(awId, qsId, awContent){
     method:"post",
     url:"/xhr/v1/qa/answer",
     data:{
-      qs_id:qsId,
       aw_id:awId,
-      aw_content:awContent
+      qs_id:qsId,
+      aw_content:JSON.stringify(awContent)
     }
   })
 }
