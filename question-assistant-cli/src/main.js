@@ -35,7 +35,7 @@ Vue.prototype.$home_url=conf.home_url
 const vue=new Vue({
   router,
   store,
-  render: h => h(Test),
+  render: h => h(App),
   methods:{
     isAuth(url){
       const urlArray=["/share", "/e404"]
